@@ -50,6 +50,8 @@ class MyFrame1 : public wxFrame
 		wxSpinCtrlDouble* SC_Lat;
 		wxSpinCtrlDouble* SC_Lng;
 		wxTextCtrl* TC_MMSI;
+		wxTextCtrl* TC_CallSign;
+		wxTextCtrl* TC_Name;
 		wxPanel* m_panel4;
 		wxTextCtrl* TC_Debug;
 		wxGrid* m_grid1;

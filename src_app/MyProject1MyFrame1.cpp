@@ -216,6 +216,8 @@ void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 				bg_TakMessage CurCoTMsg;
 				CurCoTMsg.d_lat = v->lat_deg;
 				CurCoTMsg.d_lon = v->lng_deg;
+				strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
+				
 				if (v->callsign.size() > 0)
 				{
 					strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
@@ -286,15 +288,12 @@ void MyProject1MyFrame1::BN_SendCOTOnButtonClick(wxCommandEvent& event)
 	CurCoTMsg.d_hae = -10;
 	strncpy(CurCoTMsg.msg_type, TC_Symbol->GetValue(), 30); //SAR Vessel
 
-	strncpy(CurCoTMsg.callsignS, "Akimbo", 40);
-	sprintf(CurCoTMsg.UID, "%d", 12312123123);// TC_MMSI->GetValue().c_str());
+	strncpy(CurCoTMsg.callsignS, TC_CallSign->GetValue(), 40);
+	
+	sprintf(CurCoTMsg.UID, "%d", 123121123);// TC_MMSI->GetValue().c_str());
 	SendTest(CurCoTMsg);
 
-	wxLogMessage(CurCoTMsg.UID);
-
-
-
-
-
-
+	wxLogMessage(CurCoTMsg.callsignS);
+	//Frigate/corvette "S*S*CLFF--*****"
+	
 }

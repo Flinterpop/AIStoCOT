@@ -67,7 +67,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	wxBoxSizer* bSizer11;
 	bSizer11 = new wxBoxSizer( wxHORIZONTAL );
 
-	TC_Symbol = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("a-f-G"), wxDefaultPosition, wxDefaultSize, 0 );
+	TC_Symbol = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("a-f-S-C-L-F-F"), wxDefaultPosition, wxDefaultSize, 0 );
 	TC_Symbol->SetToolTip( _("CoT Symbol") );
 
 	bSizer11->Add( TC_Symbol, 0, wxALL, 5 );
@@ -88,6 +88,12 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	TC_MMSI->SetToolTip( _("MMSI") );
 
 	bSizer11->Add( TC_MMSI, 0, wxALL, 5 );
+
+	TC_CallSign = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("Charlettetowne"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer11->Add( TC_CallSign, 0, wxALL, 5 );
+
+	TC_Name = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("DDH-339"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer11->Add( TC_Name, 0, wxALL, 5 );
 
 
 	sbSizer2->Add( bSizer11, 1, wxEXPAND, 5 );
