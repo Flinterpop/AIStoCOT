@@ -46,43 +46,74 @@ struct NMEA_AIS
 
 };
 
-struct vessel
+class vessel
 {
+public:
     int mmsi = 0;
-    int age =0;
+    int age = 0;
     bool markForDelete = false;
-    AIS_NAVIGATIONAL_STATUS nav_status;
-    int position_accuracy;
-    AisPoint position;
-    double lat_deg;
-    double lng_deg;
-    float cog;  // Degrees.
-    int true_heading;
-    int timestamp;
-    int special_manoeuvre;
-    bool raim;
-    bool utc_valid;
-    int utc_hour;
-    int utc_min;
+    
+public:
+    vessel(Ais1_2_3 *a)
+    {
+        a123 = a; 
+    };
+
+    vessel(Ais5* a)
+    {
+        ais5 = a;
+    };
+
+    Ais1_2_3* a123{};
+    Ais5* ais5{};
+
+    // Ais9 asi9;
+   // Ais18 asi18;
+   // Ais19 ais19;
+   // Ais24 ais24;
+
+    bool isValidAIS123{ false };
+    bool isValidAIS5{ false };
+    bool isValidAIS9{ false };
+    bool isValidAIS18{ false };
+    bool isValidAIS19{ false };
+    bool isValidAIS24{ false };
+
+
+    
+    
+    AIS_NAVIGATIONAL_STATUS nav_status{};
+    int position_accuracy{};
+    AisPoint position{};
+    double lat_deg{};
+    double lng_deg{};
+    float cog{};  // Degrees.
+    int true_heading{};
+    int timestamp{};
+    int special_manoeuvre{};
+    bool raim{};
+    bool utc_valid{};
+    int utc_hour{};
+    int utc_min{};
 
     //AIS 5
-    int ais_version;
-    int imo_num;
+    int ais_version{};
+    int imo_num{};
     std::string callsign = "-";
     std::string name = "-";
-    int type_and_cargo;
-    int dim_a;
-    int dim_b;
-    int dim_c;
-    int dim_d;
-    int fix_type;
-    int eta_month;
-    int eta_day;
-    int eta_hour;
-    int eta_minute;
-    float draught;  // present static draft. m
-    std::string destination;
-    int dte;
+    int type_and_cargo{};
+    int dim_a{};
+    int dim_b{};
+    int dim_c{};
+    int dim_d{};
+    int fix_type{};
+    int eta_month{};
+    int eta_day{};
+    int eta_hour{};
+    int eta_minute{};
+    float draught{};  // present static draft. m
+    std::string destination{};
+    int dte{};
 
 
     std::string LogMe()
@@ -90,16 +121,23 @@ struct vessel
         std::stringstream retVal{};
         retVal << "AIS Payload parse: " << std::endl;
         retVal << "user ID " << mmsi << std::endl;
-        retVal << "callsign " << callsign << std::endl;
-        retVal << "name " << name << std::endl;
-        retVal << "type_and_cargo " << type_and_cargo << std::endl;
-        retVal << "destination " << destination << std::endl;
+        if (nullptr != ais5)
+        {
+            retVal << "callsign " << ais5->callsign << std::endl;
+            retVal << "name " << ais5->name << std::endl;
+            retVal << "type_and_cargo " << ais5->type_and_cargo << std::endl;
+            retVal << "destination " << ais5->destination << std::endl;
+        }
 
-        retVal << "nav_status " << NAV_STATUS[nav_status] << std::endl;
-        retVal << "true_heading " << true_heading << std::endl;
-        retVal << "position, lat " << position.lat_deg << std::endl;
-        retVal << "position, lng " << position.lng_deg << std::endl;
-        retVal << "time stamp " << timestamp << std::endl;
+        if (nullptr != a123)
+        {
+
+            retVal << "nav_status " << NAV_STATUS[nav_status] << std::endl;
+            retVal << "true_heading " << true_heading << std::endl;
+            retVal << "position, lat " << position.lat_deg << std::endl;
+            retVal << "position, lng " << position.lng_deg << std::endl;
+            retVal << "time stamp " << timestamp << std::endl;
+        }
 
         return retVal.str();
 

@@ -12,6 +12,8 @@
 
 std::vector<vessel*> VesselList;
 
+int MsgCounts[27]{};
+
 struct NMEA_AIS* parseNMEA(std::string myString)
 {
     std::stringstream retVal{};
@@ -234,20 +236,17 @@ vessel *ParseIdentPayload(std::string body, int fillbits)
     }
     else
     {
-        std::unique_ptr<Ais5> a5 = std::unique_ptr<Ais5>(new Ais5(body.c_str(), fillbits));
+        Ais5 *a5 = new Ais5(body.c_str(), fillbits);
         retVal << "user ID " << a5->mmsi << std::endl;
         retVal << "callsign " << a5->callsign << std::endl;
         retVal << "name " << a5->name << std::endl;
         retVal << "type_and_cargo " << a5->type_and_cargo << std::endl;
-
         retVal << "destination " << a5->destination << std::endl;
-
-        wxLogMessage(retVal.str());
 
         vessel* v = FindVesselByMMSI(a5->mmsi);
         if (nullptr == v)
         {
-            v = new vessel();
+            v = new vessel(a5);
             v->mmsi = a5->mmsi;
             v->callsign = a5->callsign;
             v->name = a5->name;
@@ -257,6 +256,8 @@ vessel *ParseIdentPayload(std::string body, int fillbits)
         }
         else //just update the thing
         {
+            v->ais5 = a5;
+
             v->callsign = a5->callsign;
             v->name = a5->name;
             v->type_and_cargo = a5->type_and_cargo;
@@ -308,7 +309,9 @@ vessel *ParsePosReportPayload(std::string body, int fillbits)
     }
     else
     {
-        std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
+        Ais1_2_3 *a123 =  new Ais1_2_3(body.c_str(), 0);
+
+        //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
         retVal << "ParsePosReportPayload:"  << std::endl;
         retVal << "user ID " << a123->mmsi << std::endl;
         retVal << "nav_status " << NAV_STATUS[a123->nav_status] << std::endl;
@@ -318,12 +321,12 @@ vessel *ParsePosReportPayload(std::string body, int fillbits)
         retVal << "time stamp " << a123->timestamp << std::endl;
 
         wxLogMessage(retVal.str());
-
+        ++MsgCounts[a123->message_id];
 
         vessel* v = FindVesselByMMSI(a123->mmsi);
         if (nullptr == v)
         {
-            v = new vessel();
+            v = new vessel(a123);
             v->mmsi = a123->mmsi;
             v->nav_status = a123->nav_status;
             v->true_heading = a123->true_heading;
@@ -336,6 +339,8 @@ vessel *ParsePosReportPayload(std::string body, int fillbits)
         }
         else //just update the thing
         {
+            v->a123 = a123;
+
             v->nav_status = a123->nav_status;
             v->true_heading = a123->true_heading;
             v->lat_deg = a123->position.lat_deg;

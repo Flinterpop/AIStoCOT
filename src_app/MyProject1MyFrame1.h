@@ -32,6 +32,7 @@ class MyProject1MyFrame1 : public MyFrame1
      
 		void m_filePicker1OnFileChanged(wxFileDirPickerEvent& event) override;
 		void UpdateGrid();
+		void ProcessNMEAPayload(std::string p);
 };
 
 #endif 

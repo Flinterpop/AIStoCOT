@@ -54,7 +54,7 @@ MyFrame1( parent )
 	}
 	logWin->Show();
 
-	m_grid1->SetColLabelValue(0, "ID");
+	m_grid1->SetColLabelValue(0, "MMSI");
 	m_grid1->SetColSize(0, 120);
 
 	m_grid1->SetColLabelValue(1, "Call Sign");
@@ -91,30 +91,24 @@ MyProject1MyFrame1::~MyProject1MyFrame1()
 }
 
 
-/*
-void MyProject1MyFrame1::m_button7OnButtonClick(wxCommandEvent& event)
-{
-
-	wxLogMessage("Test Pushed");
-	
-	std::string body = "133sVfPP00PD>hRMDH@jNOvN20S8"; //from !AIVDM,1,1,,A,400TcdiuiT7VDR>3nIfr6>i00000,0*78
-	ParsePayloadString(body); 
-
-	body = "58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0skeQ8823mDm3kP00000000000"; //from !AIVDM,2,1,0,A,58wt8Ui`g??r21`7S=:22058<v05Htp000000015>8OA;0sk,0*7B
-	ParsePayloadString(body);
-  
-}
-*/
-
+struct NMEA_AIS* multipart1;
 void MyProject1MyFrame1::BN_Test2OnButtonClick(wxCommandEvent& event)
 {
 	std::string s = TC_AISLine->GetValue().ToStdString();
 
 	struct NMEA_AIS* nmea = parseNMEA(s);
 	wxLogMessage(nmea->print());
-	vessel * v = ParsePayloadString(nmea->payload);
 
+	vessel * v = ParsePayloadString(nmea->payload);
 	if (nullptr == v) return;
+
+
+
+
+
+
+
+
 
 	bg_TakMessage CurCoTMsg;
 	wxLogMessage(std::format("org {}  new {}", CurCoTMsg.d_lat, v->lat_deg));
@@ -131,7 +125,7 @@ void MyProject1MyFrame1::BN_Test2OnButtonClick(wxCommandEvent& event)
 
 	SendTest(CurCoTMsg);
 
-
+	UpdateGrid();
 
 
 	
@@ -194,6 +188,27 @@ void MyProject1MyFrame1::UpdateGrid()
 }
 
 
+void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
+{
+	vessel* v = ParsePayloadString(p);
+	if (nullptr != v)
+	{
+		bg_TakMessage CurCoTMsg;
+		CurCoTMsg.d_lat = v->lat_deg;
+		CurCoTMsg.d_lon = v->lng_deg;
+		strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
+
+		if (v->callsign.size() > 0)
+		{
+			strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
+		}
+		sprintf(CurCoTMsg.UID, "MMSI-%d", v->mmsi);
+		SendTest(CurCoTMsg);
+
+	}
+
+	UpdateGrid();
+}
 
 void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 {
@@ -210,25 +225,32 @@ void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		while (std::getline(myfile, line)) 
 		{
 			struct NMEA_AIS* nmea = parseNMEA(line);
-			vessel *v = ParsePayloadString(nmea->payload);
-			if (nullptr != v)
+			wxLogMessage(nmea->print());
+
+			if (1 != nmea->CountOfFragments)
 			{
-				bg_TakMessage CurCoTMsg;
-				CurCoTMsg.d_lat = v->lat_deg;
-				CurCoTMsg.d_lon = v->lng_deg;
-				strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
-				
-				if (v->callsign.size() > 0)
+				if (1 == nmea->FragmentNumber)
 				{
-					strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
+					multipart1 = nmea;
+					wxLogMessage("multipart Frag 1");
+					//return;
 				}
-				sprintf(CurCoTMsg.UID, "MMSI-%d", v->mmsi);
-				SendTest(CurCoTMsg);
 
+				else if (2 == nmea->FragmentNumber)
+				{
+					nmea->payload = multipart1->payload + nmea->payload;
+					wxLogMessage("multipart Frag 2");
+					ProcessNMEAPayload(nmea->payload);
+				}
 			}
-			
+			else
+			{
+				multipart1 = nullptr;
+				wxLogMessage("Non multipart");
+				ProcessNMEAPayload(nmea->payload);
+			}
 
-			UpdateGrid();
+
 			if (++counter > MaxVesselListSIze) return;
 
 		}
@@ -276,6 +298,9 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	strncpy(CurCoTMsg.callsignS, "CRS3", 40);
 	sprintf(CurCoTMsg.UID, "%d", mmsi);
 	SendTest(CurCoTMsg);
+
+	UpdateGrid();
+
 }
 
 void MyProject1MyFrame1::BN_SendCOTOnButtonClick(wxCommandEvent& event)

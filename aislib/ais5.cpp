@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstddef>
 #include <ostream>
+#include <format>
 
 #include "ais.h"
 
@@ -18,6 +19,7 @@ Ais5::Ais5(const char *nmea_payload, const size_t pad)
   }
   if (pad != 2 || num_chars != 71) {
     status = AIS_ERR_BAD_BIT_COUNT;
+    BGNote = std::format("pad: {} num_chars: {} AIS_ERR_BAD_BIT_COUNT",pad,num_chars);
     return;
   }
 
