@@ -78,11 +78,17 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer11->Add( SC_Lat, 0, wxALL, 5 );
 
-	SC_Lng = new wxSpinCtrlDouble( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, -63.2, 0.01 );
+	SC_Lng = new wxSpinCtrlDouble( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, -63.210000, 0.01 );
 	SC_Lng->SetDigits( 4 );
 	SC_Lng->SetToolTip( _("Longitude") );
 
 	bSizer11->Add( SC_Lng, 0, wxALL, 5 );
+
+	SC_Speed = new wxSpinCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxT("12"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 120, 0 );
+	bSizer11->Add( SC_Speed, 0, wxALL, 5 );
+
+	SC_Course = new wxSpinCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxT("315"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 360, 0 );
+	bSizer11->Add( SC_Course, 0, wxALL, 5 );
 
 	TC_MMSI = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("265547250"), wxDefaultPosition, wxDefaultSize, 0 );
 	TC_MMSI->SetToolTip( _("MMSI") );

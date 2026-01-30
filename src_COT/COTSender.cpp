@@ -34,7 +34,7 @@ char XMLEvent[] = { 0x3c, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x20, 0x76, 0x65, 0x72, 
 
 
 
-void SendTest(bg_TakMessage CurCoTMsg)
+void AssembleAndSendCoT(bg_TakMessage CurCoTMsg)
 {
 	CurCoTMsg.AssembleCoTPbufEvent();
 	SendCoT((const char*)CurCoTMsg.PKT.data(), CurCoTMsg.PKT.size());

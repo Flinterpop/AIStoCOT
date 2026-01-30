@@ -3,7 +3,7 @@
 #include "bg_TakMessage.h"
 
 
-void SendTest(bg_TakMessage CurCoTMsg);
+void AssembleAndSendCoT(bg_TakMessage CurCoTMsg);
 
 
 void StartCOTSender();

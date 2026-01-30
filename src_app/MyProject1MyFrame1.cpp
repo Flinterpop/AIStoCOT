@@ -123,7 +123,7 @@ void MyProject1MyFrame1::BN_Test2OnButtonClick(wxCommandEvent& event)
 	wxLogMessage(std::format("lat {}  lon {}", CurCoTMsg.d_lat, CurCoTMsg.d_lon));
 	wxLogMessage(std::format("CS {}  mmsi {}", CurCoTMsg.callsignS, CurCoTMsg.UID));
 
-	SendTest(CurCoTMsg);
+	AssembleAndSendCoT(CurCoTMsg);
 
 	UpdateGrid();
 
@@ -203,7 +203,7 @@ void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
 			strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
 		}
 		sprintf(CurCoTMsg.UID, "MMSI-%d", v->mmsi);
-		SendTest(CurCoTMsg);
+		AssembleAndSendCoT(CurCoTMsg);
 
 	}
 
@@ -277,7 +277,7 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 
 	strncpy(CurCoTMsg.callsignS, "SAR2", 40);
 	sprintf(CurCoTMsg.UID, "%d", mmsi);
-	SendTest(CurCoTMsg);
+	AssembleAndSendCoT(CurCoTMsg);
 
 
 	mmsi = 432547250;
@@ -287,7 +287,7 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	strncpy(CurCoTMsg.msg_type, "a-f-S-X-M", 30);
 	strncpy(CurCoTMsg.callsignS, "Moose", 40);
 	sprintf(CurCoTMsg.UID, "%d", mmsi);
-	SendTest(CurCoTMsg);
+	AssembleAndSendCoT(CurCoTMsg);
 
 
 	mmsi = 265541230;
@@ -297,7 +297,7 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	strncpy(CurCoTMsg.msg_type, "a-f-G-I-U-T", 30); //CRS Vessel
 	strncpy(CurCoTMsg.callsignS, "CRS3", 40);
 	sprintf(CurCoTMsg.UID, "%d", mmsi);
-	SendTest(CurCoTMsg);
+	AssembleAndSendCoT(CurCoTMsg);
 
 	UpdateGrid();
 
@@ -311,14 +311,18 @@ void MyProject1MyFrame1::BN_SendCOTOnButtonClick(wxCommandEvent& event)
 	CurCoTMsg.d_lat = SC_Lat->GetValue();
 	CurCoTMsg.d_lon = SC_Lng->GetValue();
 	CurCoTMsg.d_hae = -10;
-	strncpy(CurCoTMsg.msg_type, TC_Symbol->GetValue(), 30); //SAR Vessel
+	strncpy(CurCoTMsg.msg_type, TC_Symbol->GetValue(), 30); 
 
 	strncpy(CurCoTMsg.callsignS, TC_CallSign->GetValue(), 40);
 	
-	sprintf(CurCoTMsg.UID, "%d", 123121123);// TC_MMSI->GetValue().c_str());
-	SendTest(CurCoTMsg);
+	sprintf(CurCoTMsg.UID, "MMSI-%d", 123121123);// TC_MMSI->GetValue().c_str());
 
-	wxLogMessage(CurCoTMsg.callsignS);
+	CurCoTMsg.course = SC_Course->GetValue();
+	CurCoTMsg.speed = SC_Speed->GetValue();
+
+	AssembleAndSendCoT(CurCoTMsg); 
+
+	wxLogMessage("Sending : %s", CurCoTMsg.callsignS);
 	//Frigate/corvette "S*S*CLFF--*****"
 	
 }

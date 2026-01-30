@@ -49,6 +49,8 @@ class MyFrame1 : public wxFrame
 		wxTextCtrl* TC_Symbol;
 		wxSpinCtrlDouble* SC_Lat;
 		wxSpinCtrlDouble* SC_Lng;
+		wxSpinCtrl* SC_Speed;
+		wxSpinCtrl* SC_Course;
 		wxTextCtrl* TC_MMSI;
 		wxTextCtrl* TC_CallSign;
 		wxTextCtrl* TC_Name;

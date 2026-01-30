@@ -43,7 +43,23 @@ void insertDouble(std::vector<unsigned char>& v, double d)
 }
 
 
+int bg_TakMessage::build_Detail_Track()
+{
+	std::vector<unsigned char> tvec;
 
+	tvec.push_back(0x09);
+	insertDouble(tvec, speed);
+
+	tvec.push_back(0x11);
+	insertDouble(tvec, course);
+
+	CoTTrack.clear();
+	CoTTrack.push_back(0x3A);  //id for track TBC
+	CoTTrack.push_back(tvec.size());
+	for (auto a : tvec) CoTTrack.push_back(a);
+
+	return CoTTrack.size();
+}
 
 
 int bg_TakMessage::build_Detail_Contact()
@@ -55,6 +71,7 @@ int bg_TakMessage::build_Detail_Contact()
 
 	tvec.push_back(0x12);
 	insertString(tvec, callsignS);
+
 
 	CoTContact.clear();
 	CoTContact.push_back(0x12);  //id for Contact
@@ -86,25 +103,50 @@ int bg_TakMessage::build_Detail_Group()
 }
 
 
+
 int bg_TakMessage::buildCoTEvent_Detail()
 {
 	CoTDetail.clear();
 
-	//int sX = build_Detail_xmlDetail();
+	//std::string xmlDetail = "<link type=\"a-f-G-U-C-I\"uid=\"S-1-5-21-1238431522-1672500784-1255353005-1001\"parent_callsign=\"Pheonix\"relation=\"p-p\" production_time=\"2026-01-30T11:37:07Z\"/><archive/><usericon iconsetpath=\"COT_MAPPING_2525C/a-f/a-f-S\"/><remarks>Just a boat</remarks><height_unit>1</height_unit>";
+	std::string xmlDetail = "<link type=\"a-f-G-U-C-I\"uid = \"";// S - 1 - 5 - 21 - 1238431522\"";// 1238431522 - 1672500784 - 1255353005 - 1001\"";
 
+
+
+	std::vector<unsigned char> tvec;
+	tvec.push_back(0x0a);
+	insertString(tvec, xmlDetail.c_str());
+
+	
 	int sD = build_Detail_Contact();
 	int sG = build_Detail_Group();
 	
 	//int sPL= build_Detail_precisionLocation();
 	//int sS = build_Detail_status();
 	//int sTV = build_Detail_takv();
-	//int sTR = build_Detail_track();
+	int sTR = build_Detail_Track();
 	
-	CoTDetail.push_back(0x7a);
-	CoTDetail.push_back(sD + sG);//length
+	CoTDetail.push_back(0x7a);  //this is the detail tag
+	
+	int l = sD + sG + sTR + tvec.size();
+	
+	if (l < 127) CoTDetail.push_back(l);
+	else
+	{
+		int high = l & 0b0111111110000000;
+		int low  = l & 0b0000000001111111;
 
+		CoTDetail.push_back(high);
+		CoTDetail.push_back(low & 0b10000000);
+	
+	}
+
+	
+
+	for (auto a : tvec) CoTDetail.push_back(a);
 	for (auto a : CoTContact) CoTDetail.push_back(a);
 	for (auto a : CoTGroup) CoTDetail.push_back(a);
+	for (auto a : CoTTrack) CoTDetail.push_back(a);
 
 	return CoTDetail.size();
 }
