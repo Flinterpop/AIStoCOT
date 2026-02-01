@@ -41,11 +41,6 @@ void AssembleAndSendCoT(bg_TakMessage CurCoTMsg)
 }
 
 
-
-
-//bg_TakMessage CurCoTMsg;
-
-
 void StartCOTSender()
 {
 	printf("Opening %s:%d\r\n", COT_MULTICAST_SEND_GROUP, COT_MULTICAST_SEND_PORT);

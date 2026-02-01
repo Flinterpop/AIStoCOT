@@ -43,9 +43,12 @@ set(
 	src_app/MyProject1MyFrame1.cpp
 	src_app/AISModule.h
 	src_app/AISModule.cpp
+	src_app/MyProject1CoTSender.cpp
+	src_app/MyProject1CoTSender.cpp
 
 	src_COT/bg_TakMessage.h
-	src_COT/CoT.cpp
+	src_COT/bg_TakMessage.cpp
+	src_COT/CoT.h
 	src_COT/COTSender.cpp
 	src_COT/COTSender.h
 	

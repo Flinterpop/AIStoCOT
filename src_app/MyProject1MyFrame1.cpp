@@ -17,6 +17,8 @@
 #include "COTSender.h"
 #include "bg_TakMessage.h"
 
+#include "MyProject1CoTSender.h"
+
 
 wxLogWindow* logWin{};
 
@@ -103,25 +105,21 @@ void MyProject1MyFrame1::BN_Test2OnButtonClick(wxCommandEvent& event)
 	if (nullptr == v) return;
 
 
-
-
-
-
-
-
-
 	bg_TakMessage CurCoTMsg;
 	wxLogMessage(std::format("org {}  new {}", CurCoTMsg.d_lat, v->lat_deg));
 	CurCoTMsg.d_lat = v->lat_deg;
 	CurCoTMsg.d_lon = v->lng_deg;
 	if (v->callsign.size() > 0)
 	{
-		strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
+		CurCoTMsg.callsign = v->callsign;
+
+		//strncpy(CurCoTMsg.callsign.c, v->callsign.c_str(), 40);
 	}
-	sprintf(CurCoTMsg.UID,"%d", v->mmsi);
+	//sprintf(CurCoTMsg.UID,"%d", v->mmsi);
+	CurCoTMsg.UID = std::to_string(v->mmsi);
 
 	wxLogMessage(std::format("lat {}  lon {}", CurCoTMsg.d_lat, CurCoTMsg.d_lon));
-	wxLogMessage(std::format("CS {}  mmsi {}", CurCoTMsg.callsignS, CurCoTMsg.UID));
+	wxLogMessage(std::format("CS {}  mmsi {}", CurCoTMsg.callsign.c_str(), CurCoTMsg.UID.c_str()));
 
 	AssembleAndSendCoT(CurCoTMsg);
 
@@ -196,13 +194,17 @@ void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
 		bg_TakMessage CurCoTMsg;
 		CurCoTMsg.d_lat = v->lat_deg;
 		CurCoTMsg.d_lon = v->lng_deg;
-		strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
+		
+
+		CurCoTMsg.msg_type = std::string("a-f-S");
+		//strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
 
 		if (v->callsign.size() > 0)
 		{
-			strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
+			CurCoTMsg.callsign = v->callsign;
+			//strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
 		}
-		sprintf(CurCoTMsg.UID, "MMSI-%d", v->mmsi);
+		CurCoTMsg.UID = std::to_string(v->mmsi);
 		AssembleAndSendCoT(CurCoTMsg);
 
 	}
@@ -273,10 +275,17 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	CurCoTMsg.d_lat = 44.5;
 	CurCoTMsg.d_lon = -63.37;
 	CurCoTMsg.d_hae = -10;
-	strncpy(CurCoTMsg.msg_type, "a-f-G-I-U-T", 30); //SAR Vessel
+	CurCoTMsg.msg_type = std::string("a-f-G-I-U-T");
 
-	strncpy(CurCoTMsg.callsignS, "SAR2", 40);
-	sprintf(CurCoTMsg.UID, "%d", mmsi);
+
+	CurCoTMsg.msg_type = std::string("a-f-G-I-U-T");
+	//strncpy(CurCoTMsg.msg_type, "a-f-G-I-U-T", 30); //SAR Vessel
+
+
+	CurCoTMsg.callsign = std::string("SAR2");
+	//strncpy(CurCoTMsg.callsignS, "SAR2", 40);
+	CurCoTMsg.UID = std::to_string(mmsi);
+	//sprintf(CurCoTMsg.UID, "%d", mmsi);
 	AssembleAndSendCoT(CurCoTMsg);
 
 
@@ -284,9 +293,9 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	CurCoTMsg.d_lat = 44.3;
 	CurCoTMsg.d_lon = -63.27;
 	CurCoTMsg.d_hae = 4;
-	strncpy(CurCoTMsg.msg_type, "a-f-S-X-M", 30);
-	strncpy(CurCoTMsg.callsignS, "Moose", 40);
-	sprintf(CurCoTMsg.UID, "%d", mmsi);
+	CurCoTMsg.msg_type = std::string("a-f-S-X-M");
+	CurCoTMsg.callsign = std::string("Moose");
+	CurCoTMsg.UID = std::to_string(mmsi);
 	AssembleAndSendCoT(CurCoTMsg);
 
 
@@ -294,9 +303,9 @@ void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
 	CurCoTMsg.d_lat = 44.1;
 	CurCoTMsg.d_lon = -63.17;
 	CurCoTMsg.d_hae = 13;
-	strncpy(CurCoTMsg.msg_type, "a-f-G-I-U-T", 30); //CRS Vessel
-	strncpy(CurCoTMsg.callsignS, "CRS3", 40);
-	sprintf(CurCoTMsg.UID, "%d", mmsi);
+	CurCoTMsg.msg_type = std::string("a-f-G-I-U-T");
+	CurCoTMsg.callsign = std::string("CRS3");
+	CurCoTMsg.UID = std::to_string(mmsi);
 	AssembleAndSendCoT(CurCoTMsg);
 
 	UpdateGrid();
@@ -311,18 +320,29 @@ void MyProject1MyFrame1::BN_SendCOTOnButtonClick(wxCommandEvent& event)
 	CurCoTMsg.d_lat = SC_Lat->GetValue();
 	CurCoTMsg.d_lon = SC_Lng->GetValue();
 	CurCoTMsg.d_hae = -10;
-	strncpy(CurCoTMsg.msg_type, TC_Symbol->GetValue(), 30); 
+	CurCoTMsg.msg_type = std::string(TC_Symbol->GetValue());
 
-	strncpy(CurCoTMsg.callsignS, TC_CallSign->GetValue(), 40);
+	CurCoTMsg.callsign = std::string(TC_CallSign->GetValue());
 	
-	sprintf(CurCoTMsg.UID, "MMSI-%d", 123121123);// TC_MMSI->GetValue().c_str());
+	
+	CurCoTMsg.UID = std::format("MMSI-{}", TC_MMSI->GetValue().utf8_string());
 
 	CurCoTMsg.course = SC_Course->GetValue();
 	CurCoTMsg.speed = SC_Speed->GetValue();
 
+	
 	AssembleAndSendCoT(CurCoTMsg); 
 
-	wxLogMessage("Sending : %s", CurCoTMsg.callsignS);
+	wxLogMessage("Sending : %s", CurCoTMsg.callsign);
 	//Frigate/corvette "S*S*CLFF--*****"
+
+}
+
+
+MyProject1CoTSender* mcb{};
+void MyProject1MyFrame1::BN_BuilderOnButtonClick(wxCommandEvent& event)
+{
 	
+	if (nullptr == mcb) mcb = new MyProject1CoTSender(this);
+	mcb->Show();
 }

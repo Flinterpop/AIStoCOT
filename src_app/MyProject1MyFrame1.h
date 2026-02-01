@@ -23,7 +23,8 @@ class MyProject1MyFrame1 : public MyFrame1
 		void BN_Test2OnButtonClick(wxCommandEvent& event) override;
 		void m_timer1OnTimer(wxTimerEvent& event) override;
 		void BN_SendCOTOnButtonClick(wxCommandEvent& event) override;
-
+		void BN_BuilderOnButtonClick(wxCommandEvent& event) override;
+		
 		void BN_TimerOnButtonClick(wxCommandEvent& event) override 
 		{
 			if (m_timer1.IsRunning())	m_timer1.Stop();
