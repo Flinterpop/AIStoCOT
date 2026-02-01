@@ -21,7 +21,28 @@ void bg_TakMessage::AssembleCoTPbufEvent()
 	PKT.push_back(0x01);
 	PKT.push_back(0xbf);
 
+	if (IncludeTakControl)
+	{
+		
+		PKT.push_back(0x0A);  
+		encodeVarint(0, PKT); //value
+
+		//PKT.push_back(0x08);  
+		//encodeVarint(1, PKT); //value
+		
+		
+		//PKT.push_back(0x02);
+		//encodeVarint(0, PKT); //length
+		//encodeVarint(0, PKT); //length
+
+		
+		
+		//encodeVarint(0, PKT); //length
+	}
+
+	
 	int sD = build_CoTEvent();
+
 
 	PKT.push_back(0x12);  //code for CoTEvent ?
 	encodeVarint(sD, PKT);
@@ -307,8 +328,11 @@ int bg_TakMessage::build_CoTEvent()
 	CoTEvent.clear();
 	for (auto a : tvec) CoTEvent.push_back(a);
 
-	//insert the detail to the event 
-	int DetailSize = buildCoTEvent_Detail();
+	int DetailSize = 0;
+	if (includeDetail)
+	{
+		DetailSize = buildCoTEvent_Detail();
+	}
 
 	int EventLength = tvec.size() + DetailSize + 2;
 	for (auto a : CoTDetail) CoTEvent.push_back(a);

@@ -28,8 +28,8 @@
 #include <wx/grid.h>
 #include <wx/timer.h>
 #include <wx/frame.h>
-#include <wx/stattext.h>
 #include <wx/checkbox.h>
+#include <wx/stattext.h>
 #include <wx/choice.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -89,6 +89,13 @@ class CoTSender : public wxFrame
 	private:
 
 	protected:
+		wxCheckBox* CB_IncludeTakControl;
+		wxStaticText* m_staticText29;
+		wxSpinCtrl* SB_MinProtVersion;
+		wxStaticText* m_staticText30;
+		wxSpinCtrl* SB_MaxProtVersion;
+		wxStaticText* m_staticText31;
+		wxTextCtrl* TC_ContactUID;
 		wxStaticText* m_staticText1;
 		wxTextCtrl* TE_Type;
 		wxStaticText* m_staticText4;
@@ -111,6 +118,7 @@ class CoTSender : public wxFrame
 		wxSpinCtrl* SC_CE;
 		wxStaticText* m_staticText13;
 		wxSpinCtrl* SC_LE;
+		wxCheckBox* CB_IncludeDetail;
 		wxCheckBox* CB_XMLDetail;
 		wxTextCtrl* TE_XMLDetail;
 		wxStaticText* m_staticText15;
@@ -158,7 +166,7 @@ class CoTSender : public wxFrame
 
 	public:
 
-		CoTSender( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("CoT Builder"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1242,919 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		CoTSender( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("CoT Builder"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1242,1028 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~CoTSender();
 

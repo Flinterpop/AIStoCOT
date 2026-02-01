@@ -194,6 +194,49 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* TopLevel;
 	TopLevel = new wxBoxSizer( wxVERTICAL );
 
+	wxBoxSizer* bSizer17;
+	bSizer17 = new wxBoxSizer( wxVERTICAL );
+
+	wxStaticBoxSizer* sbSizer15;
+	sbSizer15 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("TakControl") ), wxHORIZONTAL );
+
+	CB_IncludeTakControl = new wxCheckBox( sbSizer15->GetStaticBox(), wxID_ANY, _("Include TakControl"), wxDefaultPosition, wxDefaultSize, 0 );
+	CB_IncludeTakControl->SetValue(true);
+	CB_IncludeTakControl->SetToolTip( _("Some applications include this. It has no fields in these cases.") );
+
+	sbSizer15->Add( CB_IncludeTakControl, 0, wxALL, 5 );
+
+	m_staticText29 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("minProtoVersion"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	sbSizer15->Add( m_staticText29, 0, wxALL, 5 );
+
+	SB_MinProtVersion = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	sbSizer15->Add( SB_MinProtVersion, 0, wxALL, 5 );
+
+	m_staticText30 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("maxProtoVersion"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30->Wrap( -1 );
+	sbSizer15->Add( m_staticText30, 0, wxALL, 5 );
+
+	SB_MaxProtVersion = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxT("2"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	sbSizer15->Add( SB_MaxProtVersion, 0, wxALL, 5 );
+
+	m_staticText31 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("contactUid"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	m_staticText31->SetToolTip( _("UID of the sending contact. May be omitted if  this message is paired in a TakMessage with a CotEvent  and the CotEvent contains this information") );
+
+	sbSizer15->Add( m_staticText31, 0, wxALL, 5 );
+
+	TC_ContactUID = new wxTextCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	TC_ContactUID->SetToolTip( _("UID of the sending contact. May be omitted if  this message is paired in a TakMessage with a CotEvent  and the CotEvent contains this information") );
+
+	sbSizer15->Add( TC_ContactUID, 0, wxALL, 5 );
+
+
+	bSizer17->Add( sbSizer15, 1, wxEXPAND, 5 );
+
+
+	TopLevel->Add( bSizer17, 0, wxEXPAND, 5 );
+
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("CoT Event") ), wxVERTICAL );
 
@@ -216,7 +259,7 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText4->Wrap( -1 );
 	Left->Add( m_staticText4, 0, wxALL, 5 );
 
-	TE_Access = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	TE_Access = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, _("Unclassified"), wxDefaultPosition, wxDefaultSize, 0 );
 	TE_Access->SetToolTip( _("Optional") );
 
 	Left->Add( TE_Access, 0, wxALL, 5 );
@@ -269,25 +312,33 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	DE_Lng->SetDigits( 4 );
 	Left->Add( DE_Lng, 0, wxALL|wxEXPAND, 5 );
 
-	m_staticText11 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("HAE"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText11 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("HAE [m]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText11->Wrap( -1 );
 	Left->Add( m_staticText11, 0, wxALL, 5 );
 
 	SC_HAE = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("33"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -50, 75000, 0 );
 	Left->Add( SC_HAE, 0, wxALL|wxEXPAND, 5 );
 
-	m_staticText12 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("CE"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText12 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("CE [m]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText12->Wrap( -1 );
+	m_staticText12->SetToolTip( _("The ce attribute defines the radius of a cylinder and is measured in metres") );
+
 	Left->Add( m_staticText12, 0, wxALL, 5 );
 
 	SC_CE = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("999999"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 999999, 0 );
+	SC_CE->SetToolTip( _("The ce attribute defines the radius of a cylinder and is measured in metres") );
+
 	Left->Add( SC_CE, 0, wxALL|wxEXPAND, 5 );
 
-	m_staticText13 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("LE"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText13 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("LE [m]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText13->Wrap( -1 );
+	m_staticText13->SetToolTip( _("The le attribute defines the half-height of a cylinder and is measured metres") );
+
 	Left->Add( m_staticText13, 0, wxALL, 5 );
 
 	SC_LE = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("999999"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 999999, 0 );
+	SC_LE->SetToolTip( _("The le attribute defines the half-height of a cylinder and is measured in metres") );
+
 	Left->Add( SC_LE, 0, wxALL|wxEXPAND, 5 );
 
 
@@ -301,6 +352,11 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	wxBoxSizer* bSizer15;
 	bSizer15 = new wxBoxSizer( wxVERTICAL );
+
+	CB_IncludeDetail = new wxCheckBox( sbSizer5->GetStaticBox(), wxID_ANY, _("Include"), wxDefaultPosition, wxDefaultSize, 0 );
+	CB_IncludeDetail->SetToolTip( _("When Checked the Detail Element is included") );
+
+	bSizer15->Add( CB_IncludeDetail, 0, wxALL, 5 );
 
 	wxStaticBoxSizer* sbSizer14;
 	sbSizer14 = new wxStaticBoxSizer( new wxStaticBox( sbSizer5->GetStaticBox(), wxID_ANY, _("xml Detail") ), wxVERTICAL );
@@ -428,7 +484,7 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	CB_Battery = new wxCheckBox( sbSizer10->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer7->Add( CB_Battery, 0, wxALL, 5 );
 
-	m_staticText21 = new wxStaticText( sbSizer10->GetStaticBox(), wxID_ANY, _("Battery"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText21 = new wxStaticText( sbSizer10->GetStaticBox(), wxID_ANY, _("Battery [%]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
 	fgSizer7->Add( m_staticText21, 0, wxALL, 5 );
 
@@ -507,7 +563,7 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	CB_Speed->SetValue(true);
 	fgSizer9->Add( CB_Speed, 0, wxALL, 5 );
 
-	m_staticText27 = new wxStaticText( sbSizer12->GetStaticBox(), wxID_ANY, _("Speed"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText27 = new wxStaticText( sbSizer12->GetStaticBox(), wxID_ANY, _("Speed [m/s]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText27->Wrap( -1 );
 	fgSizer9->Add( m_staticText27, 0, wxALL, 5 );
 
@@ -518,7 +574,7 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	CB_Course->SetValue(true);
 	fgSizer9->Add( CB_Course, 0, wxALL, 5 );
 
-	m_staticText28 = new wxStaticText( sbSizer12->GetStaticBox(), wxID_ANY, _("Course"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText28 = new wxStaticText( sbSizer12->GetStaticBox(), wxID_ANY, _("Course [ ° T]"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText28->Wrap( -1 );
 	fgSizer9->Add( m_staticText28, 0, wxALL, 5 );
 

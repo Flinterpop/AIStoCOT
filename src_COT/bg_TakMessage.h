@@ -119,6 +119,7 @@ protected:
 public:
 	std::vector<unsigned char> PKT;
 
+	bool IncludeTakControl = false;
 	
 	//CoTEvent
 	//char msg_type[30] = { "a-f-G" };
@@ -144,6 +145,7 @@ public:
 
 
 	//CoT Detail //optional
+	bool includeDetail = false;
 	std::string xmlDetail{}; //optional
 	
 	//Detail - Contact
