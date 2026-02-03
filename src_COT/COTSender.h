@@ -6,6 +6,6 @@
 void AssembleAndSendCoT(bg_TakMessage CurCoTMsg);
 
 
-void StartCOTSender();
+std::string StartCOTSender();
 void StopCOTSender();
 

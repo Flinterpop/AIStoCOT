@@ -36,7 +36,9 @@ MyFrame1( parent )
 {
 
 	initialise_winsock();
-	StartCOTSender();
+	getNetworkAdapterInfo();
+	std::string retVal = StartCOTSender();
+	wxLogMessage(retVal.c_str());
 
 	// This is crucial: set a unique name for the frame
 	SetName("AIS to CoT - 27 Jan 2026");

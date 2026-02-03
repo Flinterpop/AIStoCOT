@@ -5,6 +5,8 @@
 #include <iostream>
 #include <conio.h>
 #include <vector>
+#include <sstream>
+
 //#include "ImGui.h"
 //#include "ImBGUtil.h"
 
@@ -18,12 +20,17 @@
 //#include <AppIni.h>
 
 
-void SendCoT(const char* buf, int size);
+#include <wx/log.h>
+
+
+std::string SendCoT(const char* buf, int size);
 //void CoTSenderDialog(bool *);
 
 sockaddr_in COTSendSocker_addr;
 SOCKET COT_SendSocket;
 char COT_MULTICAST_SEND_GROUP[20] = "239.2.3.1";
+//char COT_MULTICAST_SEND_GROUP[20] = "239.255.3.1";
+
 int COT_MULTICAST_SEND_PORT = 6969;
 bool isCOTSenderRunning = false;
 
@@ -37,22 +44,26 @@ char XMLEvent[] = { 0x3c, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x20, 0x76, 0x65, 0x72, 
 void AssembleAndSendCoT(bg_TakMessage CurCoTMsg)
 {
 	CurCoTMsg.AssembleCoTPbufEvent();
-	SendCoT((const char*)CurCoTMsg.PKT.data(), CurCoTMsg.PKT.size());
+	std::string ret = SendCoT((const char*)CurCoTMsg.PKT.data(), CurCoTMsg.PKT.size());
+	wxLogMessage(ret.c_str());
 }
 
 
-void StartCOTSender()
+std::string StartCOTSender()
 {
-	printf("Opening %s:%d\r\n", COT_MULTICAST_SEND_GROUP, COT_MULTICAST_SEND_PORT);
+	std::stringstream retVal{};
+	retVal << "Opening " << COT_MULTICAST_SEND_GROUP <<":" << std::to_string(COT_MULTICAST_SEND_PORT)<<std::endl;
+
+	//printf("Opening %s:%d\r\n", COT_MULTICAST_SEND_GROUP, COT_MULTICAST_SEND_PORT);
 
 	// Create socket
 	COT_SendSocket = WSASocket(AF_INET, SOCK_DGRAM, IPPROTO_UDP, NULL, 0, 0);
 	// An IPV4 udp blocking socket, I will likely write a tutorial on overlapped receiving socket in the future.
 	if (COT_SendSocket == INVALID_SOCKET)
 	{
-		std::cout << "Can not create socket: <" << WSAGetLastError() << ">\n";
+		retVal << "Can not create socket: <" << WSAGetLastError() << std::endl;
 		//ImGui::InsertNotification({ ImGuiToastType::Error, 3000, "Can not create COT Send socket. Err:: %x", WSAGetLastError() });
-		return ;
+		return retVal.str();
 	}
 
 	//Set target address 
@@ -60,11 +71,14 @@ void StartCOTSender()
 	COTSendSocker_addr.sin_family = AF_INET;
 	if (inet_pton(AF_INET, (PCSTR)(COT_MULTICAST_SEND_GROUP), &COTSendSocker_addr.sin_addr.s_addr) < 0) {
 		std::cout << "Multicast failed set join group\n";
-		return ;
+		retVal << "Multicast failed set join group" << std::endl;
+		return retVal.str();
 	}
 	COTSendSocker_addr.sin_port = htons(COT_MULTICAST_SEND_PORT);
 	isCOTSenderRunning = true;
+	retVal << "Started COT Sender" << std::endl;
 	puts("Started COT Sender");
+	return retVal.str();
 
 }
 
@@ -77,18 +91,20 @@ void StopCOTSender()
 }
 
 
-void SendCoT(const char* buf, int size)
+std::string SendCoT(const char* buf, int size)
 {
-
+	std::stringstream retVal{};
 	int bytesSent = 0;
 	int iResult = sendto(COT_SendSocket, (const char*)buf, size, bytesSent, (struct sockaddr*)&COTSendSocker_addr, sizeof(COTSendSocker_addr));
 	if (iResult == SOCKET_ERROR)
 	{
+		retVal <<"COT send failed with error code: " << WSAGetLastError() <<std::endl;
 		printf("COT send failed with error code: %d\r\n", WSAGetLastError());
-		return;// true;
+		return retVal.str();
 	}
-	else printf("COT send worked\r\n");
-	return;// false;
+	retVal << "COT send worked" << std::endl;
+	printf("COT send worked\r\n");
+	return retVal.str();
 }
 
 
