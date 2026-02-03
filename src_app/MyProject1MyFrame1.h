@@ -6,7 +6,7 @@
 
 #include "ais.h"
 #include "decode_body.h"
-
+#include "AISModule.h"
 
 using namespace libais;
 
@@ -20,7 +20,7 @@ class MyProject1MyFrame1 : public MyFrame1
 		~MyProject1MyFrame1();
 
 		void m_BN_PreCanned(wxCommandEvent& event) override;
-		void BN_Test2OnButtonClick(wxCommandEvent& event) override;
+		void BN_NMEAToCoTOnButtonClick(wxCommandEvent& event) override;
 		void m_timer1OnTimer(wxTimerEvent& event) override;
 		void BN_SendCOTOnButtonClick(wxCommandEvent& event) override;
 		void BN_BuilderOnButtonClick(wxCommandEvent& event) override;
@@ -34,6 +34,17 @@ class MyProject1MyFrame1 : public MyFrame1
 		void m_filePicker1OnFileChanged(wxFileDirPickerEvent& event) override;
 		void UpdateGrid();
 		void ProcessNMEAPayload(std::string p);
+		void SendVesselCoTUpdate(vessel* v);
+
+		void SendAidToNavCoTUpdate(AidToNavigation* v);
+
+		void BN_ClearOnButtonClick(wxCommandEvent& event) override;
+		void BN_ShowStatsOnButtonClick(wxCommandEvent& event) override;
+
+		void BN_ShowAISBuilderOnButtonClick(wxCommandEvent& event) override;
+
+		void ProcessNMEAToCoT(std::string line);
+
 };
 
 #endif 

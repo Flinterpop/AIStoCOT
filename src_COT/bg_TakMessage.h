@@ -120,10 +120,12 @@ public:
 	std::vector<unsigned char> PKT;
 
 	bool IncludeTakControl = false;
+	bool includeContact = false;
+	bool includeGroup = false;
 	
 	//CoTEvent
 	//char msg_type[30] = { "a-f-G" };
-	std::string msg_type{ "a-f-G" };
+	std::string msg_type{};
 	//char msg_type[30] = { "a-f-G-I-U-T" };  //CRS Vessel
 	//char msg_type[30] = { "a-f-S-X-M" }; 
 	//char msg_type[30] = { "a-f-S-X-L" }; //SAR Vesel
@@ -131,7 +133,8 @@ public:
 	std::string access{};//optional
 	std::string qos{};//optional
 	std::string opex{};//optional
-	std::string UID{ "TAKAdapter0-b219671e-40ad-41ce-8b31-3877dbb7145" };
+	std::string UID{};
+
 	
 	int COT_STALE{};//valid time in seconds
 
@@ -149,12 +152,12 @@ public:
 	std::string xmlDetail{}; //optional
 	
 	//Detail - Contact
-	std::string endpoint{ "192.168.19.119:4242:tcp" }; //optional
-	std::string callsign{"wxAIS"};
+	std::string endpoint{};// "192.168.19.119:4242:tcp" }; //optional
+	std::string callsign{};// "wxAIS"};
 	
 	//Detail - Group
-	std::string group_name {"Yellow"};
-	std::string role{ "Team Member"};
+	std::string group_name{};// "Yellow"};
+	std::string role{};// "Team Member"};
 
 
 	//Detail - Precision Location

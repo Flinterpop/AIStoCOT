@@ -45,12 +45,22 @@ set(
 	src_app/AISModule.cpp
 	src_app/MyProject1CoTSender.cpp
 	src_app/MyProject1CoTSender.cpp
+	src_app/MyProject1AISBuilder.h
+	src_app/MyProject1AISBuilder.cpp
 
 	src_COT/bg_TakMessage.h
 	src_COT/bg_TakMessage.cpp
 	src_COT/CoT.h
 	src_COT/COTSender.cpp
 	src_COT/COTSender.h
+
+	AIS_library--main/ais1.cpp
+	AIS_library--main/ais1.h
+	AIS_library--main/ais5.h
+	AIS_library--main/ais5.cpp
+	AIS_library--main/aislib.h
+	AIS_library--main/aislib.cpp
+
 	
 	aislib/ais.cpp
 	aislib/ais_bitset.cpp
@@ -122,6 +132,7 @@ target_include_directories(${PROJECT_NAME}  PUBLIC src_base)
 target_include_directories(${PROJECT_NAME}  PUBLIC src_app)
 target_include_directories(${PROJECT_NAME}  PUBLIC aislib)
 target_include_directories(${PROJECT_NAME}  PUBLIC src_COT)
+target_include_directories(${PROJECT_NAME}  PUBLIC AIS_library--main)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC wxcore wxnet wxhtml wxrichtext wxaui)
 

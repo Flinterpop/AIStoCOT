@@ -16,6 +16,16 @@ class MyProject1CoTSender : public CoTSender
 	protected:
 		// Handlers for CoTSender events.
 		void BN_SendOnButtonClick( wxCommandEvent& event );
+		void BN_AtoNOnButtonClick(wxCommandEvent& event) override;
+		void BN_PinkOnButtonClick(wxCommandEvent& event) override;
+		void BN_ShipOnButtonClick(wxCommandEvent& event) override;
+		void BN_ClearOnButtonClick(wxCommandEvent& event) override;
+		void BN_USCGOnButtonClick(wxCommandEvent& event) override;
+
+		void ClearUI();
+		void SendTakMessage();
+
+
 	public:
 		/** Constructor */
 		MyProject1CoTSender( wxWindow* parent );

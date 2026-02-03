@@ -18,9 +18,13 @@
 #include "bg_TakMessage.h"
 
 #include "MyProject1CoTSender.h"
+#include "MyProject1AISBuilder.h"
+
 
 
 wxLogWindow* logWin{};
+
+extern int MsgCounts[27];
 
 extern std::vector<vessel*> VesselList;
 const int AGEOUT = 20;
@@ -83,6 +87,9 @@ MyFrame1( parent )
 	m_grid1->SetColLabelValue(7, "Age");
 	m_grid1->SetColSize(7, 100);
 
+
+	m_grid1->SetColLabelValue(8, "Msg ID");
+	m_grid1->SetColSize(8, 100);
 }
 
 
@@ -93,48 +100,31 @@ MyProject1MyFrame1::~MyProject1MyFrame1()
 }
 
 
-struct NMEA_AIS* multipart1;
-void MyProject1MyFrame1::BN_Test2OnButtonClick(wxCommandEvent& event)
+
+void MyProject1MyFrame1::BN_ClearOnButtonClick(wxCommandEvent& event)
 {
-	std::string s = TC_AISLine->GetValue().ToStdString();
-
-	struct NMEA_AIS* nmea = parseNMEA(s);
-	wxLogMessage(nmea->print());
-
-	vessel * v = ParsePayloadString(nmea->payload);
-	if (nullptr == v) return;
-
-
-	bg_TakMessage CurCoTMsg;
-	wxLogMessage(std::format("org {}  new {}", CurCoTMsg.d_lat, v->lat_deg));
-	CurCoTMsg.d_lat = v->lat_deg;
-	CurCoTMsg.d_lon = v->lng_deg;
-	if (v->callsign.size() > 0)
-	{
-		CurCoTMsg.callsign = v->callsign;
-
-		//strncpy(CurCoTMsg.callsign.c, v->callsign.c_str(), 40);
-	}
-	//sprintf(CurCoTMsg.UID,"%d", v->mmsi);
-	CurCoTMsg.UID = std::to_string(v->mmsi);
-
-	wxLogMessage(std::format("lat {}  lon {}", CurCoTMsg.d_lat, CurCoTMsg.d_lon));
-	wxLogMessage(std::format("CS {}  mmsi {}", CurCoTMsg.callsign.c_str(), CurCoTMsg.UID.c_str()));
-
-	AssembleAndSendCoT(CurCoTMsg);
-
+	for (int x = 0; x < 27; x++) MsgCounts[x] = 0;
+	VesselList.clear();
 	UpdateGrid();
 
+}
 
-	
 
+void MyProject1MyFrame1::BN_ShowStatsOnButtonClick(wxCommandEvent& event) 
+{
+
+	wxLogMessage(std::format("AIS1: {}", MsgCounts[1]));
+	wxLogMessage(std::format("AIS2: {}", MsgCounts[2]));
+	wxLogMessage(std::format("AIS3: {}", MsgCounts[3]));
+	wxLogMessage(std::format("AIS5: {}", MsgCounts[5]));
+	wxLogMessage(std::format("AIS6: {}", MsgCounts[6]));
+	wxLogMessage(std::format("AIS18: {}", MsgCounts[18]));
 }
 
 
 void MyProject1MyFrame1::m_timer1OnTimer(wxTimerEvent& event)
 {
 	wxLogMessage(std::format("Num Vessels: {}", VesselList.size()));
-
 
 	TC_Debug->Clear();
 
@@ -178,6 +168,7 @@ void MyProject1MyFrame1::UpdateGrid()
 		m_grid1->SetCellValue(row, 5, std::format("{}", v->true_heading).c_str());
 		m_grid1->SetCellValue(row, 6, std::format("{}", NAV_STATUS[v->nav_status]).c_str());
 		m_grid1->SetCellValue(row, 7, std::format("{}", v->age));
+		m_grid1->SetCellValue(row, 8, std::format("{}", v->AISMsgNumber ));
 
 		++row;
 
@@ -188,28 +179,158 @@ void MyProject1MyFrame1::UpdateGrid()
 
 void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
 {
-	vessel* v = ParsePayloadString(p);
-	if (nullptr != v)
+	AISObject* ao = ParsePayloadString(p);
+	if (nullptr == ao) return;
+	switch (ao->AISMsgNumber)
 	{
-		bg_TakMessage CurCoTMsg;
-		CurCoTMsg.d_lat = v->lat_deg;
-		CurCoTMsg.d_lon = v->lng_deg;
-		
-
-		CurCoTMsg.msg_type = std::string("a-f-S");
-		//strncpy(CurCoTMsg.msg_type, "a-f-S", 30); //Surface
-
-		if (v->callsign.size() > 0)
+	case 1:
+	case 2:
+	case 3:
 		{
-			CurCoTMsg.callsign = v->callsign;
-			//strncpy(CurCoTMsg.callsignS, v->callsign.c_str(), 40);
+			vessel* v = (vessel*)ao;
+			SendVesselCoTUpdate(v);
+			break;
 		}
-		CurCoTMsg.UID = std::to_string(v->mmsi);
-		AssembleAndSendCoT(CurCoTMsg);
-
+		case 5:
+		{
+			vessel* v = (vessel*)ao;
+			break;
+		}
+		case 18:
+		{
+			vessel* v = (vessel*)ao;
+			SendVesselCoTUpdate(v);
+			break;
+		}
+		case 21:  //Type 21: Aid-to-Navigation Report
+		{
+			AidToNavigation* a2n = (AidToNavigation*)ao;
+			SendAidToNavCoTUpdate(a2n);
+			break;
+		}
 	}
 
 	UpdateGrid();
+}
+
+
+void MyProject1MyFrame1::SendVesselCoTUpdate(vessel *v)
+{
+	if ((false == v->isValidAIS123) && (false == v->isValidAIS18) ) return;
+
+	bg_TakMessage CurCoTMsg;
+	CurCoTMsg.IncludeTakControl = true;
+
+	CurCoTMsg.d_lat = v->lat_deg;
+	CurCoTMsg.d_lon = v->lng_deg;
+	CurCoTMsg.d_hae = 0;
+	CurCoTMsg.d_ce = 100;
+	CurCoTMsg.d_le = 100;
+
+	CurCoTMsg.UID = std::format("MMSI-{}", v->mmsi);
+	CurCoTMsg._how = "m-g";
+
+	CurCoTMsg.course = v->true_heading;
+	//CurCoTMsg.speed = v->mmsi;
+
+	CurCoTMsg.includeContact = true;
+	std::string name{};
+	vessel* v2 = FindVesselByMMSI(v->mmsi);
+	if (nullptr != v2)  //found vessel in vessel list
+	{
+		if (0 != v2->callsign.size())
+		{
+			std::string cs = v2->callsign;
+			std::erase(cs, '@'); // C++20 only
+			if (0 != cs.size()) CurCoTMsg.callsign = cs;// v2->callsign;
+			else
+			{
+				std::string cs = v2->name;
+				std::erase(cs, '@'); // C++20 only
+				if (0 != cs.size()) CurCoTMsg.callsign = cs;
+			}
+		}
+		if (0!= v2->name.size()) name = v2->name;
+	}
+	else
+	{
+		if (v->callsign.size() > 0) CurCoTMsg.callsign = std::format("AIS{}", v->callsign);
+		else CurCoTMsg.callsign = std::format("MSSI-{}", v->mmsi);
+	}
+
+
+	CurCoTMsg.msg_type = std::string("a-f-S-X-M");
+
+	CurCoTMsg.includeDetail = true;
+	std::stringstream remarks;
+	remarks << "<remarks>";
+	if (CurCoTMsg.includeContact) remarks << "Shipname: " << v->callsign;
+	if (name.size() > 0) remarks << " AIS Name: " << name;
+	remarks << " Country: " << "China";
+	remarks << " Type: " << std::to_string(v->type_and_cargo);
+	remarks << " MMSI: " << std::to_string(v->mmsi);
+	remarks << "</remarks>";
+	CurCoTMsg.xmlDetail = remarks.str();
+
+	AssembleAndSendCoT(CurCoTMsg);
+
+}
+
+
+
+void MyProject1MyFrame1::SendAidToNavCoTUpdate(AidToNavigation* a2n)
+{
+
+
+}
+
+
+
+struct NMEA_AIS* multipart1;
+void MyProject1MyFrame1::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
+{
+
+	auto t = TC_AISLine->GetNumberOfLines();
+	for (int i = 0; i < t; i++)
+	{
+		auto s = TC_AISLine->GetLineText(i);
+		struct NMEA_AIS* nmea = parseNMEA(s.utf8_string());
+		wxLogMessage(nmea->print());
+
+		ProcessNMEAPayload(nmea->payload);
+	}
+		
+}
+
+
+void MyProject1MyFrame1::ProcessNMEAToCoT(std::string line)
+{
+	struct NMEA_AIS* nmea = parseNMEA(line);
+	wxLogMessage(nmea->print());
+
+	if (1 != nmea->CountOfFragments)
+	{
+		if (1 == nmea->FragmentNumber)
+		{
+			multipart1 = nmea;
+			wxLogMessage("multipart Frag 1");
+			//return;
+		}
+
+		else if (2 == nmea->FragmentNumber)
+		{
+			nmea->payload = multipart1->payload + nmea->payload;
+			wxLogMessage("multipart Frag 2");
+			ProcessNMEAPayload(nmea->payload);
+		}
+	}
+	else
+	{
+		multipart1 = nullptr;
+		wxLogMessage("Non multipart");
+		ProcessNMEAPayload(nmea->payload);
+	}
+
 }
 
 void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
@@ -226,43 +347,14 @@ void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		int counter = 0;
 		while (std::getline(myfile, line)) 
 		{
-			struct NMEA_AIS* nmea = parseNMEA(line);
-			wxLogMessage(nmea->print());
-
-			if (1 != nmea->CountOfFragments)
-			{
-				if (1 == nmea->FragmentNumber)
-				{
-					multipart1 = nmea;
-					wxLogMessage("multipart Frag 1");
-					//return;
-				}
-
-				else if (2 == nmea->FragmentNumber)
-				{
-					nmea->payload = multipart1->payload + nmea->payload;
-					wxLogMessage("multipart Frag 2");
-					ProcessNMEAPayload(nmea->payload);
-				}
-			}
-			else
-			{
-				multipart1 = nullptr;
-				wxLogMessage("Non multipart");
-				ProcessNMEAPayload(nmea->payload);
-			}
-
-
-			if (++counter > MaxVesselListSIze) return;
-
+			ProcessNMEAToCoT(line);
+			//if (++counter > MaxVesselListSize) return;
 		}
 		myfile.close();
 	}
 	else {
 		wxLogMessage("Unable to open file");
 	}
-
-
 }
 
 
@@ -317,6 +409,8 @@ void MyProject1MyFrame1::BN_SendCOTOnButtonClick(wxCommandEvent& event)
 	int mmsi = 265547250;
 
 	bg_TakMessage CurCoTMsg;
+
+
 	CurCoTMsg.d_lat = SC_Lat->GetValue();
 	CurCoTMsg.d_lon = SC_Lng->GetValue();
 	CurCoTMsg.d_hae = -10;
@@ -345,4 +439,12 @@ void MyProject1MyFrame1::BN_BuilderOnButtonClick(wxCommandEvent& event)
 	
 	if (nullptr == mcb) mcb = new MyProject1CoTSender(this);
 	mcb->Show();
+}
+
+
+MyProject1AISBuilder* mAIS{};
+void MyProject1MyFrame1::BN_ShowAISBuilderOnButtonClick(wxCommandEvent& event)
+{
+	if (nullptr == mAIS) mAIS = new MyProject1AISBuilder(this);
+	mAIS->Show();
 }

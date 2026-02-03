@@ -203,8 +203,11 @@ int bg_TakMessage::buildCoTEvent_Detail()
 
 	int sXML = 0;
 	if (xmlDetail.size()>0) sXML = build_Detail_XmlDetail();
-	int sD = build_Detail_Contact();
-	int sG = build_Detail_Group();
+
+	int sD = 0;
+	if (true == includeContact) sD = build_Detail_Contact();
+	int sG = 0;
+	if (true == includeGroup) sG = build_Detail_Group();
 
 	int sPL = 0;
 	if ((geopointsrc.size()>0) || (altsrc.size()>0) ) sPL = build_Detail_precisionLocation();

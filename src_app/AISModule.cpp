@@ -12,7 +12,26 @@
 
 std::vector<vessel*> VesselList;
 
-int MsgCounts[27]{};
+std::vector<KnownVessel*> KnownVesselList;
+
+
+
+void BuildKnownVesselList()
+{
+    KnownVessel *kv = new KnownVessel(316130000, 0, "HMCS Charlettetown", "CGAJ", 35, "Canada", 134,17,0,0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316138000, 0, "HMCS Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316135000, 0, "HMCS Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316030879, 9348182, "MV Asterix", "CFN7327", 35, "Canada",183, 34, 0, 0);
+    KnownVesselList.push_back(kv);
+
+}
+
 
 struct NMEA_AIS* parseNMEA(std::string myString)
 {
@@ -70,7 +89,11 @@ struct NMEA_AIS* parseNMEA(std::string myString)
 vessel* FindVesselByMMSI(int mmsi)
 {
     for (auto v : VesselList)
-        if (v->mmsi == mmsi) return v;
+        if (v->mmsi == mmsi)
+        {
+            wxLogMessage("Found vessel %d  %s % s", v->mmsi, v->callsign, v->name);
+            return v;
+        }
     return nullptr;
 }
 
@@ -91,12 +114,14 @@ const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
     "AIS_NV_STATUS_PUSHING_AHEAD_OR_TOWING_ALONGSIDE", // power-driven vessel pushing ahead or towing alongside (regional use)
     "AIS_NV_STATUS_RESERVED3", // reserved for future use
     "AIS_NV_STATUS_SART", // AIS-SART (active), MOB-AIS, EPIRB-AIS
-    "AIS_NV_STATUS_UNDEFINED", // undefined = default (also used by AIS-SART, MOB-AIS and EPIRB-AIS under test)
+    "   ", // undefined = default (also used by AIS-SART, MOB-AIS and EPIRB-AIS under test)
 };
 
 
+int MsgCounts[27]{};
 
-vessel *ParsePayloadString(std::string body)
+
+AISObject *ParsePayloadString(std::string body)
 {
     switch (body[0])
     {
@@ -104,7 +129,7 @@ vessel *ParsePayloadString(std::string body)
     case '2':  // FALLTHROUGH
     case '3':  // 1-3: Class A position report.
     {
-        return ParsePosReportPayload(body, 0);
+        return ParseAIS123_PosReportPayload(body, 0);
         break;
     }
 
@@ -118,7 +143,7 @@ vessel *ParsePayloadString(std::string body)
 
     case '5':  // 5 - Ship and Cargo
     {
-        return ParseIdentPayload(body, 2);
+        return ParseASI5IdentPayload(body, 2);
         //return MakeUnique<libais::Ais5>(body.c_str(), fill_bits);
         break;
     }
@@ -180,6 +205,7 @@ case 'A':  // 17 - GNSS broadcast
 
     case 'B':  // 18 - Position, Class B
     {
+        return ParseAIS18_PosReportPayload(body, 0);
         //return MakeUnique<libais::Ais18>(body.c_str(), fill_bits);
         break;
     }
@@ -225,7 +251,7 @@ case 'A':  // 17 - GNSS broadcast
 }
 
 
-vessel *ParseIdentPayload(std::string body, int fillbits)
+AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
 {
     std::stringstream retVal{};
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
@@ -265,7 +291,7 @@ vessel *ParseIdentPayload(std::string body, int fillbits)
             v->age = 0;
         }
 
-        return v;
+        return (AISObject*)v;
 
 
 
@@ -298,9 +324,12 @@ vessel *ParseIdentPayload(std::string body, int fillbits)
 
 }
 
-vessel *ParsePosReportPayload(std::string body, int fillbits)
+
+
+AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
 {
     std::stringstream retVal{};
+
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
     if (nullptr == p)
     {
@@ -321,7 +350,6 @@ vessel *ParsePosReportPayload(std::string body, int fillbits)
         retVal << "time stamp " << a123->timestamp << std::endl;
 
         wxLogMessage(retVal.str());
-        ++MsgCounts[a123->message_id];
 
         vessel* v = FindVesselByMMSI(a123->mmsi);
         if (nullptr == v)
@@ -348,7 +376,66 @@ vessel *ParsePosReportPayload(std::string body, int fillbits)
             v->timestamp = a123->timestamp;
             v->age = 0;
         }
-        return v;
+        return (AISObject *)v;
+    }
+    return nullptr;
+
+}
+
+
+
+
+AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
+{
+    std::stringstream retVal{};
+
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
+    if (nullptr == p)
+    {
+        std::cout << "Null ptr" << std::endl;
+        return nullptr;
+    }
+    else
+    {
+        Ais18* a18 = new Ais18(body.c_str(), 0);
+
+        //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
+        retVal << "ParsePosReportPayload:" << std::endl;
+        retVal << "user ID " << a18->mmsi << std::endl;
+        //retVal << "nav_status " << NAV_STATUS[a18->nav_status] << std::endl;
+        retVal << "true_heading " << a18->true_heading << std::endl;
+        retVal << "position, lat " << a18->position.lat_deg << std::endl;
+        retVal << "position, lng " << a18->position.lng_deg << std::endl;
+        retVal << "time stamp " << a18->timestamp << std::endl;
+
+        wxLogMessage(retVal.str());
+
+        vessel* v = FindVesselByMMSI(a18->mmsi);
+        if (nullptr == v)
+        {
+            v = new vessel(a18);
+            v->mmsi = a18->mmsi;
+            //v->nav_status = -1;// a18->nav_status;
+            v->true_heading = a18->true_heading;
+            v->lat_deg = a18->position.lat_deg;
+            v->lng_deg = a18->position.lng_deg;
+            v->timestamp = a18->timestamp;
+
+
+            VesselList.push_back(v);
+        }
+        else //just update the thing
+        {
+            v->a18= a18;
+
+            //v->nav_status = a18->nav_status;
+            v->true_heading = a18->true_heading;
+            v->lat_deg = a18->position.lat_deg;
+            v->lng_deg = a18->position.lng_deg;
+            v->timestamp = a18->timestamp;
+            v->age = 0;
+        }
+        return (AISObject*)v;
     }
     return nullptr;
 

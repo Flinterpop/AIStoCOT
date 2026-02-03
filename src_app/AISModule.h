@@ -10,6 +10,8 @@
 using namespace libais;
 
 extern const char* NAV_STATUS[];
+extern int MsgCounts[27];
+
 
 struct NMEA_AIS
 {
@@ -46,48 +48,125 @@ struct NMEA_AIS
 
 };
 
-class vessel
+struct KnownVessel
+{
+    int MMSI{};
+    int IMO{};
+    std::string name{};
+    std::string callsign{};
+    int A, B, C, D{};  //dimensions
+    int type{};
+    std::string flag{};
+
+    KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _type, std::string _flag, int a, int b, int c, int d)
+    {
+        MMSI=mmsi;
+        IMO = imo;
+        name=_name;
+        callsign = cs;
+        A = a;
+        B = b;
+        C = c;
+        D = d;  //dimensions
+        type = _type;
+        flag = _flag;
+    };
+
+
+
+};
+
+
+
+class AISObject
 {
 public:
     int mmsi = 0;
     int age = 0;
     bool markForDelete = false;
+    int AISMsgNumber = 0; //1 thru 27
+
+
     
 public:
-    vessel(Ais1_2_3 *a)
+    AISObject(int _AISMsgNum, int _mmsi)
     {
-        a123 = a; 
+        mmsi=_mmsi; 
+        AISMsgNumber = _AISMsgNum;
+        MsgCounts[AISMsgNumber]++;
     };
 
-    vessel(Ais5* a)
+    virtual std::string LogMe() {
+        std::stringstream retVal{};
+            retVal << "AISObject (base class) " << std::endl;
+            retVal << "MMSI " << mmsi << std::endl;
+            retVal << "Message ID " << AISMsgNumber << std::endl;
+        return retVal.str();
+    };
+    
+
+};
+
+class AidToNavigation: public AISObject
+{
+    AidToNavigation(Ais6* a) : AISObject(a->message_id, a->mmsi)
+    {
+        asi6 = a;
+    };
+
+    Ais6* asi6{};
+
+    std::string LogMe() override
+    {
+        std::stringstream retVal{};
+        retVal << "AIS 6 Ait To Nav parse: " << std::endl;
+        retVal << "MMSI " << mmsi << std::endl;
+        return retVal.str();
+    }
+
+};
+
+
+class vessel : public AISObject
+{
+public:
+
+    vessel(Ais1_2_3* a) : AISObject(a->message_id, a->mmsi)
+    {
+        a123 = a;
+        isValidAIS123 = true;
+    };
+    vessel(Ais18* a) : AISObject(a->message_id, a->mmsi)
+    {
+        a18 = a;
+        isValidAIS18 = true;
+    };
+
+    vessel(Ais5* a) : AISObject(a->message_id, a->mmsi)
     {
         ais5 = a;
+        isValidAIS5 = true;
     };
 
     Ais1_2_3* a123{};
+    Ais18* a18{};
     Ais5* ais5{};
 
-    // Ais9 asi9;
-   // Ais18 asi18;
-   // Ais19 ais19;
-   // Ais24 ais24;
 
     bool isValidAIS123{ false };
-    bool isValidAIS5{ false };
-    bool isValidAIS9{ false };
     bool isValidAIS18{ false };
-    bool isValidAIS19{ false };
-    bool isValidAIS24{ false };
-
-
+    bool isValidAIS5{ false };
     
     
+
+    //AIS 1,2,3
     AIS_NAVIGATIONAL_STATUS nav_status{};
     int position_accuracy{};
     AisPoint position{};
     double lat_deg{};
     double lng_deg{};
     float cog{};  // Degrees.
+    float sog{};
     int true_heading{};
     int timestamp{};
     int special_manoeuvre{};
@@ -99,8 +178,8 @@ public:
     //AIS 5
     int ais_version{};
     int imo_num{};
-    std::string callsign = "-";
-    std::string name = "-";
+    std::string callsign{};
+    std::string name{};
     int type_and_cargo{};
     int dim_a{};
     int dim_b{};
@@ -116,11 +195,12 @@ public:
     int dte{};
 
 
-    std::string LogMe()
+    std::string LogMe() override
     {
         std::stringstream retVal{};
-        retVal << "AIS Payload parse: " << std::endl;
-        retVal << "user ID " << mmsi << std::endl;
+        retVal << "AIS_1_2_3 parse: " << std::endl;
+        retVal << "MMSI " << mmsi << std::endl;
+
         if (nullptr != ais5)
         {
             retVal << "callsign " << ais5->callsign << std::endl;
@@ -143,25 +223,23 @@ public:
 
 
     }
-
 };
 
 
+
+
+
+
 vessel* FindVesselByMMSI(int mmsi);
+AISObject *ParsePayloadString(std::string body);
+AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits);
+AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
+AISObject *ParseASI5IdentPayload(std::string body, int fillbits);
 
-
-
-vessel *ParsePayloadString(std::string body);
-vessel *ParsePosReportPayload(std::string body, int fillbits);
-vessel *ParseIdentPayload(std::string body, int fillbits);
-
-
+void BuildKnownVesselList();
 
 
 struct NMEA_AIS *parseNMEA(std::string s);
-
-
-
 
 /* NMEA sentence max length, including \r\n (chars) */
 #define NMEA_MAX_LENGTH		82

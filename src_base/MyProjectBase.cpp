@@ -29,6 +29,15 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	BN_Builder = new wxButton( m_panel3, wxID_ANY, _("Show CoT Builder"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer14->Add( BN_Builder, 0, wxALL, 5 );
 
+	BN_ShowAISBuilder = new wxButton( m_panel3, wxID_ANY, _("Show AIS Builder"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer14->Add( BN_ShowAISBuilder, 0, wxALL, 5 );
+
+	BN_Clear = new wxButton( m_panel3, wxID_ANY, _("Clear Stats"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer14->Add( BN_Clear, 0, wxALL, 5 );
+
+	BN_ShowStats = new wxButton( m_panel3, wxID_ANY, _("Show Stats"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer14->Add( BN_ShowStats, 0, wxALL, 5 );
+
 
 	m_panel3->SetSizer( bSizer14 );
 	m_panel3->Layout();
@@ -39,13 +48,13 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	bSizer8 = new wxBoxSizer( wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer1;
-	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("AIS Payload") ), wxVERTICAL );
+	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("AIS NMEA Line") ), wxVERTICAL );
 
-	TC_AISLine = new wxTextCtrl( sbSizer1->GetStaticBox(), wxID_ANY, _("!AIVDM,1,1,,A,13u?etPv2;0n:dDPwUM1U1Cb069D,0*23"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer1->Add( TC_AISLine, 1, wxALL|wxEXPAND, 5 );
+	TC_AISLine = new wxTextCtrl( sbSizer1->GetStaticBox(), wxID_ANY, _("!AIVDM,1,1,,A,1Cu?etPjh0J`ej@Ih@B1hQH00000,0*5B\n"), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
+	sbSizer1->Add( TC_AISLine, 0, wxALL|wxEXPAND, 5 );
 
-	BN_Test2 = new wxButton( sbSizer1->GetStaticBox(), wxID_ANY, _("Send Payload to AIS and CoT"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer1->Add( BN_Test2, 0, wxALL, 5 );
+	BN_NMEAToCoT = new wxButton( sbSizer1->GetStaticBox(), wxID_ANY, _("Decode AIS NMEA Sentence and Send as CoT"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer1->Add( BN_NMEAToCoT, 0, wxALL, 5 );
 
 
 	bSizer8->Add( sbSizer1, 1, wxEXPAND, 5 );
@@ -63,7 +72,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	bSizer10->Add( sbSizer3, 1, wxEXPAND, 5 );
 
 
-	bSizer8->Add( bSizer10, 1, wxEXPAND, 5 );
+	bSizer8->Add( bSizer10, 0, wxEXPAND, 5 );
 
 	wxStaticBoxSizer* sbSizer2;
 	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("CoT Test") ), wxVERTICAL );
@@ -115,7 +124,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	sbSizer2->Add( bSizer11, 1, wxEXPAND, 5 );
 
 
-	bSizer8->Add( sbSizer2, 1, wxEXPAND, 5 );
+	bSizer8->Add( sbSizer2, 0, wxEXPAND, 5 );
 
 
 	bsLeft->Add( bSizer8, 1, wxEXPAND, 5 );
@@ -136,7 +145,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_grid1 = new wxGrid( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	m_grid1->CreateGrid( 100, 8 );
+	m_grid1->CreateGrid( 100, 9 );
 	m_grid1->EnableEditing( true );
 	m_grid1->EnableGridLines( true );
 	m_grid1->EnableDragGridSize( false );
@@ -176,7 +185,10 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	// Connect Events
 	BN_Timer->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_TimerOnButtonClick ), NULL, this );
 	BN_Builder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_BuilderOnButtonClick ), NULL, this );
-	BN_Test2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_Test2OnButtonClick ), NULL, this );
+	BN_ShowAISBuilder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ShowAISBuilderOnButtonClick ), NULL, this );
+	BN_Clear->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ClearOnButtonClick ), NULL, this );
+	BN_ShowStats->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ShowStatsOnButtonClick ), NULL, this );
+	BN_NMEAToCoT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_NMEAToCoTOnButtonClick ), NULL, this );
 	m_filePicker1->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MyFrame1::m_filePicker1OnFileChanged ), NULL, this );
 	m_button11->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::m_BN_PreCanned ), NULL, this );
 	BN_SendCOT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_SendCOTOnButtonClick ), NULL, this );
@@ -193,6 +205,47 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	wxBoxSizer* TopLevel;
 	TopLevel = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer18;
+	bSizer18 = new wxBoxSizer( wxVERTICAL );
+
+	wxStaticBoxSizer* sbSizer16;
+	sbSizer16 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("AIS Types") ), wxVERTICAL );
+
+	wxFlexGridSizer* fgSizer11;
+	fgSizer11 = new wxFlexGridSizer( 0, 6, 0, 0 );
+	fgSizer11->SetFlexibleDirection( wxBOTH );
+	fgSizer11->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+
+	BN_Clear = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Clear"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( BN_Clear, 0, wxALL, 5 );
+
+	BN_AtoN = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("AtoN"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( BN_AtoN, 0, wxALL, 5 );
+
+	BN_Pink = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Pink"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( BN_Pink, 0, wxALL, 5 );
+
+	BN_Ship = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Ship"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( BN_Ship, 0, wxALL, 5 );
+
+	BN_USCG = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("USCG"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( BN_USCG, 0, wxALL, 5 );
+
+	m_button12 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( m_button12, 0, wxALL, 5 );
+
+	m_button13 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer11->Add( m_button13, 0, wxALL, 5 );
+
+
+	sbSizer16->Add( fgSizer11, 1, wxEXPAND, 5 );
+
+
+	bSizer18->Add( sbSizer16, 1, wxEXPAND, 5 );
+
+
+	TopLevel->Add( bSizer18, 0, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer17;
 	bSizer17 = new wxBoxSizer( wxVERTICAL );
@@ -259,17 +312,18 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText4->Wrap( -1 );
 	Left->Add( m_staticText4, 0, wxALL, 5 );
 
-	TE_Access = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, _("Unclassified"), wxDefaultPosition, wxDefaultSize, 0 );
-	TE_Access->SetToolTip( _("Optional") );
-
-	Left->Add( TE_Access, 0, wxALL, 5 );
+	wxString CH_AccessChoices[] = { wxEmptyString, _("Unclassified"), _("NATO Unclassified"), _("NATO Restricted"), _("Confidential"), _("Secret"), _("NATO Secret"), _("Undefined"), wxEmptyString, wxEmptyString, wxEmptyString };
+	int CH_AccessNChoices = sizeof( CH_AccessChoices ) / sizeof( wxString );
+	CH_Access = new wxChoice( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, CH_AccessNChoices, CH_AccessChoices, 0 );
+	CH_Access->SetSelection( 0 );
+	Left->Add( CH_Access, 0, wxALL, 5 );
 
 	m_staticText5 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("QOS"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText5->Wrap( -1 );
 	Left->Add( m_staticText5, 0, wxALL, 5 );
 
 	TE_QOS = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	TE_QOS->SetToolTip( _("Optional") );
+	TE_QOS->SetToolTip( _("Optional.  <Priority-Value>-<Overtaking-Value>-<Assurance-Value>") );
 
 	Left->Add( TE_QOS, 0, wxALL, 5 );
 
@@ -277,10 +331,11 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText6->Wrap( -1 );
 	Left->Add( m_staticText6, 0, wxALL, 5 );
 
-	TE_OPEX = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	TE_OPEX->SetToolTip( _("Optional") );
-
-	Left->Add( TE_OPEX, 0, wxALL, 5 );
+	wxString MC_OPEXChoices[] = { wxEmptyString, _("Live Operation"), _("Exercise"), _("Simulation") };
+	int MC_OPEXNChoices = sizeof( MC_OPEXChoices ) / sizeof( wxString );
+	MC_OPEX = new wxChoice( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, MC_OPEXNChoices, MC_OPEXChoices, 0 );
+	MC_OPEX->SetSelection( 0 );
+	Left->Add( MC_OPEX, 0, wxALL, 5 );
 
 	m_staticText7 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("UID"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText7->Wrap( -1 );
@@ -293,8 +348,13 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText8->Wrap( -1 );
 	Left->Add( m_staticText8, 0, wxALL, 5 );
 
-	TE_How = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, _("h-e"), wxDefaultPosition, wxDefaultSize, 0 );
-	Left->Add( TE_How, 0, wxALL, 5 );
+	wxString MC_HowChoices[] = { wxEmptyString, _("h-e"), _("h-c"), _("h-t"), _("h-p"), _("m-a"), _("m-c"), _("m-i"), _("m-f"), _("m-g"), _("m-g-n"), _("m-g-d"), _("m-m"), _("m-n"), _("m-p"), _("m-r"), _("m-r-e"), _("m-r-p"), _("m-r-d"), _("m-r-v"), _("m-r-t"), _("m-r-t-a"), _("m-r-t-j"), _("m-s"), wxEmptyString, wxEmptyString };
+	int MC_HowNChoices = sizeof( MC_HowChoices ) / sizeof( wxString );
+	MC_How = new wxChoice( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, MC_HowNChoices, MC_HowChoices, 0 );
+	MC_How->SetSelection( 9 );
+	MC_How->SetToolTip( _("h=human, m=machine / g=gps, n=GPS+INS") );
+
+	Left->Add( MC_How, 0, wxALL, 5 );
 
 	m_staticText9 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("latitude"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText9->Wrap( -1 );
@@ -341,6 +401,13 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	Left->Add( SC_LE, 0, wxALL|wxEXPAND, 5 );
 
+	m_staticText32 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, _("Valid Time[xs]"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32->Wrap( -1 );
+	Left->Add( m_staticText32, 0, wxALL, 5 );
+
+	SC_ValidTime = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("90"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 99999, 5 );
+	Left->Add( SC_ValidTime, 0, wxALL|wxEXPAND, 5 );
+
 
 	sizerRoot->Add( Left, 0, wxEXPAND, 5 );
 
@@ -378,6 +445,9 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxStaticBoxSizer* sbSizer7;
 	sbSizer7 = new wxStaticBoxSizer( new wxStaticBox( sbSizer5->GetStaticBox(), wxID_ANY, _("Contact") ), wxVERTICAL );
 
+	CB_IncludeContact = new wxCheckBox( sbSizer7->GetStaticBox(), wxID_ANY, _("Include"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer7->Add( CB_IncludeContact, 0, wxALL, 5 );
+
 	wxFlexGridSizer* fgSizer5;
 	fgSizer5 = new wxFlexGridSizer( 0, 2, 0, 0 );
 	fgSizer5->SetFlexibleDirection( wxBOTH );
@@ -407,6 +477,9 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	wxStaticBoxSizer* sbSizer8;
 	sbSizer8 = new wxStaticBoxSizer( new wxStaticBox( sbSizer5->GetStaticBox(), wxID_ANY, _("Group") ), wxVERTICAL );
+
+	CB_IncludeGroup = new wxCheckBox( sbSizer8->GetStaticBox(), wxID_ANY, _("Include"), wxDefaultPosition, wxDefaultSize, 0 );
+	sbSizer8->Add( CB_IncludeGroup, 0, wxALL, 5 );
 
 	wxFlexGridSizer* fgSizer6;
 	fgSizer6 = new wxFlexGridSizer( 0, 2, 0, 0 );
@@ -567,7 +640,7 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_staticText27->Wrap( -1 );
 	fgSizer9->Add( m_staticText27, 0, wxALL, 5 );
 
-	SC_Speed = new wxSpinCtrl( sbSizer12->GetStaticBox(), wxID_ANY, wxT("17"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 150, 0 );
+	SC_Speed = new wxSpinCtrl( sbSizer12->GetStaticBox(), wxID_ANY, wxT("17"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 150, 18 );
 	fgSizer9->Add( SC_Speed, 0, wxALL, 5 );
 
 	CB_Course = new wxCheckBox( sbSizer12->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
@@ -624,10 +697,415 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->Centre( wxBOTH );
 
 	// Connect Events
+	BN_Clear->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_ClearOnButtonClick ), NULL, this );
+	BN_AtoN->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_AtoNOnButtonClick ), NULL, this );
+	BN_Pink->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_PinkOnButtonClick ), NULL, this );
+	BN_Ship->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_ShipOnButtonClick ), NULL, this );
+	BN_USCG->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_USCGOnButtonClick ), NULL, this );
 	BN_Send->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_SendOnButtonClick ), NULL, this );
 	BN_Close->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( CoTSender::BN_CloseOnButtonClick ), NULL, this );
 }
 
 CoTSender::~CoTSender()
+{
+}
+
+AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+	wxBoxSizer* bSizer16;
+	bSizer16 = new wxBoxSizer( wxVERTICAL );
+
+	wxStaticBoxSizer* sbSizer18;
+	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Common") ), wxVERTICAL );
+
+	wxFlexGridSizer* fgSizer13;
+	fgSizer13 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer13->SetFlexibleDirection( wxBOTH );
+	fgSizer13->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+
+	m_staticText29 = new wxStaticText( sbSizer18->GetStaticBox(), wxID_ANY, _("Message ID"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	fgSizer13->Add( m_staticText29, 0, wxALL, 5 );
+
+	SC_MsgID = new wxSpinCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer13->Add( SC_MsgID, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText30 = new wxStaticText( sbSizer18->GetStaticBox(), wxID_ANY, _("Repeat Indicator"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30->Wrap( -1 );
+	fgSizer13->Add( m_staticText30, 0, wxALL, 5 );
+
+	SC_RepeatInd = new wxSpinCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxT("1"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer13->Add( SC_RepeatInd, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText31 = new wxStaticText( sbSizer18->GetStaticBox(), wxID_ANY, _("MMSI"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	fgSizer13->Add( m_staticText31, 0, wxALL, 5 );
+
+	SC_MMSI = new wxSpinCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxT("265547250"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 999999999, 316130000 );
+	fgSizer13->Add( SC_MMSI, 0, wxALL|wxEXPAND, 5 );
+
+
+	sbSizer18->Add( fgSizer13, 0, wxEXPAND, 5 );
+
+
+	bSizer16->Add( sbSizer18, 0, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer17;
+	bSizer17 = new wxBoxSizer( wxHORIZONTAL );
+
+	wxStaticBoxSizer* sbSizer15;
+	sbSizer15 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Pos Report Msg 1,2,3") ), wxVERTICAL );
+
+	wxFlexGridSizer* fgSizer10;
+	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer10->SetFlexibleDirection( wxBOTH );
+	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+
+	m_staticText57 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Class"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText57->Wrap( -1 );
+	fgSizer10->Add( m_staticText57, 0, wxALL, 5 );
+
+	wxString C_ClassChoices[] = { _("Position Report Class A"), _("Position Report Class A (Assigned schedule)"), _("Position Report Class A (Response to interrogation)") };
+	int C_ClassNChoices = sizeof( C_ClassChoices ) / sizeof( wxString );
+	C_Class = new wxChoice( sbSizer15->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, C_ClassNChoices, C_ClassChoices, 0 );
+	C_Class->SetSelection( 0 );
+	C_Class->SetToolTip( _("Affects AIS Message Number (1,2 or 3)") );
+
+	fgSizer10->Add( C_Class, 0, wxALL, 5 );
+
+	m_staticText32 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Nav Status"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32->Wrap( -1 );
+	fgSizer10->Add( m_staticText32, 0, wxALL, 5 );
+
+	wxString CB_NavStatusChoices[] = { _("AIS_NV_STATUS_UNDER_WAY_USING_ENGINE"), _("AIS_NV_STATUS_AT_ANCHOR"), _("AIS_NV_STATUS_NOT_UNDER_COMMAND"), _("AIS_NV_STATUS_RESTRICTED_MANEUVERABILITY"), _("AIS_NV_STATUS_CONSTRAINED_BY_DRAUGHT"), _("AIS_NV_STATUS_MOORED"), _("AIS_NV_STATUS_AGROUND"), _("AIS_NV_STATUS_ENGAGED_IN_FISHING"), _("AIS_NV_STATUS_UNDER_WAY_SAILING"), _("AIS_NV_STATUS_RESERVED1"), _("AIS_NV_STATUS_RESERVED2"), _("AIS_NV_STATUS_TOWING_ASTERN"), _("AIS_NV_STATUS_PUSHING_AHEAD_OR_TOWING_ALONGSIDE"), _("AIS_NV_STATUS_RESERVED3"), _("AIS_NV_STATUS_SART"), _("AIS_NV_STATUS_UNDEFINED") };
+	int CB_NavStatusNChoices = sizeof( CB_NavStatusChoices ) / sizeof( wxString );
+	CB_NavStatus = new wxChoice( sbSizer15->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, CB_NavStatusNChoices, CB_NavStatusChoices, 0 );
+	CB_NavStatus->SetSelection( 0 );
+	fgSizer10->Add( CB_NavStatus, 0, wxALL, 5 );
+
+	m_staticText33 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Rate Of Turn [deg/min]"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText33->Wrap( -1 );
+	fgSizer10->Add( m_staticText33, 0, wxALL, 5 );
+
+	wxBoxSizer* bSizer24;
+	bSizer24 = new wxBoxSizer( wxHORIZONTAL );
+
+	SC_RateOfTurn = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxT("-128"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -128, 127, 0 );
+	SC_RateOfTurn->SetToolTip( _("0 = not turning\n1…​126 = turning right at up to 708 degrees per minute or higher\n1…​-126 = turning left at up to 708 degrees per minute or higher\n127 = turning right at more than 5deg/30s (No TI available)\n-127 = turning left at more than 5deg/30s (No TI available)\n128 (80 hex) indicates no turn information available (default)\n\nValues between 0 and 708 degrees/min coded by ROTAIS=4.733 * SQRT(ROTsensor) degrees/min where ROTsensor is the Rate of Turn as input by an external Rate of Turn Indicator. ROTAIS is rounded to the nearest integer value. Thus, to decode the field value, divide by 4.733 and then square it. Sign of the field value should be preserved when squaring it, otherwise the left/right indication will be lost.") );
+
+	bSizer24->Add( SC_RateOfTurn, 0, wxALL, 5 );
+
+	ST_RateOfTurn = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("MyLabel"), wxDefaultPosition, wxDefaultSize, 0 );
+	ST_RateOfTurn->Wrap( -1 );
+	bSizer24->Add( ST_RateOfTurn, 0, wxALL, 5 );
+
+
+	fgSizer10->Add( bSizer24, 1, wxEXPAND, 5 );
+
+	m_staticText34 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("SOG"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34->Wrap( -1 );
+	m_staticText34->SetToolTip( _("Speed Over Ground") );
+
+	fgSizer10->Add( m_staticText34, 0, wxALL, 5 );
+
+	SC_SOG = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("12.2"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 102, 0, 1 );
+	SC_SOG->SetDigits( 1 );
+	fgSizer10->Add( SC_SOG, 0, wxALL, 5 );
+
+	m_staticText35 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Pos Accurracy"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText35->Wrap( -1 );
+	m_staticText35->SetToolTip( _("The position accuracy flag indicates the accuracy of the fix. A value of 1 indicates a DGPS-quality fix with an accuracy of < 10ms. 0, the default, indicates an unaugmented GNSS fix with accuracy > 10m.") );
+
+	fgSizer10->Add( m_staticText35, 0, wxALL, 5 );
+
+	wxString C_PosAccuracyChoices[] = { _("0"), _("1") };
+	int C_PosAccuracyNChoices = sizeof( C_PosAccuracyChoices ) / sizeof( wxString );
+	C_PosAccuracy = new wxChoice( sbSizer15->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, C_PosAccuracyNChoices, C_PosAccuracyChoices, 0 );
+	C_PosAccuracy->SetSelection( 0 );
+	fgSizer10->Add( C_PosAccuracy, 0, wxALL, 5 );
+
+	m_staticText36 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Longitude"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText36->Wrap( -1 );
+	fgSizer10->Add( m_staticText36, 0, wxALL, 5 );
+
+	SC_Latitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("45.5"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -90, 90, 0, 1 );
+	SC_Latitude->SetDigits( 4 );
+	fgSizer10->Add( SC_Latitude, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText37 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Latitude"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText37->Wrap( -1 );
+	fgSizer10->Add( m_staticText37, 0, wxALL, 5 );
+
+	SC_Longitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("-75.5"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -180, 180, 0, 1 );
+	SC_Longitude->SetDigits( 4 );
+	fgSizer10->Add( SC_Longitude, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText38 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("COG"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText38->Wrap( -1 );
+	m_staticText38->SetToolTip( _("Course over ground will be 3600 (0xE10) if that data is not available.") );
+
+	fgSizer10->Add( m_staticText38, 0, wxALL, 5 );
+
+	SC_COG = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 45, 360, 0, 1 );
+	SC_COG->SetDigits( 1 );
+	fgSizer10->Add( SC_COG, 0, wxALL, 5 );
+
+	m_staticText39 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("True Heading"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText39->Wrap( -1 );
+	fgSizer10->Add( m_staticText39, 0, wxALL, 5 );
+
+	SC_Heading = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxT("44"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 360, 0 );
+	fgSizer10->Add( SC_Heading, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText40 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Time Stamp"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText40->Wrap( -1 );
+	fgSizer10->Add( m_staticText40, 0, wxALL, 5 );
+
+	m_textCtrl31 = new wxTextCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer10->Add( m_textCtrl31, 0, wxALL, 5 );
+
+	m_staticText41 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("SMI"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText41->Wrap( -1 );
+	fgSizer10->Add( m_staticText41, 0, wxALL, 5 );
+
+	m_textCtrl32 = new wxTextCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer10->Add( m_textCtrl32, 0, wxALL, 5 );
+
+
+	sbSizer15->Add( fgSizer10, 1, wxEXPAND, 5 );
+
+
+	bSizer17->Add( sbSizer15, 1, wxEXPAND, 5 );
+
+	wxStaticBoxSizer* sbSizer17;
+	sbSizer17 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("AIS 5") ), wxVERTICAL );
+
+	wxFlexGridSizer* fgSizer12;
+	fgSizer12 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer12->SetFlexibleDirection( wxBOTH );
+	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+
+	m_staticText43 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("AIS Version Number"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText43->Wrap( -1 );
+	m_staticText43->SetToolTip( _("0=[ITU1371], 1-3 = future editions") );
+
+	fgSizer12->Add( m_staticText43, 0, wxALL, 5 );
+
+	SC_AISVersion = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 10, 0 );
+	SC_AISVersion->SetToolTip( _("0=[ITU1371], 1-3 = future editions") );
+
+	fgSizer12->Add( SC_AISVersion, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText44 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("IMO Number"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText44->Wrap( -1 );
+	m_staticText44->SetToolTip( _("Should be 0 for inland vessels, ATIS code should be used for inland vessels") );
+
+	fgSizer12->Add( m_staticText44, 0, wxALL|wxEXPAND, 5 );
+
+	SC_IMONumber = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 10, 0 );
+	SC_IMONumber->SetToolTip( _("Should be 0 for inland vessels, ATIS code should be used for inland vessels") );
+
+	fgSizer12->Add( SC_IMONumber, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText45 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Call Sign"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText45->Wrap( -1 );
+	fgSizer12->Add( m_staticText45, 0, wxALL, 5 );
+
+	TC_CallSign = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("FFH-339"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer12->Add( TC_CallSign, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText46 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText46->Wrap( -1 );
+	fgSizer12->Add( m_staticText46, 0, wxALL, 5 );
+
+	TC_Name = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("HMCS Charlettetown"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer12->Add( TC_Name, 0, wxALL|wxBOTTOM|wxEXPAND, 5 );
+
+	m_staticText47 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Type of Ship and Cargo"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText47->Wrap( -1 );
+	fgSizer12->Add( m_staticText47, 0, wxALL, 5 );
+
+	SC_ShipType = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("35"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 99, 0 );
+	fgSizer12->Add( SC_ShipType, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText48 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Ship Dimensions [m]"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText48->Wrap( -1 );
+	m_staticText48->SetToolTip( _("4 dimensions in metres") );
+
+	fgSizer12->Add( m_staticText48, 0, wxALL, 5 );
+
+	wxBoxSizer* bSizer23;
+	bSizer23 = new wxBoxSizer( wxHORIZONTAL );
+
+	SC_A = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("113"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 511, 0 );
+	SC_A->SetToolTip( _("Dimension to Bow [m]") );
+
+	bSizer23->Add( SC_A, 0, wxALL, 5 );
+
+	SC_B = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("31"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 511, 0 );
+	SC_B->SetToolTip( _("Dimension to Stern [m]") );
+
+	bSizer23->Add( SC_B, 0, wxALL, 5 );
+
+	SC_C = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("17"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 511, 9 );
+	SC_C->SetToolTip( _("Dimension to Port [m]") );
+
+	bSizer23->Add( SC_C, 0, wxALL, 5 );
+
+	SC_D = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("11"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 511, 8 );
+	SC_D->SetToolTip( _("Dimension to Starboard [m]") );
+
+	bSizer23->Add( SC_D, 0, wxALL, 5 );
+
+
+	fgSizer12->Add( bSizer23, 1, wxEXPAND, 5 );
+
+	m_staticText49 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Position Fix Type (EPFD)"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText49->Wrap( -1 );
+	m_staticText49->SetToolTip( _("Position Fix Type") );
+
+	fgSizer12->Add( m_staticText49, 0, wxALL, 5 );
+
+	wxString m_choice7Choices[] = { _("Undefined (default)"), _("GPS"), _("GLONASS"), _("Combined GPS/GLONASS"), _("Loran-C"), _("Chayka"), _("Integrated navigation system"), _("Surveyed"), _("Galileo"), _("Reserved"), _("Reserved"), _("Reserved"), _("Reserved"), _("Reserved"), _("Reserved"), _("Internal GNSS"), wxEmptyString, wxEmptyString };
+	int m_choice7NChoices = sizeof( m_choice7Choices ) / sizeof( wxString );
+	m_choice7 = new wxChoice( sbSizer17->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice7NChoices, m_choice7Choices, 0 );
+	m_choice7->SetSelection( 0 );
+	fgSizer12->Add( m_choice7, 0, wxALL, 5 );
+
+	m_staticText50 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("ETA month"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText50->Wrap( -1 );
+	fgSizer12->Add( m_staticText50, 0, wxALL, 5 );
+
+	SC_Month = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("2"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 1, 12, 0 );
+	fgSizer12->Add( SC_Month, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText51 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("ETA Day"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText51->Wrap( -1 );
+	fgSizer12->Add( m_staticText51, 0, wxALL, 5 );
+
+	SC_Day = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("4"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 1, 31, 0 );
+	fgSizer12->Add( SC_Day, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText52 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("ETA Hour"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText52->Wrap( -1 );
+	fgSizer12->Add( m_staticText52, 0, wxALL, 5 );
+
+	SC_Hour = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("17"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 23, 0 );
+	fgSizer12->Add( SC_Hour, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText53 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("ETA Minute"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText53->Wrap( -1 );
+	fgSizer12->Add( m_staticText53, 0, wxALL, 5 );
+
+	SC_Minute = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxT("45"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 59, 0 );
+	fgSizer12->Add( SC_Minute, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText54 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Max Static Draught [dm]"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText54->Wrap( -1 );
+	m_staticText54->SetToolTip( _("decimetres") );
+
+	fgSizer12->Add( m_staticText54, 0, wxALL, 5 );
+
+	SC_Draught = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 1000, 0 );
+	fgSizer12->Add( SC_Draught, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText55 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Destination"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText55->Wrap( -1 );
+	fgSizer12->Add( m_staticText55, 0, wxALL, 5 );
+
+	TC_Destination = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("Digby"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer12->Add( TC_Destination, 0, wxALL|wxEXPAND, 5 );
+
+	m_staticText56 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("DTE"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText56->Wrap( -1 );
+	m_staticText56->SetToolTip( _("Date Terminal Equipment") );
+
+	fgSizer12->Add( m_staticText56, 0, wxALL, 5 );
+
+	SC_DTE = new wxSpinCtrl( sbSizer17->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 1, 0 );
+	fgSizer12->Add( SC_DTE, 0, wxALL|wxEXPAND, 5 );
+
+
+	sbSizer17->Add( fgSizer12, 1, wxEXPAND, 5 );
+
+
+	bSizer17->Add( sbSizer17, 1, wxEXPAND, 5 );
+
+
+	bSizer16->Add( bSizer17, 0, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer18;
+	bSizer18 = new wxBoxSizer( wxVERTICAL );
+
+	wxStaticBoxSizer* sbSizer16;
+	sbSizer16 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Build") ), wxVERTICAL );
+
+	wxBoxSizer* bSizer19;
+	bSizer19 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer20;
+	bSizer20 = new wxBoxSizer( wxHORIZONTAL );
+
+	BN_BuildAIS123 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Build AIS1,2,3"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer20->Add( BN_BuildAIS123, 0, wxALL, 5 );
+
+	BN_SendAIS123 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Send"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer20->Add( BN_SendAIS123, 0, wxALL, 5 );
+
+
+	bSizer19->Add( bSizer20, 0, wxEXPAND, 5 );
+
+	TC_NMEA = new wxTextCtrl( sbSizer16->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer19->Add( TC_NMEA, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer21;
+	bSizer21 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer22;
+	bSizer22 = new wxBoxSizer( wxHORIZONTAL );
+
+	BN_BuildAIS5 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Build AIS 5"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer22->Add( BN_BuildAIS5, 0, wxALL, 5 );
+
+	BN_SendAIS5 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Send"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer22->Add( BN_SendAIS5, 0, wxALL, 5 );
+
+
+	bSizer21->Add( bSizer22, 1, wxEXPAND, 5 );
+
+	TC_AIS5 = new wxTextCtrl( sbSizer16->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
+	bSizer21->Add( TC_AIS5, 0, wxALL|wxEXPAND, 5 );
+
+
+	bSizer19->Add( bSizer21, 0, wxEXPAND, 5 );
+
+
+	sbSizer16->Add( bSizer19, 1, wxEXPAND, 5 );
+
+
+	bSizer18->Add( sbSizer16, 0, wxEXPAND, 5 );
+
+
+	bSizer16->Add( bSizer18, 1, wxEXPAND, 5 );
+
+
+	this->SetSizer( bSizer16 );
+	this->Layout();
+
+	this->Centre( wxBOTH );
+
+	// Connect Events
+	SC_RateOfTurn->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( AISBuilder::SC_RateOfTurnOnSpinCtrl ), NULL, this );
+	SC_RateOfTurn->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AISBuilder::SC_RateOfTurnOnSpinCtrl ), NULL, this );
+	SC_RateOfTurn->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AISBuilder::SC_RateOfTurnOnSpinCtrl ), NULL, this );
+	BN_BuildAIS123->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AISBuilder::BN_BuildAIS123OnButtonClick ), NULL, this );
+	BN_SendAIS123->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AISBuilder::BN_SendAIS123OnButtonClick ), NULL, this );
+	BN_BuildAIS5->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AISBuilder::BN_BuildAIS5OnButtonClick ), NULL, this );
+	BN_SendAIS5->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AISBuilder::BN_SendAIS5OnButtonClick ), NULL, this );
+}
+
+AISBuilder::~AISBuilder()
 {
 }
