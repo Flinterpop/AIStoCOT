@@ -16,6 +16,8 @@ using namespace libais;
 class MyProject1MyFrame1 : public MyFrame1
 {
 	public:
+
+		bool debug = false;
 		MyProject1MyFrame1( wxWindow* parent );
 		~MyProject1MyFrame1();
 

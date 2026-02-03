@@ -33,67 +33,17 @@ void BuildKnownVesselList()
 }
 
 
-struct NMEA_AIS* parseNMEA(std::string myString)
-{
-    std::stringstream retVal{};
-    struct NMEA_AIS* nmea = new NMEA_AIS();
-
-    std::vector<std::string> fields;
-    auto split_view = myString | std::ranges::views::split(',');
-    for (const auto& view : split_view) fields.push_back(std::string(view.begin(), view.end()));
-    for (const std::string& fields : fields) std::cout << fields << std::endl;
-    if (fields.size() !=7)
-    {
-        nmea->parseRecord = "Incorrect number of fields";
-        return nmea;
-    }
-
-    retVal << "Num Fieds: " << fields.size() << std::endl;
-
-    for (auto s : fields)
-        retVal << s << "//";
-       
-    nmea->sentence = myString;
-    nmea->name = fields[0];
-    
-    bool isInt = isStringAnInteger(fields[1]);
-    if (isInt) nmea->CountOfFragments  = std::stoi(fields[1]);
-
-    isInt = isStringAnInteger(fields[2]);
-    if (isInt) nmea->FragmentNumber = std::stoi(fields[2]);
-
-    isInt = isStringAnInteger(fields[3]);
-    if (isInt) nmea->SequentialMessageID = std::stoi(fields[3]);
-
-    nmea->RadioChannel = fields[4];
-    nmea->payload = fields[5];
-
-
-    char FB = fields[6][0];
-    nmea->fillBits = FB - 0x30;
-
-    
-
-    std::string c = fields[6].substr(2);
-
-    isInt = isStringAnInteger(c);
-    if (isInt) nmea->checksum = std::stoi(c);
-
-    nmea->parseRecord = retVal.str();
-    nmea->isValid = true;
-    return nmea;
-
-}
-
-
 vessel* FindVesselByMMSI(int mmsi)
 {
     for (auto v : VesselList)
+    {
+        wxLogMessage("Checking:%d  %d CS:%s Name:%s", mmsi, v->mmsi, v->callsign, v->name);
         if (v->mmsi == mmsi)
         {
-            wxLogMessage("Found vessel %d  %s % s", v->mmsi, v->callsign, v->name);
+            wxLogMessage("Found vessel MMSI:%d  CS:%s Name:%s", v->mmsi, v->callsign, v->name);
             return v;
         }
+    }
     return nullptr;
 }
 
@@ -253,7 +203,7 @@ case 'A':  // 17 - GNSS broadcast
 
 AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
 {
-    std::stringstream retVal{};
+    //std::stringstream retVal{};
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
     if (nullptr == p)
     {
@@ -263,11 +213,11 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
     else
     {
         Ais5 *a5 = new Ais5(body.c_str(), fillbits);
-        retVal << "user ID " << a5->mmsi << std::endl;
-        retVal << "callsign " << a5->callsign << std::endl;
-        retVal << "name " << a5->name << std::endl;
-        retVal << "type_and_cargo " << a5->type_and_cargo << std::endl;
-        retVal << "destination " << a5->destination << std::endl;
+        //retVal << "user ID " << a5->mmsi << std::endl;
+        //retVal << "callsign " << a5->callsign << std::endl;
+        //retVal << "name " << a5->name << std::endl;
+        //retVal << "type_and_cargo " << a5->type_and_cargo << std::endl;
+        //retVal << "destination " << a5->destination << std::endl;
 
         vessel* v = FindVesselByMMSI(a5->mmsi);
         if (nullptr == v)

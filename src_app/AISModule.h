@@ -3,14 +3,65 @@
 #include <sstream>
 #include <format>
 
+#include <ranges>
+#include <algorithm>
+
+
 #include "ais.h"
 #include "decode_body.h"
+#include <wx/log.h>
 
 
 using namespace libais;
 
 extern const char* NAV_STATUS[];
 extern int MsgCounts[27];
+
+
+void BuildKnownVesselList();
+
+/* NMEA sentence max length, including \r\n (chars) */
+#define NMEA_MAX_LENGTH		82
+
+/* NMEA sentence endings, should be \r\n according the NMEA 0183 standard */
+#define NMEA_END_CHAR_1		'\r'
+#define NMEA_END_CHAR_2		'\n'
+
+/* NMEA sentence prefix length (num chars), Ex: GPGLL */
+#define NMEA_PREFIX_LENGTH	5
+
+
+
+
+inline bool isStringADouble(const std::string& s) {
+    char* end = nullptr;
+    double val = std::strtod(s.c_str(), &end);
+
+    // Check if a conversion was performed (end != s.c_str())
+    // and if the entire string was consumed (*end == '\\0')
+    // This also needs to handle potential issues like underflow/overflow if necessary
+    return end != s.c_str() && *end == '\0';
+}
+
+
+inline bool isStringAnInteger(const std::string& s) {
+    if (s.empty()) return false;
+
+    char* p;
+    // strtol attempts to parse the string as a long integer
+    // The second argument, &p, is set to point to the character 
+    // where parsing stopped. The third argument is the base (10 for decimal).
+    long converted_val = std::strtol(s.c_str(), &p, 10);
+
+    // Check if the pointer 'p' reached the end of the string.
+    // Also check for leading whitespace, which strtol ignores by default
+    // but may be considered invalid for a strict integer check.
+    // The *p == 0 check ensures no non-integer characters (like 'a', '.') remain.
+    return (*p == 0);
+}
+
+
+
 
 
 struct NMEA_AIS
@@ -27,6 +78,55 @@ struct NMEA_AIS
     std::string payload{};
     int fillBits{};
     int checksum{};
+
+    NMEA_AIS(std::string myString)
+    {
+        wxLogMessage("Parsing %s", myString);
+        std::stringstream retVal{};
+        std::vector<std::string> fields;
+        auto split_view = myString | std::ranges::views::split(',');
+        for (const auto& view : split_view) fields.push_back(std::string(view.begin(), view.end()));
+        for (const std::string& fields : fields) std::cout << fields << std::endl;
+        if (fields.size() != 7)
+        {
+            parseRecord = "Incorrect number of fields";
+            return;// nmea;
+        }
+
+        retVal << "Num Fieds: " << fields.size() << std::endl;
+
+        for (auto s : fields)
+            retVal << s << "//";
+
+        sentence = myString;
+        name = fields[0];
+
+        bool isInt = isStringAnInteger(fields[1]);
+        if (isInt) CountOfFragments = std::stoi(fields[1]);
+
+        isInt = isStringAnInteger(fields[2]);
+        if (isInt) FragmentNumber = std::stoi(fields[2]);
+
+        isInt = isStringAnInteger(fields[3]);
+        if (isInt) SequentialMessageID = std::stoi(fields[3]);
+
+        RadioChannel = fields[4];
+        payload = fields[5];
+
+
+        char FB = fields[6][0];
+        fillBits = FB - 0x30;
+
+
+
+        std::string c = fields[6].substr(2);
+
+        isInt = isStringAnInteger(c);
+        if (isInt) checksum = std::stoi(c);
+
+        parseRecord = retVal.str();
+        isValid = true;
+    }
 
     std::string print()
     {
@@ -226,57 +326,11 @@ public:
 };
 
 
-
-
-
-
 vessel* FindVesselByMMSI(int mmsi);
-AISObject *ParsePayloadString(std::string body);
-AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits);
+AISObject* ParsePayloadString(std::string body);
+AISObject* ParseAIS123_PosReportPayload(std::string body, int fillbits);
 AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
-AISObject *ParseASI5IdentPayload(std::string body, int fillbits);
+AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
 
-void BuildKnownVesselList();
-
-
-struct NMEA_AIS *parseNMEA(std::string s);
-
-/* NMEA sentence max length, including \r\n (chars) */
-#define NMEA_MAX_LENGTH		82
-
-/* NMEA sentence endings, should be \r\n according the NMEA 0183 standard */
-#define NMEA_END_CHAR_1		'\r'
-#define NMEA_END_CHAR_2		'\n'
-
-/* NMEA sentence prefix length (num chars), Ex: GPGLL */
-#define NMEA_PREFIX_LENGTH	5
-
-
-inline bool isStringADouble(const std::string& s) {
-    char* end = nullptr;
-    double val = std::strtod(s.c_str(), &end);
-
-    // Check if a conversion was performed (end != s.c_str())
-    // and if the entire string was consumed (*end == '\\0')
-    // This also needs to handle potential issues like underflow/overflow if necessary
-    return end != s.c_str() && *end == '\0';
-}
-
-
-inline bool isStringAnInteger(const std::string& s) {
-    if (s.empty()) return false;
-
-    char* p;
-    // strtol attempts to parse the string as a long integer
-    // The second argument, &p, is set to point to the character 
-    // where parsing stopped. The third argument is the base (10 for decimal).
-    long converted_val = std::strtol(s.c_str(), &p, 10);
-
-    // Check if the pointer 'p' reached the end of the string.
-    // Also check for leading whitespace, which strtol ignores by default
-    // but may be considered invalid for a strict integer check.
-    // The *p == 0 check ensures no non-integer characters (like 'a', '.') remain.
-    return (*p == 0);
-}
 
 

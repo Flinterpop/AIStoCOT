@@ -593,7 +593,7 @@
                         <property name="validator_style">wxFILTER_NONE</property>
                         <property name="validator_type">wxDefaultValidator</property>
                         <property name="validator_variable"></property>
-                        <property name="value">!AIVDM,1,1,,A,1Cu?etPjh0J`ej@Ih@B1hQH00000,0*5B&#x0A;</property>
+                        <property name="value">!AIVDM,1,1,,A,1Cu?etPjh0J`ej@Ih@B1hQH00000,0*5B&#x0A;!AIVDM,2,1,0,A,5Cu?etP000000000000Pl=&gt;0&lt;P58hEA@E@uLp00S&gt;8OA;0jjf012AhV@,0*5C&#x0A;!AIVDM,2,2,0,A,000000000000000,2*24</property>
                         <property name="window_extra_style"></property>
                         <property name="window_name"></property>
                         <property name="window_style"></property>

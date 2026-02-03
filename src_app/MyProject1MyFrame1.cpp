@@ -177,43 +177,6 @@ void MyProject1MyFrame1::UpdateGrid()
 }
 
 
-void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
-{
-	AISObject* ao = ParsePayloadString(p);
-	if (nullptr == ao) return;
-	switch (ao->AISMsgNumber)
-	{
-	case 1:
-	case 2:
-	case 3:
-		{
-			vessel* v = (vessel*)ao;
-			SendVesselCoTUpdate(v);
-			break;
-		}
-		case 5:
-		{
-			vessel* v = (vessel*)ao;
-			break;
-		}
-		case 18:
-		{
-			vessel* v = (vessel*)ao;
-			SendVesselCoTUpdate(v);
-			break;
-		}
-		case 21:  //Type 21: Aid-to-Navigation Report
-		{
-			AidToNavigation* a2n = (AidToNavigation*)ao;
-			SendAidToNavCoTUpdate(a2n);
-			break;
-		}
-	}
-
-	UpdateGrid();
-}
-
-
 void MyProject1MyFrame1::SendVesselCoTUpdate(vessel *v)
 {
 	if ((false == v->isValidAIS123) && (false == v->isValidAIS18) ) return;
@@ -286,27 +249,89 @@ void MyProject1MyFrame1::SendAidToNavCoTUpdate(AidToNavigation* a2n)
 
 
 
-struct NMEA_AIS* multipart1;
+
+
 void MyProject1MyFrame1::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 {
+	wxLogMessage("-------------------------------");
+	wxLogMessage("Parsing Text Control Contents");
 
 	auto t = TC_AISLine->GetNumberOfLines();
 	for (int i = 0; i < t; i++)
 	{
 		auto s = TC_AISLine->GetLineText(i);
-		struct NMEA_AIS* nmea = parseNMEA(s.utf8_string());
-		wxLogMessage(nmea->print());
-
-		ProcessNMEAPayload(nmea->payload);
+		ProcessNMEAToCoT(s.utf8_string());
 	}
-		
+}
+
+void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
+{
+	wxLogMessage("-------------------------------");
+	wxLogMessage("Opening File: %s",m_filePicker1->GetTextCtrlValue());
+	std::string fname = m_filePicker1->GetTextCtrlValue().ToStdString();
+
+	std::ifstream myfile(fname);
+
+	if (myfile.is_open())
+	{
+		std::string line;
+		//int counter = 0;
+		while (std::getline(myfile, line))
+		{
+			ProcessNMEAToCoT(line);
+			//if (++counter > MaxVesselListSize) return;
+		}
+		myfile.close();
+	}
+	else {
+		wxLogMessage("Unable to open file");
+	}
 }
 
 
+void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
+{
+	AISObject* ao = ParsePayloadString(p);
+	if (nullptr == ao) return;
+
+	switch (ao->AISMsgNumber)
+	{
+	case 1:
+	case 2:
+	case 3:
+	{
+		vessel* v = (vessel*)ao;
+		SendVesselCoTUpdate(v);
+		break;
+	}
+	case 5:
+	{
+		vessel* v = (vessel*)ao;
+		break;
+	}
+	case 18:
+	{
+		vessel* v = (vessel*)ao;
+		SendVesselCoTUpdate(v);
+		break;
+	}
+	case 21:  //Type 21: Aid-to-Navigation Report
+	{
+		AidToNavigation* a2n = (AidToNavigation*)ao;
+		SendAidToNavCoTUpdate(a2n);
+		break;
+	}
+	}
+
+	UpdateGrid();
+}
+
+
+struct NMEA_AIS* multipart1;
 void MyProject1MyFrame1::ProcessNMEAToCoT(std::string line)
 {
-	struct NMEA_AIS* nmea = parseNMEA(line);
-	wxLogMessage(nmea->print());
+	struct NMEA_AIS* nmea = new NMEA_AIS(line);
+	if (debug) wxLogMessage(nmea->print());
 
 	if (1 != nmea->CountOfFragments)
 	{
@@ -314,7 +339,6 @@ void MyProject1MyFrame1::ProcessNMEAToCoT(std::string line)
 		{
 			multipart1 = nmea;
 			wxLogMessage("multipart Frag 1");
-			//return;
 		}
 
 		else if (2 == nmea->FragmentNumber)
@@ -333,29 +357,6 @@ void MyProject1MyFrame1::ProcessNMEAToCoT(std::string line)
 
 }
 
-void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
-{
-	wxLogMessage(m_filePicker1->GetTextCtrlValue());
-
-	std::string fname = m_filePicker1->GetTextCtrlValue().ToStdString();
-
-	std::ifstream myfile(fname);
-	
-	if (myfile.is_open()) 
-	{
-		std::string line;
-		int counter = 0;
-		while (std::getline(myfile, line)) 
-		{
-			ProcessNMEAToCoT(line);
-			//if (++counter > MaxVesselListSize) return;
-		}
-		myfile.close();
-	}
-	else {
-		wxLogMessage("Unable to open file");
-	}
-}
 
 
 void MyProject1MyFrame1::m_BN_PreCanned(wxCommandEvent& event)
