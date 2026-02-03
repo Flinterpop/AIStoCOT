@@ -275,11 +275,11 @@ void MyProject1MyFrame1::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 	if (myfile.is_open())
 	{
 		std::string line;
-		//int counter = 0;
+		int counter = 0;
 		while (std::getline(myfile, line))
 		{
 			ProcessNMEAToCoT(line);
-			//if (++counter > MaxVesselListSize) return;
+			if (++counter > 100) break;
 		}
 		myfile.close();
 	}

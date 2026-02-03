@@ -37,10 +37,10 @@ vessel* FindVesselByMMSI(int mmsi)
 {
     for (auto v : VesselList)
     {
-        wxLogMessage("Checking:%d  %d CS:%s Name:%s", mmsi, v->mmsi, v->callsign, v->name);
+        //wxLogMessage("Checking:%d  %d CS:%s Name:%s", mmsi, v->mmsi, v->callsign, v->name);
         if (v->mmsi == mmsi)
         {
-            wxLogMessage("Found vessel MMSI:%d  CS:%s Name:%s", v->mmsi, v->callsign, v->name);
+            //wxLogMessage("Found vessel MMSI:%d  CS:%s Name:%s", v->mmsi, v->callsign, v->name);
             return v;
         }
     }
@@ -278,9 +278,7 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
 
 AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
 {
-    std::stringstream retVal{};
-
-    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
+       std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -290,6 +288,8 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
     {
         Ais1_2_3 *a123 =  new Ais1_2_3(body.c_str(), 0);
 
+        /*
+        std::stringstream retVal{};
         //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
         retVal << "ParsePosReportPayload:"  << std::endl;
         retVal << "user ID " << a123->mmsi << std::endl;
@@ -300,6 +300,7 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
         retVal << "time stamp " << a123->timestamp << std::endl;
 
         wxLogMessage(retVal.str());
+        */
 
         vessel* v = FindVesselByMMSI(a123->mmsi);
         if (nullptr == v)
