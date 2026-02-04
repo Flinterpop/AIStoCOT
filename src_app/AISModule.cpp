@@ -1,20 +1,15 @@
 
 #include "AISModule.h"
 
-#include <sstream>
-#include <format>
-#include <ranges>
-#include <algorithm>
-
-
 #include <wx/log.h>
 
 int MsgCounts[27]{};
 
 
-std::vector<Vessel*> VesselList;
 
-std::vector<KnownVessel*> KnownVesselList;
+std::vector<AISMODULE::Vessel*> VesselList;
+
+std::vector<AISMODULE::KnownVessel*> KnownVesselList;
 
 const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
     "AIS_NV_STATUS_AT_ANCHOR",
@@ -39,20 +34,20 @@ const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
 
 void BuildKnownVesselList()
 {
-    KnownVessel* kv = new KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "Canada", 134, 17, 0, 0);
+    AISMODULE::KnownVessel* kv = new AISMODULE::KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
+    kv = new AISMODULE::KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
+    kv = new AISMODULE::KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "Canada", 183, 34, 0, 0);
+    kv = new AISMODULE::KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "Canada", 183, 34, 0, 0);
     KnownVesselList.push_back(kv);
 }
 
-KnownVessel* FindKnownVesselByMMSI(int mmsi)
+AISMODULE::KnownVessel* AISMODULE::FindKnownVesselByMMSI(int mmsi)
 {
     for (auto kv : KnownVesselList)
     {
@@ -62,7 +57,7 @@ KnownVessel* FindKnownVesselByMMSI(int mmsi)
 }
 
 
-Vessel* FindVesselByMMSI(int mmsi)
+AISMODULE::Vessel* AISMODULE::FindVesselByMMSI(int mmsi)
 {
     for (auto v : VesselList)
     {
@@ -74,7 +69,7 @@ Vessel* FindVesselByMMSI(int mmsi)
 
 
 
-AISObject *ParsePayloadString(std::string body)
+AISMODULE::AISObject * AISMODULE::ParsePayloadString(std::string body)
 {
     switch (body[0])
     {
@@ -82,7 +77,7 @@ AISObject *ParsePayloadString(std::string body)
     case '2':  // FALLTHROUGH
     case '3':  // 1-3: Class A position report.
     {
-        return ParseAIS123_PosReportPayload(body, 0);
+        return AISMODULE::ParseAIS123_PosReportPayload(body, 0);
         break;
     }
 
@@ -96,7 +91,7 @@ AISObject *ParsePayloadString(std::string body)
 
     case '5':  // 5 - Ship and Cargo
     {
-        return ParseASI5IdentPayload(body, 2);
+        return AISMODULE::ParseASI5IdentPayload(body, 2);
         //return MakeUnique<libais::Ais5>(body.c_str(), fill_bits);
         break;
     }
@@ -156,7 +151,7 @@ case 'A':  // 17 - GNSS broadcast
 
     case 'B':  // 18 - Position, Class B
     {
-        return ParseAIS18_PosReportPayload(body, 0);
+        return AISMODULE::ParseAIS18_PosReportPayload(body, 0);
         //return MakeUnique<libais::Ais18>(body.c_str(), fill_bits);
         break;
     }
@@ -169,7 +164,7 @@ case 'A':  // 17 - GNSS broadcast
     }
 
     case 'H':  // 24 - Static data report
-        return ParseASI24IdentPayload(body, 0);   //MakeUnique<libais::Ais24>(body.c_str(), fill_bits);
+        return AISMODULE::ParseASI24IdentPayload(body, 0);   //MakeUnique<libais::Ais24>(body.c_str(), fill_bits);
         break;
 
 
@@ -208,7 +203,7 @@ case 'A':  // 17 - GNSS broadcast
 
 
 
-AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
+AISMODULE::AISObject * AISMODULE::ParseASI5IdentPayload(std::string body, int fillbits)
 {
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
     if (nullptr == p)
@@ -220,10 +215,10 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
     {
         Ais5 *a5 = new Ais5(body.c_str(), fillbits);
 
-        Vessel* v = FindVesselByMMSI(a5->mmsi);
+        AISMODULE::Vessel* v = AISMODULE::FindVesselByMMSI(a5->mmsi);
         if (nullptr == v)
         {
-            v = new Vessel(a5);
+            v = new AISMODULE::Vessel(a5);
             v->mmsi = a5->mmsi;
             v->callsign = a5->callsign;
             v->name = a5->name;
@@ -240,13 +235,13 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
             v->destination = a5->destination;
             v->age = 0;
         }
-        return (AISObject*)v;
+        return (AISMODULE::AISObject*)v;
     }
     return nullptr;
 }
 
 
-AISObject* ParseASI24IdentPayload(std::string body, int fillbits)
+AISMODULE::AISObject* AISMODULE::ParseASI24IdentPayload(std::string body, int fillbits)
 {
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
     if (nullptr == p)
@@ -258,10 +253,10 @@ AISObject* ParseASI24IdentPayload(std::string body, int fillbits)
     {
         Ais24* a24 = new Ais24(body.c_str(), fillbits);
 
-        Vessel* v = FindVesselByMMSI(a24->mmsi);
+        AISMODULE::Vessel* v = AISMODULE::FindVesselByMMSI(a24->mmsi);
         if (nullptr == v)
         {
-            v = new Vessel(a24);
+            v = new AISMODULE::Vessel(a24);
             v->mmsi = a24->mmsi;
             v->callsign = a24->callsign;
             v->name = a24->name;
@@ -278,7 +273,7 @@ AISObject* ParseASI24IdentPayload(std::string body, int fillbits)
             //v->destination = a24->destination;
             v->age = 0;
         }
-        return (AISObject*)v;
+        return (AISMODULE::AISObject*)v;
     }
     return nullptr;
 }
@@ -286,7 +281,7 @@ AISObject* ParseASI24IdentPayload(std::string body, int fillbits)
 
 
 
-AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
+AISMODULE::AISObject * AISMODULE::ParseAIS123_PosReportPayload(std::string body, int fillbits)
 {
        std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
     if (nullptr == p)
@@ -312,10 +307,10 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
         wxLogMessage(retVal.str());
         */
 
-        Vessel* v = FindVesselByMMSI(a123->mmsi);
+        AISMODULE::Vessel* v = AISMODULE::FindVesselByMMSI(a123->mmsi);
         if (nullptr == v)
         {
-            v = new Vessel(a123);
+            v = new AISMODULE::Vessel(a123);
             v->mmsi = a123->mmsi;
             v->nav_status = a123->nav_status;
             v->true_heading = a123->true_heading;
@@ -337,14 +332,14 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
             v->timestamp = a123->timestamp;
             v->age = 0;
         }
-        return (AISObject *)v;
+        return (AISMODULE::AISObject *)v;
     }
     return nullptr;
 
 }
 
 
-AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
+AISMODULE::AISObject * AISMODULE::ParseAIS18_PosReportPayload(std::string body, int fillbits)
 {
     std::stringstream retVal{};
 
@@ -369,10 +364,10 @@ AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
 
         wxLogMessage(retVal.str());
 
-        Vessel* v = FindVesselByMMSI(a18->mmsi);
+        AISMODULE::Vessel* v = AISMODULE::FindVesselByMMSI(a18->mmsi);
         if (nullptr == v)
         {
-            v = new Vessel(a18);
+            v = new AISMODULE::Vessel(a18);
             v->mmsi = a18->mmsi;
             //v->nav_status = -1;// a18->nav_status;
             v->true_heading = a18->true_heading;
@@ -394,7 +389,7 @@ AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
             v->timestamp = a18->timestamp;
             v->age = 0;
         }
-        return (AISObject*)v;
+        return (AISMODULE::AISObject*)v;
     }
     return nullptr;
 

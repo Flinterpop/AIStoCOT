@@ -7,10 +7,11 @@
 #include "COTSender.h"
 #include "bg_TakMessage.h"
 
+#include "wx/log.h"
 
 extern bool g_debug;
 
-
+using namespace AISMODULE;
 
 namespace AIS2COT
 {

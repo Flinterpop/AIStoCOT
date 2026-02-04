@@ -51,7 +51,7 @@ class wxAISCOT_MainFrame : public MainFrame1
 		//void ProcessNMEAPayload(std::string p);
 		//void SendVesselCoTUpdate(Vessel* v);
 
-		void SendAidToNavCoTUpdate(AidToNavigation* v);
+		void SendAidToNavCoTUpdate(AISMODULE::AidToNavigation* v);
 
 		void BN_ClearOnButtonClick(wxCommandEvent& event) override;
 		void BN_ShowStatsOnButtonClick(wxCommandEvent& event) override;
