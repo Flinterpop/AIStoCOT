@@ -9,45 +9,11 @@
 
 #include <wx/log.h>
 
+int MsgCounts[27]{};
 
-std::vector<vessel*> VesselList;
+std::vector<Vessel*> VesselList;
 
 std::vector<KnownVessel*> KnownVesselList;
-
-
-
-void BuildKnownVesselList()
-{
-    KnownVessel *kv = new KnownVessel(316130000, 0, "HMCS Charlettetown", "CGAJ", 35, "Canada", 134,17,0,0);
-    KnownVesselList.push_back(kv);
-
-    kv = new KnownVessel(316138000, 0, "HMCS Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
-    KnownVesselList.push_back(kv);
-
-    kv = new KnownVessel(316135000, 0, "HMCS Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
-    KnownVesselList.push_back(kv);
-
-    kv = new KnownVessel(316030879, 9348182, "MV Asterix", "CFN7327", 35, "Canada",183, 34, 0, 0);
-    KnownVesselList.push_back(kv);
-
-}
-
-
-vessel* FindVesselByMMSI(int mmsi)
-{
-    for (auto v : VesselList)
-    {
-        //wxLogMessage("Checking:%d  %d CS:%s Name:%s", mmsi, v->mmsi, v->callsign, v->name);
-        if (v->mmsi == mmsi)
-        {
-            //wxLogMessage("Found vessel MMSI:%d  CS:%s Name:%s", v->mmsi, v->callsign, v->name);
-            return v;
-        }
-    }
-    return nullptr;
-}
-
-
 
 const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
     "AIS_NV_STATUS_AT_ANCHOR",
@@ -68,7 +34,43 @@ const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
 };
 
 
-int MsgCounts[27]{};
+
+
+void BuildKnownVesselList()
+{
+    KnownVessel* kv = new KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "Canada", 134, 17, 0, 0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
+    KnownVesselList.push_back(kv);
+
+    kv = new KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "Canada", 183, 34, 0, 0);
+    KnownVesselList.push_back(kv);
+}
+
+KnownVessel* FindKnownVesselByMMSI(int mmsi)
+{
+    for (auto kv : KnownVesselList)
+    {
+        if (kv->MMSI == mmsi) return kv;
+    }
+    return nullptr;
+}
+
+
+Vessel* FindVesselByMMSI(int mmsi)
+{
+    for (auto v : VesselList)
+    {
+        if (v->mmsi == mmsi) return v;
+    }
+    return nullptr;
+}
+
+
 
 
 AISObject *ParsePayloadString(std::string body)
@@ -98,7 +100,6 @@ AISObject *ParsePayloadString(std::string body)
         break;
     }
 
-
     case '6':  // 6 - Addressed binary message
     {
         //return CreateAisMsg6(body, fill_bits);
@@ -111,7 +112,6 @@ AISObject *ParsePayloadString(std::string body)
         //   return MakeUnique<libais::Ais7_13>(body.c_str(), fill_bits);
         break;
     }
-
 
     case '8':  // 8 - Binary broadcast message (BBM)
     {
@@ -167,6 +167,12 @@ case 'A':  // 17 - GNSS broadcast
         break;
     }
 
+    case 'H':  // 24 - Static data report
+        return ParseASI24IdentPayload(body, 0);   //MakeUnique<libais::Ais24>(body.c_str(), fill_bits);
+        break;
+
+
+
 
     /*
     case 'D':  // 20 - Data link management
@@ -181,8 +187,6 @@ case 'A':  // 17 - GNSS broadcast
     case 'G':  // 23 - Group Assignment Command
         return MakeUnique<libais::Ais23>(body.c_str(), fill_bits);
 
-    case 'H':  // 24 - Static data report
-        return MakeUnique<libais::Ais24>(body.c_str(), fill_bits);
 
     case 'I':  // 25 - Single slot binary message
         return MakeUnique<libais::Ais25>(body.c_str(), fill_bits);
@@ -201,9 +205,10 @@ case 'A':  // 17 - GNSS broadcast
 }
 
 
+
+
 AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
 {
-    //std::stringstream retVal{};
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
     if (nullptr == p)
     {
@@ -213,16 +218,11 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
     else
     {
         Ais5 *a5 = new Ais5(body.c_str(), fillbits);
-        //retVal << "user ID " << a5->mmsi << std::endl;
-        //retVal << "callsign " << a5->callsign << std::endl;
-        //retVal << "name " << a5->name << std::endl;
-        //retVal << "type_and_cargo " << a5->type_and_cargo << std::endl;
-        //retVal << "destination " << a5->destination << std::endl;
 
-        vessel* v = FindVesselByMMSI(a5->mmsi);
+        Vessel* v = FindVesselByMMSI(a5->mmsi);
         if (nullptr == v)
         {
-            v = new vessel(a5);
+            v = new Vessel(a5);
             v->mmsi = a5->mmsi;
             v->callsign = a5->callsign;
             v->name = a5->name;
@@ -233,46 +233,55 @@ AISObject *ParseASI5IdentPayload(std::string body, int fillbits)
         else //just update the thing
         {
             v->ais5 = a5;
-
             v->callsign = a5->callsign;
             v->name = a5->name;
             v->type_and_cargo = a5->type_and_cargo;
             v->destination = a5->destination;
             v->age = 0;
         }
-
         return (AISObject*)v;
-
-
-
     }
-
     return nullptr;
-
-    /*
-    int ais_version;
-    int imo_num;
-    std::string callsign;
-    std::string name;
-    int type_and_cargo;
-    int dim_a;
-    int dim_b;
-    int dim_c;
-    int dim_d;
-    int fix_type;
-    int eta_month;
-    int eta_day;
-    int eta_hour;
-    int eta_minute;
-    float draught;  // present static draft. m
-    std::string destination;
-    int dte;
-    int spare;
-    */
-
-
-
 }
+
+
+AISObject* ParseASI24IdentPayload(std::string body, int fillbits)
+{
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
+    if (nullptr == p)
+    {
+        std::cout << "Null ptr" << std::endl;
+        return nullptr;
+    }
+    else
+    {
+        Ais24* a24 = new Ais24(body.c_str(), fillbits);
+
+        Vessel* v = FindVesselByMMSI(a24->mmsi);
+        if (nullptr == v)
+        {
+            v = new Vessel(a24);
+            v->mmsi = a24->mmsi;
+            v->callsign = a24->callsign;
+            v->name = a24->name;
+            v->type_and_cargo = a24->type_and_cargo;
+            //v->destination = a24->destination;
+            VesselList.push_back(v);
+        }
+        else //just update the thing
+        {
+            v->ais24 = a24;
+            v->callsign = a24->callsign;
+            v->name = a24->name;
+            v->type_and_cargo = a24->type_and_cargo;
+            //v->destination = a24->destination;
+            v->age = 0;
+        }
+        return (AISObject*)v;
+    }
+    return nullptr;
+}
+
 
 
 
@@ -302,10 +311,10 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
         wxLogMessage(retVal.str());
         */
 
-        vessel* v = FindVesselByMMSI(a123->mmsi);
+        Vessel* v = FindVesselByMMSI(a123->mmsi);
         if (nullptr == v)
         {
-            v = new vessel(a123);
+            v = new Vessel(a123);
             v->mmsi = a123->mmsi;
             v->nav_status = a123->nav_status;
             v->true_heading = a123->true_heading;
@@ -334,8 +343,6 @@ AISObject *ParseAIS123_PosReportPayload(std::string body, int fillbits)
 }
 
 
-
-
 AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
 {
     std::stringstream retVal{};
@@ -361,10 +368,10 @@ AISObject *ParseAIS18_PosReportPayload(std::string body, int fillbits)
 
         wxLogMessage(retVal.str());
 
-        vessel* v = FindVesselByMMSI(a18->mmsi);
+        Vessel* v = FindVesselByMMSI(a18->mmsi);
         if (nullptr == v)
         {
-            v = new vessel(a18);
+            v = new Vessel(a18);
             v->mmsi = a18->mmsi;
             //v->nav_status = -1;// a18->nav_status;
             v->true_heading = a18->true_heading;

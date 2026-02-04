@@ -26,7 +26,7 @@ wxLogWindow* logWin{};
 
 extern int MsgCounts[27];
 
-extern std::vector<vessel*> VesselList;
+extern std::vector<Vessel*> VesselList;
 const int AGEOUT = 20;
 const int MaxVesselListSIze = 150;
 
@@ -157,7 +157,7 @@ void MyProject1MyFrame1::UpdateGrid()
 	}
 		
 	m_grid1->ClearGrid();
-	for (vessel* v : VesselList)
+	for (Vessel* v : VesselList)
 	{
 		TC_Debug->AppendText(v->LogMe());
 
@@ -179,7 +179,7 @@ void MyProject1MyFrame1::UpdateGrid()
 }
 
 
-void MyProject1MyFrame1::SendVesselCoTUpdate(vessel *v)
+void MyProject1MyFrame1::SendVesselCoTUpdate(Vessel *v)
 {
 	if ((false == v->isValidAIS123) && (false == v->isValidAIS18) ) return;
 
@@ -200,7 +200,7 @@ void MyProject1MyFrame1::SendVesselCoTUpdate(vessel *v)
 
 	CurCoTMsg.includeContact = true;
 	std::string name{};
-	vessel* v2 = FindVesselByMMSI(v->mmsi);
+	Vessel* v2 = FindVesselByMMSI(v->mmsi);
 	if (nullptr != v2)  //found vessel in vessel list
 	{
 		if (0 != v2->callsign.size())
@@ -302,18 +302,18 @@ void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
 	case 2:
 	case 3:
 	{
-		vessel* v = (vessel*)ao;
+		Vessel* v = (Vessel*)ao;
 		SendVesselCoTUpdate(v);
 		break;
 	}
 	case 5:
 	{
-		vessel* v = (vessel*)ao;
+		Vessel* v = (Vessel*)ao;
 		break;
 	}
 	case 18:
 	{
-		vessel* v = (vessel*)ao;
+		Vessel* v = (Vessel*)ao;
 		SendVesselCoTUpdate(v);
 		break;
 	}
@@ -329,10 +329,10 @@ void MyProject1MyFrame1::ProcessNMEAPayload(std::string p)
 }
 
 
-struct NMEA_AIS* multipart1;
+struct NMEA_AIS_MSG* multipart1;
 void MyProject1MyFrame1::ProcessNMEAToCoT(std::string line)
 {
-	struct NMEA_AIS* nmea = new NMEA_AIS(line);
+	struct NMEA_AIS_MSG* nmea = new NMEA_AIS_MSG(line);
 	if (debug) wxLogMessage(nmea->print());
 
 	if (1 != nmea->CountOfFragments)

@@ -64,41 +64,42 @@ inline bool isStringAnInteger(const std::string& s) {
 
 
 
-struct NMEA_AIS
+struct NMEA_AIS_MSG
 {
     bool isValid = false;
-    std::string parseRecord{};
+    std::string parseRecordString{};
 
-    std::string sentence{};
-    std::string name{};         //Field 1
-    int CountOfFragments{};     //Field 2
-    int FragmentNumber{};
-    int SequentialMessageID{};
-    std::string RadioChannel{};
-    std::string payload{};
-    int fillBits{};
-    int checksum{};
+    std::string sentence{};  //example !AIVDM,1,1,,A,1Cu?etPjh0J`ej@Ih@B1hQH00000,0*5B
+    std::string name{};         //Field 1 should be AIVDM
+    int CountOfFragments{};     //Field 2   1 or 2
+    int FragmentNumber{};       //Field 3   1 or 2 
+    int SequentialMessageID{};  //Field 4   often 0, shoudl be the same for fragments of the same message
+    std::string RadioChannel{}; //Field 5   A or B 
+    std::string payload{};      //Field 6   string of binary data 
+    int fillBits{};             //Field 7 before *
+    int checksum{};             //Field 7 after *
 
-    NMEA_AIS(std::string myString)
+
+    NMEA_AIS_MSG(std::string NMEA_Sentence)
     {
-        wxLogMessage("Parsing %s", myString);
+        wxLogMessage("Parsing %s", NMEA_Sentence);
+
         std::stringstream retVal{};
         std::vector<std::string> fields;
-        auto split_view = myString | std::ranges::views::split(',');
+        auto split_view = NMEA_Sentence | std::ranges::views::split(',');
         for (const auto& view : split_view) fields.push_back(std::string(view.begin(), view.end()));
         for (const std::string& fields : fields) std::cout << fields << std::endl;
         if (fields.size() != 7)
         {
-            parseRecord = "Incorrect number of fields";
-            return;// nmea;
+            parseRecordString = "Incorrect number of fields";
+            return;
         }
 
-        retVal << "Num Fieds: " << fields.size() << std::endl;
-
+        retVal << "Num Fields: " << fields.size() << std::endl;
         for (auto s : fields)
             retVal << s << "//";
 
-        sentence = myString;
+        sentence = NMEA_Sentence;
         name = fields[0];
 
         bool isInt = isStringAnInteger(fields[1]);
@@ -113,18 +114,15 @@ struct NMEA_AIS
         RadioChannel = fields[4];
         payload = fields[5];
 
-
         char FB = fields[6][0];
         fillBits = FB - 0x30;
-
-
 
         std::string c = fields[6].substr(2);
 
         isInt = isStringAnInteger(c);
         if (isInt) checksum = std::stoi(c);
 
-        parseRecord = retVal.str();
+        parseRecordString = retVal.str();
         isValid = true;
     }
 
@@ -154,38 +152,34 @@ struct KnownVessel
     int IMO{};
     std::string name{};
     std::string callsign{};
-    int A, B, C, D{};  //dimensions
+    int A{}, B{}, C{}, D{};  //dimensions
     int type{};
     std::string flag{};
 
     KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _type, std::string _flag, int a, int b, int c, int d)
     {
-        MMSI=mmsi;
+        MMSI = mmsi;
         IMO = imo;
-        name=_name;
+        name = _name;
         callsign = cs;
         A = a;
         B = b;
         C = c;
         D = d;  //dimensions
         type = _type;
-        flag = _flag;
+        flag = _flag;  //Country of registration
     };
-
-
-
 };
 
 
 
-class AISObject
+class AISObject  //base class for all AIS things with an MMSI
 {
 public:
     int mmsi = 0;
     int age = 0;
     bool markForDelete = false;
     int AISMsgNumber = 0; //1 thru 27
-
 
     
 public:
@@ -226,41 +220,51 @@ class AidToNavigation: public AISObject
 
 };
 
-
-class vessel : public AISObject
+class Vessel : public AISObject
 {
 public:
 
-    vessel(Ais1_2_3* a) : AISObject(a->message_id, a->mmsi)
+    Vessel(Ais1_2_3* a) : AISObject(a->message_id, a->mmsi)
     {
         a123 = a;
         isValidAIS123 = true;
     };
-    vessel(Ais18* a) : AISObject(a->message_id, a->mmsi)
+    Vessel(Ais18* a) : AISObject(a->message_id, a->mmsi)
     {
         a18 = a;
         isValidAIS18 = true;
     };
 
-    vessel(Ais5* a) : AISObject(a->message_id, a->mmsi)
+    Vessel(Ais5* a) : AISObject(a->message_id, a->mmsi)
     {
         ais5 = a;
         isValidAIS5 = true;
     };
 
-    Ais1_2_3* a123{};
-    Ais18* a18{};
-    Ais5* ais5{};
+    Vessel(Ais24* a) : AISObject(a->message_id, a->mmsi)
+    {
+        ais24 = a;
+        isValidAIS24 = true;
+    };
+
+
+
+    Ais1_2_3* a123{};   //Class A Position Reports
+    Ais5* ais5{};       //Class A Ship Data
+
+    Ais18* a18{};       //Class A Position Reports
+    Ais24* ais24{};       //Class A Ship Data
 
 
     bool isValidAIS123{ false };
-    bool isValidAIS18{ false };
     bool isValidAIS5{ false };
-    
-    
+   
+    bool isValidAIS18{ false };
+    bool isValidAIS24{ false };
 
-    //AIS 1,2,3
-    AIS_NAVIGATIONAL_STATUS nav_status{};
+
+    //AIS 1,2,3, 18
+    
     int position_accuracy{};
     AisPoint position{};
     double lat_deg{};
@@ -275,17 +279,22 @@ public:
     int utc_hour{};
     int utc_min{};
 
-    //AIS 5
+    //AIS 1,2,3
+    AIS_NAVIGATIONAL_STATUS nav_status{};
+
+
+    //AIS 5, 24
     int ais_version{};
     int imo_num{};
     std::string callsign{};
-    std::string name{};
+    std::string name{};  //Vessel Names that exceed the AIS’s 20 character limit should be shortened (not truncated) to 15 character - spaces, followed by an underscore{ _ },
     int type_and_cargo{};
     int dim_a{};
     int dim_b{};
     int dim_c{};
     int dim_d{};
     int fix_type{};
+
     int eta_month{};
     int eta_day{};
     int eta_hour{};
@@ -294,6 +303,8 @@ public:
     std::string destination{};
     int dte{};
 
+    //AIS 24
+    int Mothership_MMSI{};
 
     std::string LogMe() override
     {
@@ -326,11 +337,25 @@ public:
 };
 
 
-vessel* FindVesselByMMSI(int mmsi);
+
+class VesselClassA : public Vessel
+{
+
+};
+
+class VesselClassB : public Vessel
+{
+
+};
+
+
+
+KnownVessel* FindKnownVesselByMMSI(int mmsi);
+Vessel* FindVesselByMMSI(int mmsi);
 AISObject* ParsePayloadString(std::string body);
 AISObject* ParseAIS123_PosReportPayload(std::string body, int fillbits);
 AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
 AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
-
+AISObject* ParseASI24IdentPayload(std::string body, int fillbits);
 
 

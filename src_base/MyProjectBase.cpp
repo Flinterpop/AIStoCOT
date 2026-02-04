@@ -221,9 +221,13 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 	fgSizer11->Add( BN_Clear, 0, wxALL, 5 );
 
 	BN_AtoN = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("AtoN"), wxDefaultPosition, wxDefaultSize, 0 );
+	BN_AtoN->SetToolTip( _("Sends Aid To Navigation Test Mesage") );
+
 	fgSizer11->Add( BN_AtoN, 0, wxALL, 5 );
 
 	BN_Pink = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Pink"), wxDefaultPosition, wxDefaultSize, 0 );
+	BN_Pink->SetToolTip( _("Generic Vesel") );
+
 	fgSizer11->Add( BN_Pink, 0, wxALL, 5 );
 
 	BN_Ship = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Ship"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -913,14 +917,32 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText45->Wrap( -1 );
 	fgSizer12->Add( m_staticText45, 0, wxALL, 5 );
 
-	TC_CallSign = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("FFH-339"), wxDefaultPosition, wxDefaultSize, 0 );
+	TC_CallSign = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("CGAJ"), wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !TC_CallSign->HasFlag( wxTE_MULTILINE ) )
+	{
+	TC_CallSign->SetMaxLength( 7 );
+	}
+	#else
+	TC_CallSign->SetMaxLength( 7 );
+	#endif
+	TC_CallSign->SetToolTip( _("Max Length 7") );
+
 	fgSizer12->Add( TC_CallSign, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText46 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText46->Wrap( -1 );
 	fgSizer12->Add( m_staticText46, 0, wxALL, 5 );
 
-	TC_Name = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("HMCS Charlettetown"), wxDefaultPosition, wxDefaultSize, 0 );
+	TC_Name = new wxTextCtrl( sbSizer17->GetStaticBox(), wxID_ANY, _("Charlettetown"), wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !TC_Name->HasFlag( wxTE_MULTILINE ) )
+	{
+	TC_Name->SetMaxLength( 20 );
+	}
+	#else
+	TC_Name->SetMaxLength( 20 );
+	#endif
 	fgSizer12->Add( TC_Name, 0, wxALL|wxBOTTOM|wxEXPAND, 5 );
 
 	m_staticText47 = new wxStaticText( sbSizer17->GetStaticBox(), wxID_ANY, _("Type of Ship and Cargo"), wxDefaultPosition, wxDefaultSize, 0 );

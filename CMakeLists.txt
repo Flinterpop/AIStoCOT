@@ -54,12 +54,12 @@ set(
 	src_COT/COTSender.cpp
 	src_COT/COTSender.h
 
-	AIS_library--main/ais1.cpp
-	AIS_library--main/ais1.h
-	AIS_library--main/ais5.h
-	AIS_library--main/ais5.cpp
-	AIS_library--main/aislib.h
-	AIS_library--main/aislib.cpp
+	AIS_Build/ais1.cpp
+	AIS_Build/ais1.h
+	AIS_Build/ais5.h
+	AIS_Build/ais5.cpp
+	AIS_Build/aislib.h
+	AIS_Build/aislib.cpp
 
 	
 	aislib/ais.cpp
@@ -96,9 +96,6 @@ set(
 	aislib/decode_body.cpp
 	aislib/vdm.cpp
 	
-	
-
-
     main.exe.manifest
 )
 
@@ -130,9 +127,9 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT $
 
 target_include_directories(${PROJECT_NAME}  PUBLIC src_base)
 target_include_directories(${PROJECT_NAME}  PUBLIC src_app)
-target_include_directories(${PROJECT_NAME}  PUBLIC aislib)
+target_include_directories(${PROJECT_NAME}  PUBLIC aislib)  
 target_include_directories(${PROJECT_NAME}  PUBLIC src_COT)
-target_include_directories(${PROJECT_NAME}  PUBLIC AIS_library--main)
+target_include_directories(${PROJECT_NAME}  PUBLIC AIS_Build)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC wxcore wxnet wxhtml wxrichtext wxaui)
 
