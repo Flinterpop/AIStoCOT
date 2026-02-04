@@ -56,7 +56,7 @@ namespace AIS2COT
 
 
 
-	inline AISObject* ao ProcessNMEA_AISPayload(std::string payload)
+	//inline AISObject* ao ProcessNMEA_AISPayload(std::string payload)
 
 	inline void ProcessNMEA_AISPayload(std::string payload)
 	{
