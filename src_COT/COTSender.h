@@ -3,9 +3,11 @@
 #include "bg_TakMessage.h"
 
 
-void AssembleAndSendCoT(bg_TakMessage CurCoTMsg);
+namespace COTSENDER
+{
+	std::string StartCOTSender();
+	void StopCOTSender();
 
+	void AssembleAndSendCoT(bg_TakMessage CurCoTMsg);
 
-std::string StartCOTSender();
-void StopCOTSender();
-
+}

@@ -39,8 +39,9 @@ set(
 	src_base/BG_SocketBase.h
 	src_base/BG_SocketBase.cpp
 
-	src_app/MyProject1MyFrame1.h
-	src_app/MyProject1MyFrame1.cpp
+	src_app/AIStoCoT.h
+	src_app/wxAISCOT_MainFrame.h
+	src_app/wxAISCOT_MainFrame.cpp
 	src_app/AISModule.h
 	src_app/AISModule.cpp
 	src_app/MyProject1CoTSender.cpp

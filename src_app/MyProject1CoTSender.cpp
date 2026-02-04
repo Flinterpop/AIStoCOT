@@ -86,7 +86,7 @@ void MyProject1CoTSender::SendTakMessage()
 		if (CB_Speed->IsChecked()) CurCoTMsg.speed = SC_Speed->GetValue();
 	}
 
-	AssembleAndSendCoT(CurCoTMsg);
+	COTSENDER::AssembleAndSendCoT(CurCoTMsg);
 
 	wxLogMessage("Sending : %s", CurCoTMsg.callsign);
 	//Frigate/corvette "S*S*CLFF--*****"

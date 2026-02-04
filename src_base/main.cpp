@@ -15,7 +15,7 @@
 
 #include <wx/persist/toplevel.h>
 
-#include "MyProject1MyFrame1.h"
+#include "wxAISCOT_MainFrame.h"
 
 
 
@@ -42,7 +42,7 @@ bool MyApp::OnInit()
     //frm->Show();
 
 
-    MyProject1MyFrame1* f4 = new MyProject1MyFrame1(nullptr);
+    wxAISCOT_MainFrame* f4 = new wxAISCOT_MainFrame(nullptr);
     SetTopWindow(f4);
 
     f4->Show();

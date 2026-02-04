@@ -24,21 +24,21 @@
 #include <wx/textctrl.h>
 #include <wx/statbox.h>
 #include <wx/filepicker.h>
-#include <wx/spinctrl.h>
 #include <wx/grid.h>
 #include <wx/timer.h>
 #include <wx/frame.h>
 #include <wx/checkbox.h>
 #include <wx/stattext.h>
+#include <wx/spinctrl.h>
 #include <wx/choice.h>
 #include <wx/valtext.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class MyFrame1
+/// Class MainFrame1
 ///////////////////////////////////////////////////////////////////////////////
-class MyFrame1 : public wxFrame
+class MainFrame1 : public wxFrame
 {
 	private:
 
@@ -52,16 +52,6 @@ class MyFrame1 : public wxFrame
 		wxTextCtrl* TC_AISLine;
 		wxButton* BN_NMEAToCoT;
 		wxFilePickerCtrl* m_filePicker1;
-		wxButton* m_button11;
-		wxButton* BN_SendCOT;
-		wxTextCtrl* TC_Symbol;
-		wxSpinCtrlDouble* SC_Lat;
-		wxSpinCtrlDouble* SC_Lng;
-		wxSpinCtrl* SC_Speed;
-		wxSpinCtrl* SC_Course;
-		wxTextCtrl* TC_MMSI;
-		wxTextCtrl* TC_CallSign;
-		wxTextCtrl* TC_Name;
 		wxPanel* m_panel4;
 		wxTextCtrl* TC_Debug;
 		wxGrid* m_grid1;
@@ -75,16 +65,14 @@ class MyFrame1 : public wxFrame
 		virtual void BN_ShowStatsOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BN_NMEAToCoTOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_filePicker1OnFileChanged( wxFileDirPickerEvent& event ) { event.Skip(); }
-		virtual void m_BN_PreCanned( wxCommandEvent& event ) { event.Skip(); }
-		virtual void BN_SendCOTOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_timer1OnTimer( wxTimerEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxAIStoNMEA"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1600,1200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxAIStoNMEA"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1600,1200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
-		~MyFrame1();
+		~MainFrame1();
 
 };
 
@@ -101,8 +89,6 @@ class CoTSender : public wxFrame
 		wxButton* BN_Pink;
 		wxButton* BN_Ship;
 		wxButton* BN_USCG;
-		wxButton* m_button12;
-		wxButton* m_button13;
 		wxCheckBox* CB_IncludeTakControl;
 		wxStaticText* m_staticText29;
 		wxSpinCtrl* SB_MinProtVersion;

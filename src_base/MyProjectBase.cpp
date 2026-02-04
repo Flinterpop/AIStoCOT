@@ -9,7 +9,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
-MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
@@ -57,7 +57,7 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	sbSizer1->Add( BN_NMEAToCoT, 0, wxALL, 5 );
 
 
-	bSizer8->Add( sbSizer1, 1, wxEXPAND, 5 );
+	bSizer8->Add( sbSizer1, 0, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer10;
 	bSizer10 = new wxBoxSizer( wxVERTICAL );
@@ -74,60 +74,8 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 
 	bSizer8->Add( bSizer10, 0, wxEXPAND, 5 );
 
-	wxStaticBoxSizer* sbSizer2;
-	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("CoT Test") ), wxVERTICAL );
 
-	m_button11 = new wxButton( sbSizer2->GetStaticBox(), wxID_ANY, _("CoT Precanned 3"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer2->Add( m_button11, 0, wxALL, 5 );
-
-	BN_SendCOT = new wxButton( sbSizer2->GetStaticBox(), wxID_ANY, _("CoT Test"), wxDefaultPosition, wxDefaultSize, 0 );
-	sbSizer2->Add( BN_SendCOT, 0, wxALL, 5 );
-
-	wxBoxSizer* bSizer11;
-	bSizer11 = new wxBoxSizer( wxHORIZONTAL );
-
-	TC_Symbol = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("a-f-S-C-L-F-F"), wxDefaultPosition, wxDefaultSize, 0 );
-	TC_Symbol->SetToolTip( _("CoT Symbol") );
-
-	bSizer11->Add( TC_Symbol, 0, wxALL, 5 );
-
-	SC_Lat = new wxSpinCtrlDouble( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -90, 90, 43.2, 0.01 );
-	SC_Lat->SetDigits( 4 );
-	SC_Lat->SetToolTip( _("Latitude") );
-
-	bSizer11->Add( SC_Lat, 0, wxALL, 5 );
-
-	SC_Lng = new wxSpinCtrlDouble( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, -63.210000, 0.01 );
-	SC_Lng->SetDigits( 4 );
-	SC_Lng->SetToolTip( _("Longitude") );
-
-	bSizer11->Add( SC_Lng, 0, wxALL, 5 );
-
-	SC_Speed = new wxSpinCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxT("12"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 120, 0 );
-	bSizer11->Add( SC_Speed, 0, wxALL, 5 );
-
-	SC_Course = new wxSpinCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxT("315"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 360, 0 );
-	bSizer11->Add( SC_Course, 0, wxALL, 5 );
-
-	TC_MMSI = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("265547250"), wxDefaultPosition, wxDefaultSize, 0 );
-	TC_MMSI->SetToolTip( _("MMSI") );
-
-	bSizer11->Add( TC_MMSI, 0, wxALL, 5 );
-
-	TC_CallSign = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("Charlettetowne"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer11->Add( TC_CallSign, 0, wxALL, 5 );
-
-	TC_Name = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, _("DDH-339"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer11->Add( TC_Name, 0, wxALL, 5 );
-
-
-	sbSizer2->Add( bSizer11, 1, wxEXPAND, 5 );
-
-
-	bSizer8->Add( sbSizer2, 0, wxEXPAND, 5 );
-
-
-	bsLeft->Add( bSizer8, 1, wxEXPAND, 5 );
+	bsLeft->Add( bSizer8, 0, wxEXPAND, 5 );
 
 
 	bSizer3->Add( bsLeft, 0, wxEXPAND, 5 );
@@ -183,19 +131,17 @@ MyFrame1::MyFrame1( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	BN_Timer->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_TimerOnButtonClick ), NULL, this );
-	BN_Builder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_BuilderOnButtonClick ), NULL, this );
-	BN_ShowAISBuilder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ShowAISBuilderOnButtonClick ), NULL, this );
-	BN_Clear->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ClearOnButtonClick ), NULL, this );
-	BN_ShowStats->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_ShowStatsOnButtonClick ), NULL, this );
-	BN_NMEAToCoT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_NMEAToCoTOnButtonClick ), NULL, this );
-	m_filePicker1->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MyFrame1::m_filePicker1OnFileChanged ), NULL, this );
-	m_button11->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::m_BN_PreCanned ), NULL, this );
-	BN_SendCOT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MyFrame1::BN_SendCOTOnButtonClick ), NULL, this );
-	this->Connect( m_timer1.GetId(), wxEVT_TIMER, wxTimerEventHandler( MyFrame1::m_timer1OnTimer ) );
+	BN_Timer->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_TimerOnButtonClick ), NULL, this );
+	BN_Builder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_BuilderOnButtonClick ), NULL, this );
+	BN_ShowAISBuilder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ShowAISBuilderOnButtonClick ), NULL, this );
+	BN_Clear->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ClearOnButtonClick ), NULL, this );
+	BN_ShowStats->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ShowStatsOnButtonClick ), NULL, this );
+	BN_NMEAToCoT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_NMEAToCoTOnButtonClick ), NULL, this );
+	m_filePicker1->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame1::m_filePicker1OnFileChanged ), NULL, this );
+	this->Connect( m_timer1.GetId(), wxEVT_TIMER, wxTimerEventHandler( MainFrame1::m_timer1OnTimer ) );
 }
 
-MyFrame1::~MyFrame1()
+MainFrame1::~MainFrame1()
 {
 }
 
@@ -225,22 +171,16 @@ CoTSender::CoTSender( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	fgSizer11->Add( BN_AtoN, 0, wxALL, 5 );
 
-	BN_Pink = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Pink"), wxDefaultPosition, wxDefaultSize, 0 );
+	BN_Pink = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Commercial"), wxDefaultPosition, wxDefaultSize, 0 );
 	BN_Pink->SetToolTip( _("Generic Vesel") );
 
 	fgSizer11->Add( BN_Pink, 0, wxALL, 5 );
 
-	BN_Ship = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Ship"), wxDefaultPosition, wxDefaultSize, 0 );
+	BN_Ship = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("Frigate"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer11->Add( BN_Ship, 0, wxALL, 5 );
 
 	BN_USCG = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("USCG"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer11->Add( BN_USCG, 0, wxALL, 5 );
-
-	m_button12 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer11->Add( m_button12, 0, wxALL, 5 );
-
-	m_button13 = new wxButton( sbSizer16->GetStaticBox(), wxID_ANY, _("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer11->Add( m_button13, 0, wxALL, 5 );
 
 
 	sbSizer16->Add( fgSizer11, 1, wxEXPAND, 5 );
