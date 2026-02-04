@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\xml\CMakeFiles\wxxml.dir\cmake_pch.cxx">
+      <Filter>CMake</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\xml\xml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\xtixml.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xml\xml.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtixml.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu\wx\setup.h">
+      <Filter>Setup Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\xml\CMakeFiles\wxxml.dir\Debug\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\xml\CMakeFiles\wxxml.dir\Release\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\xml\CMakeFiles\wxxml.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\xml\CMakeFiles\wxxml.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\xml\CMakeLists.txt">
+      <Filter>CMake</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake">
+      <UniqueIdentifier>{6A913645-824A-3D6D-8ADA-EB8D23D9D052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Headers">
+      <UniqueIdentifier>{9E2C8CBE-F7D3-3C9E-92F5-B886BD94E6BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Sources">
+      <UniqueIdentifier>{50EA3A9C-5732-3891-827C-DD66DC85E0E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup Headers">
+      <UniqueIdentifier>{BD984550-4474-385C-9233-E89002900E68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CF551B5F-F252-30E4-B27F-4C4794BB046C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

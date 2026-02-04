@@ -1,0 +1,962 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\base\CMakeFiles\wxbase.dir\cmake_pch.cxx">
+      <Filter>CMake</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\any.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\appbase.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\arcall.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\arcfind.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\archive.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\arrstr.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\base64.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\clntdata.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\cmdline.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\config.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\convauto.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\datetime.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\datetimefmt.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\datstrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\dircmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\dynlib.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\dynload.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\encconv.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\evtloopcmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\extended.c">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\ffile.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\file.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fileback.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fileconf.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\filefn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\filename.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\filesys.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\filtall.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\filtfind.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fmapbase.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fs_arc.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fs_filter.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\hash.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\hashmap.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\init.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\intl.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\ipcbase.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\languageinfo.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\list.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\log.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\longlong.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\mimecmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\module.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\mstream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\numformatter.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\object.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\platinfo.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\process.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\regex.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\secretstore.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\stdpbase.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sstream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\stdstream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\stopwatch.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\strconv.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\stream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\string.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\stringops.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\strvararg.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sysopt.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\tarstrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\textbuf.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\textfile.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\time.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\timercmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\timerimpl.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\tokenzr.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\translation.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\txtstrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\unichar.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\uri.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\ustring.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\variant.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\wfstream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\wxcrt.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\wxprintf.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\xlocale.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\xti.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\xtistrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\zipstrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\zstream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fswatchercmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\generic\fswatcherg.cpp">
+      <Filter>Generic Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\lzmastream.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\uilocale.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fs_data.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\event.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fs_mem.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\msgout.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\utilscmn.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\basemsw.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\crashrpt.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\debughlp.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\dde.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\dir.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\dlmsw.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\evtloopconsole.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\mimetype.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\regconf.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\registry.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\secretstore.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\snglinst.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\stackwalk.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\stdpaths.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\thread.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\timer.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\utils.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\utilsexc.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\fswatcher.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\uilocale.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\main.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\volume.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\afterstd.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\any.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\anystr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\app.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\apptrait.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\archive.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\arrimpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\arrstr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\atomic.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\base64.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\beforestd.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\buffer.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\build.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\chartype.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\checkeddelete.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\chkconf.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\clntdata.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\cmdargs.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\cmdline.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\compiler.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\confbase.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\config.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\convauto.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\containr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\cpp.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\crt.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\datetime.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\datstrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dde.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\debug.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\defs.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dir.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dlimpexp.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dlist.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dynarray.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dynlib.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\dynload.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\encconv.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\event.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\eventfilter.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\evtloop.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\evtloopsrc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\except.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\features.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\flags.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ffile.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\file.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fileconf.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\filefn.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\filename.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\filesys.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fontenc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fontmap.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_arc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_filter.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_mem.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_zip.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\hash.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\hashmap.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\hashset.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\iconloc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\init.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\intl.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\iosfwrap.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ioswrap.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ipc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ipcbase.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\kbdstate.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\language.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\link.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\list.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\listimpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\log.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\longlong.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\math.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\memconf.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\memory.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\memtext.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\mimetype.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\module.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\mousestate.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msgout.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msgqueue.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\mstream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\numformatter.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\object.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\platform.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\platinfo.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\process.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ptr_scpd.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ptr_shrd.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\recguard.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\regex.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\rtti.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\scopedarray.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\scopedptr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\scopeguard.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\secretstore.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sharedptr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\snglinst.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sstream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stack.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stackwalk.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stdpaths.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stdstream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stockitem.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stopwatch.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\strconv.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\string.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\stringops.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\strvararg.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sysopt.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\tarstrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\textbuf.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\textfile.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\thread.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\thrimpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\time.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\timer.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\tls.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\tokenzr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\tracker.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\translation.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\txtstrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\typeinfo.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\types.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\unichar.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\uri.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\ustring.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\utils.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\variant.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\vector.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\version.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\versioninfo.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\volume.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\weakref.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wfstream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wx.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wxchar.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wxcrt.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wxcrtbase.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wxcrtvararg.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\wxprec.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xlocale.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xti.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xti2.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtistrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtictor.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtihandler.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtiprop.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\xtitypes.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\zipstrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\zstream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\convertible.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\if.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\implicitconversion.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\int2type.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\movable.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\pod.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\meta\removeref.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fswatcher.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\generic\fswatcher.h">
+      <Filter>Generic Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\lzmastream.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\localedefs.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\uilocale.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_data.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\apptrait.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\apptbase.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\chkconf.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\crashrpt.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\dde.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\debughlp.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\evtloopconsole.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\gccpriv.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\libraries.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\mimetype.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\private.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\regconf.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\registry.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\seh.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\stackwalk.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\stdpaths.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\winundef.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\winver.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\wrapcctl.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\wrapcdlg.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\wrapwin.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\msw\fswatcher.h">
+      <Filter>MSW Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu\wx\setup.h">
+      <Filter>Setup Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\base\CMakeFiles\wxbase.dir\Debug\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\base\CMakeFiles\wxbase.dir\Release\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\base\CMakeFiles\wxbase.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\base\CMakeFiles\wxbase.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\base\CMakeLists.txt">
+      <Filter>CMake</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake">
+      <UniqueIdentifier>{6A913645-824A-3D6D-8ADA-EB8D23D9D052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Headers">
+      <UniqueIdentifier>{9E2C8CBE-F7D3-3C9E-92F5-B886BD94E6BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Sources">
+      <UniqueIdentifier>{50EA3A9C-5732-3891-827C-DD66DC85E0E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generic Headers">
+      <UniqueIdentifier>{764B8E87-9348-3F36-B458-4F8A47D6AB05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generic Sources">
+      <UniqueIdentifier>{CFA18E7F-8278-324B-A114-15C881E86161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MSW Headers">
+      <UniqueIdentifier>{1057C83D-9454-3E13-B4FC-1F9744E1855B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MSW Sources">
+      <UniqueIdentifier>{3185E1C8-2438-32ED-B52D-DF8D3CC11D0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup Headers">
+      <UniqueIdentifier>{BD984550-4474-385C-9233-E89002900E68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CF551B5F-F252-30E4-B27F-4C4794BB046C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

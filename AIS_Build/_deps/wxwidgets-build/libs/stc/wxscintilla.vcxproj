@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DD2C0CB5-FF3C-333B-8B6B-23BB7A7ACB97}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>scintilla</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">wxscintilla.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">wxscintillad</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">wxscintilla.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">wxscintilla</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">wxscintilla.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">wxscintilla</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">wxscintilla.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">wxscintilla</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswud;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswud;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswud;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/Release//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/MinSizeRel//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/RelWithDebInfo//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_DEPRECATE=1;_SCL_SECURE_NO_WARNINGS=1;UNICODE;_UNICODE;__WX__;WX_PRECOMP;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\lexilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\scintilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\source_groups.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\lexilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\scintilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\source_groups.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\lexilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\scintilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\source_groups.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\lexilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\stc\scintilla.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\source_groups.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\wxscintilla.dir\cmake_pch.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ScanSourceForModuleDependencies>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/Release//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ScanSourceForModuleDependencies>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/MinSizeRel//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</ScanSourceForModuleDependencies>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/wxscintilla.dir/RelWithDebInfo//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ScanSourceForModuleDependencies Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\Compat.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\ILexer.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\ILoader.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\Platform.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\Sci_Position.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\Scintilla.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\include\ScintillaWidget.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\AutoComplete.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\AutoComplete.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CallTip.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CallTip.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CaseConvert.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CaseConvert.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CaseFolder.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CaseFolder.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CellBuffer.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CellBuffer.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharClassify.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharClassify.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharacterCategory.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharacterCategory.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharacterSet.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\CharacterSet.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ContractionState.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ContractionState.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\DBCS.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\DBCS.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Decoration.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Decoration.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Document.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Document.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\EditModel.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\EditModel.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\EditView.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\EditView.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Editor.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Editor.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ElapsedPeriod.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\FontQuality.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Indicator.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Indicator.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\IntegerRectangle.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\KeyMap.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\KeyMap.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\LineMarker.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\LineMarker.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\MarginView.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\MarginView.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Partitioning.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\PerLine.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\PerLine.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Position.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\PositionCache.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\PositionCache.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\RESearch.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\RESearch.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\RunStyles.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\RunStyles.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ScintillaBase.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ScintillaBase.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Selection.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Selection.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\SparseVector.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\SplitVector.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Style.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\Style.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\UniConversion.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\UniConversion.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\UniqueString.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\UniqueString.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ViewStyle.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\ViewStyle.h" />
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\XPM.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/stc/CMakeFiles/wxscintilla.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\stc\scintilla\src\XPM.h" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\wxscintilla.dir\Debug\cmake_pch.hxx" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\wxscintilla.dir\Release\cmake_pch.hxx" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\wxscintilla.dir\MinSizeRel\cmake_pch.hxx" />
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\stc\CMakeFiles\wxscintilla.dir\RelWithDebInfo\cmake_pch.hxx" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\ZERO_CHECK.vcxproj">
+      <Project>{C070F927-229E-3E1F-A099-3088E4D987ED}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

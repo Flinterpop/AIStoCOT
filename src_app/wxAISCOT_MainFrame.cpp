@@ -7,9 +7,6 @@
 #include <wx/log.h>
 #include <fstream>
 
-
-
-#include "AISModule.h"
 #include <wx/persist.h>
 #include <wx/textfile.h>
 

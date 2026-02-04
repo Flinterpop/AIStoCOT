@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\net\CMakeFiles\wxnet.dir\cmake_pch.cxx">
+      <Filter>CMake</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\fs_inet.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\ftp.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\http.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\protocol.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sckaddr.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sckfile.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sckipc.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\sckstrm.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\socket.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\url.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\webrequest.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\common\webrequest_curl.cpp">
+      <Filter>Common Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\sockmsw.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\urlmsw.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\src\msw\webrequest_winhttp.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\fs_inet.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\protocol\file.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\protocol\ftp.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\protocol\http.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\protocol\log.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\protocol\protocol.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sckaddr.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sckipc.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\sckstrm.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\socket.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\url.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\include\wx\webrequest.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\lib\vc_x64_lib\mswu\wx\setup.h">
+      <Filter>Setup Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\net\CMakeFiles\wxnet.dir\Debug\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\net\CMakeFiles\wxnet.dir\Release\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\net\CMakeFiles\wxnet.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\net\CMakeFiles\wxnet.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>CMake</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\build\cmake\lib\net\CMakeLists.txt">
+      <Filter>CMake</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake">
+      <UniqueIdentifier>{6A913645-824A-3D6D-8ADA-EB8D23D9D052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Headers">
+      <UniqueIdentifier>{9E2C8CBE-F7D3-3C9E-92F5-B886BD94E6BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Sources">
+      <UniqueIdentifier>{50EA3A9C-5732-3891-827C-DD66DC85E0E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MSW Sources">
+      <UniqueIdentifier>{3185E1C8-2438-32ED-B52D-DF8D3CC11D0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup Headers">
+      <UniqueIdentifier>{BD984550-4474-385C-9233-E89002900E68}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

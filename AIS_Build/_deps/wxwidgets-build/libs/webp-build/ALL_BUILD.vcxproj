@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0874E25F-2860-382B-B10C-56C61BDFADC3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/3rdparty/libwebp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/webp-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\WebPConfig.cmake.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\config.h.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\deps.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\sharpyuv\libsharpyuv.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\demux\libwebpdemux.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebp.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebpdecoder.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\mux\libwebpmux.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/3rdparty/libwebp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/webp-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\WebPConfig.cmake.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\config.h.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\deps.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\sharpyuv\libsharpyuv.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\demux\libwebpdemux.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebp.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebpdecoder.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\mux\libwebpmux.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/3rdparty/libwebp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/webp-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\WebPConfig.cmake.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\config.h.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\deps.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\sharpyuv\libsharpyuv.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\demux\libwebpdemux.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebp.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebpdecoder.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\mux\libwebpmux.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/3rdparty/libwebp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/source_wx/AIStoCOT -BC:/source_wx/AIStoCOT/AIS_Build --check-stamp-file C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-build/libs/webp-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\WebPConfig.cmake.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\config.h.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\cmake\deps.cmake;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\sharpyuv\libsharpyuv.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\demux\libwebpdemux.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebp.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\libwebpdecoder.pc.in;C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-src\3rdparty\libwebp\src\mux\libwebpmux.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\ZERO_CHECK.vcxproj">
+      <Project>{C070F927-229E-3E1F-A099-3088E4D987ED}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\libwebpmux.vcxproj">
+      <Project>{65AF192A-4DC8-36E0-9524-3874390CE8B3}</Project>
+      <Name>libwebpmux</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\sharpyuv.vcxproj">
+      <Project>{76ED0220-17B5-3588-89FF-6BACEDD702C6}</Project>
+      <Name>sharpyuv</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webp.vcxproj">
+      <Project>{8FA0C631-55C2-348C-A672-31B3BE99EDC6}</Project>
+      <Name>webp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpdecode.vcxproj">
+      <Project>{676F9081-8F36-3759-882C-9967CFE0B898}</Project>
+      <Name>webpdecode</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpdecoder.vcxproj">
+      <Project>{966055E2-8722-332A-B519-8B4D5C4E1A06}</Project>
+      <Name>webpdecoder</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpdemux.vcxproj">
+      <Project>{1A299C5B-61EA-30DE-AC1D-32BA25EB88AE}</Project>
+      <Name>webpdemux</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpdsp.vcxproj">
+      <Project>{5ED16621-911D-398D-89D8-BB6F6848C015}</Project>
+      <Name>webpdsp</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpdspdecode.vcxproj">
+      <Project>{D299C4A9-8577-358D-AADC-D97B7A1E9737}</Project>
+      <Name>webpdspdecode</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webpencode.vcxproj">
+      <Project>{9BC28D2A-8A77-3F57-9298-15BE4FF45586}</Project>
+      <Name>webpencode</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webputils.vcxproj">
+      <Project>{8D799C45-D24D-3344-8D5C-2ABCEFD8E4E4}</Project>
+      <Name>webputils</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\source_wx\AIStoCOT\AIS_Build\_deps\wxwidgets-build\libs\webp-build\webputilsdecode.vcxproj">
+      <Project>{3175A325-5455-33CE-A553-73C5897923A2}</Project>
+      <Name>webputilsdecode</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

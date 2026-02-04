@@ -2,7 +2,7 @@
 
 #include "BG_SocketBase.h"
 
-#include "AISModule.h"
+#include "AISParser.h"
 
 #include "COTSender.h"
 #include "bg_TakMessage.h"
@@ -11,15 +11,18 @@
 
 extern bool g_debug;
 
-using namespace AISMODULE;
+using namespace AIS_PARSER;
 
 namespace AIS2COT
 {
 
 	//forward declarations
 	void ProcessNMEAToCoT(std::string NMEA_String);
-	void SendVesselCoTUpdate(Vessel* v);
+	
 	void ProcessNMEA_AISPayload(std::string payload);
+
+	void SendVesselCoTUpdate(Vessel* v);
+
 
 
 	struct NMEA_AIS_MSG* multipart1;
@@ -52,6 +55,8 @@ namespace AIS2COT
 	}
 
 
+
+	inline AISObject* ao ProcessNMEA_AISPayload(std::string payload)
 
 	inline void ProcessNMEA_AISPayload(std::string payload)
 	{
@@ -159,8 +164,10 @@ namespace AIS2COT
 		remarks << "</remarks>";
 		CurCoTMsg.xmlDetail = remarks.str();
 
-		COTSENDER::AssembleAndSendCoT(CurCoTMsg);
+		CurCoTMsg.AssembleCoTPbufEvent();
 
+		std::string retVal = COTSENDER::SendCoTMsg(CurCoTMsg);
+		wxLogMessage(retVal.c_str());
 	}
 
 

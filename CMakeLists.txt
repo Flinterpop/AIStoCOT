@@ -42,8 +42,8 @@ set(
 	src_app/AIStoCoT.h
 	src_app/wxAISCOT_MainFrame.h
 	src_app/wxAISCOT_MainFrame.cpp
-	src_app/AISModule.h
-	src_app/AISModule.cpp
+	src_app/AISParser.h
+	src_app/AISParser.cpp
 	src_app/MyProject1CoTSender.cpp
 	src_app/MyProject1CoTSender.cpp
 	src_app/MyProject1AISBuilder.h

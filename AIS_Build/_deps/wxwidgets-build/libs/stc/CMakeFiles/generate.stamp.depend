@@ -1,0 +1,5 @@
+# CMake generation dependency list for this directory.
+C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/CMakeLists.txt
+C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/lexilla.cmake
+C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/lib/stc/scintilla.cmake
+C:/source_wx/AIStoCOT/AIS_Build/_deps/wxwidgets-src/build/cmake/source_groups.cmake

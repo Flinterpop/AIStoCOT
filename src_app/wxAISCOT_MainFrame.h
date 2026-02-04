@@ -6,7 +6,7 @@
 
 #include "ais.h"
 #include "decode_body.h"
-#include "AISModule.h"
+#include "AISParser.h"
 #include "MyProject1CoTSender.h"
 #include "MyProject1AISBuilder.h"
 
@@ -51,7 +51,7 @@ class wxAISCOT_MainFrame : public MainFrame1
 		//void ProcessNMEAPayload(std::string p);
 		//void SendVesselCoTUpdate(Vessel* v);
 
-		void SendAidToNavCoTUpdate(AISMODULE::AidToNavigation* v);
+		void SendAidToNavCoTUpdate(AIS_PARSER::AidToNavigation* v);
 
 		void BN_ClearOnButtonClick(wxCommandEvent& event) override;
 		void BN_ShowStatsOnButtonClick(wxCommandEvent& event) override;

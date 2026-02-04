@@ -7,7 +7,6 @@ namespace COTSENDER
 {
 	std::string StartCOTSender();
 	void StopCOTSender();
-
-	void AssembleAndSendCoT(bg_TakMessage CurCoTMsg);
+	std::string SendCoTMsg(bg_TakMessage CurCoTMsg);
 
 }
