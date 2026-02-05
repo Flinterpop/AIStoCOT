@@ -45,8 +45,8 @@ class MainFrame1 : public wxFrame
 	protected:
 		wxPanel* m_panel3;
 		wxButton* BN_Timer;
-		wxButton* BN_Builder;
 		wxButton* BN_ShowAISBuilder;
+		wxButton* BN_Builder;
 		wxButton* BN_Clear;
 		wxButton* BN_ShowStats;
 		wxTextCtrl* TC_AISLine;
@@ -59,8 +59,8 @@ class MainFrame1 : public wxFrame
 
 		// Virtual event handlers, override them in your derived class
 		virtual void BN_TimerOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
-		virtual void BN_BuilderOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BN_ShowAISBuilderOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void BN_BuilderOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BN_ClearOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BN_ShowStatsOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BN_NMEAToCoTOnButtonClick( wxCommandEvent& event ) { event.Skip(); }

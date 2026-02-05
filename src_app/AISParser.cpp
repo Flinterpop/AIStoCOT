@@ -362,7 +362,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string body
         retVal << "position, lng " << a18->position.lng_deg << std::endl;
         retVal << "time stamp " << a18->timestamp << std::endl;
 
-        wxLogMessage(retVal.str());
+        wxLogMessage(retVal.str().c_str());
 
         AIS_PARSER::Vessel* v = AIS_PARSER::FindVesselByMMSI(a18->mmsi);
         if (nullptr == v)

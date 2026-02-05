@@ -1,12 +1,14 @@
 #include "MyProject1AISBuilder.h"
 
+
 #include "ais.h"
 
-MyProject1AISBuilder::MyProject1AISBuilder( wxWindow* parent )
-:
-AISBuilder( parent )
-{
 
+#include "wxAISCOT_MainFrame.h"
+
+MyProject1AISBuilder::MyProject1AISBuilder( wxWindow* parent ) : AISBuilder( parent )
+{
+    MyParent = parent;
 }
 
 
@@ -53,7 +55,8 @@ void MyProject1AISBuilder::BN_BuildAIS123OnButtonClick( wxCommandEvent& event )
 
 void MyProject1AISBuilder::BN_SendAIS123OnButtonClick( wxCommandEvent& event )
 {
-	
+	std::string nmea = TC_NMEA->GetValue().utf8_string();
+    ((wxAISCOT_MainFrame*)MyParent)->MoveNMEA(nmea);
 
 
 
@@ -98,5 +101,8 @@ void MyProject1AISBuilder::BN_BuildAIS5OnButtonClick(wxCommandEvent& event)
 
 void MyProject1AISBuilder::BN_SendAIS5OnButtonClick(wxCommandEvent& event)
 {
-
+    std::string nmea = TC_AIS5->GetValue().utf8_string();
+    ((wxAISCOT_MainFrame*)MyParent)->MoveNMEA(nmea);
+    
+    
 }

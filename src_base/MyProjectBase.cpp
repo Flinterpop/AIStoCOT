@@ -26,11 +26,11 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	BN_Timer = new wxButton( m_panel3, wxID_ANY, _("Timer"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer14->Add( BN_Timer, 0, wxALL, 5 );
 
-	BN_Builder = new wxButton( m_panel3, wxID_ANY, _("Show CoT Builder"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer14->Add( BN_Builder, 0, wxALL, 5 );
-
 	BN_ShowAISBuilder = new wxButton( m_panel3, wxID_ANY, _("Show AIS Builder"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer14->Add( BN_ShowAISBuilder, 0, wxALL, 5 );
+
+	BN_Builder = new wxButton( m_panel3, wxID_ANY, _("Show CoT Builder"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer14->Add( BN_Builder, 0, wxALL, 5 );
 
 	BN_Clear = new wxButton( m_panel3, wxID_ANY, _("Clear Stats"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer14->Add( BN_Clear, 0, wxALL, 5 );
@@ -132,8 +132,8 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	// Connect Events
 	BN_Timer->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_TimerOnButtonClick ), NULL, this );
-	BN_Builder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_BuilderOnButtonClick ), NULL, this );
 	BN_ShowAISBuilder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ShowAISBuilderOnButtonClick ), NULL, this );
+	BN_Builder->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_BuilderOnButtonClick ), NULL, this );
 	BN_Clear->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ClearOnButtonClick ), NULL, this );
 	BN_ShowStats->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_ShowStatsOnButtonClick ), NULL, this );
 	BN_NMEAToCoT->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame1::BN_NMEAToCoTOnButtonClick ), NULL, this );
@@ -723,7 +723,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText32->Wrap( -1 );
 	fgSizer10->Add( m_staticText32, 0, wxALL, 5 );
 
-	wxString CB_NavStatusChoices[] = { _("AIS_NV_STATUS_UNDER_WAY_USING_ENGINE"), _("AIS_NV_STATUS_AT_ANCHOR"), _("AIS_NV_STATUS_NOT_UNDER_COMMAND"), _("AIS_NV_STATUS_RESTRICTED_MANEUVERABILITY"), _("AIS_NV_STATUS_CONSTRAINED_BY_DRAUGHT"), _("AIS_NV_STATUS_MOORED"), _("AIS_NV_STATUS_AGROUND"), _("AIS_NV_STATUS_ENGAGED_IN_FISHING"), _("AIS_NV_STATUS_UNDER_WAY_SAILING"), _("AIS_NV_STATUS_RESERVED1"), _("AIS_NV_STATUS_RESERVED2"), _("AIS_NV_STATUS_TOWING_ASTERN"), _("AIS_NV_STATUS_PUSHING_AHEAD_OR_TOWING_ALONGSIDE"), _("AIS_NV_STATUS_RESERVED3"), _("AIS_NV_STATUS_SART"), _("AIS_NV_STATUS_UNDEFINED") };
+	wxString CB_NavStatusChoices[] = { _("UNDER_WAY_USING_ENGINE"), _("AT_ANCHOR"), _("NOT_UNDER_COMMAND"), _("RESTRICTED_MANEUVERABILITY"), _("CONSTRAINED_BY_DRAUGHT"), _("MOORED"), _("AGROUND"), _("ENGAGED_IN_FISHING"), _("UNDER_WAY_SAILING"), _("RESERVED1"), _("RESERVED2"), _("TOWING_ASTERN"), _("PUSHING_AHEAD_OR_TOWING_ALONGSIDE"), _("RESERVED3"), _("SART"), _("UNDEFINED") };
 	int CB_NavStatusNChoices = sizeof( CB_NavStatusChoices ) / sizeof( wxString );
 	CB_NavStatus = new wxChoice( sbSizer15->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, CB_NavStatusNChoices, CB_NavStatusChoices, 0 );
 	CB_NavStatus->SetSelection( 0 );
@@ -774,7 +774,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText36->Wrap( -1 );
 	fgSizer10->Add( m_staticText36, 0, wxALL, 5 );
 
-	SC_Latitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("45.5"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -90, 90, 0, 1 );
+	SC_Latitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("44.6"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -90, 90, 44.600000, 1 );
 	SC_Latitude->SetDigits( 4 );
 	fgSizer10->Add( SC_Latitude, 0, wxALL|wxEXPAND, 5 );
 
@@ -782,7 +782,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText37->Wrap( -1 );
 	fgSizer10->Add( m_staticText37, 0, wxALL, 5 );
 
-	SC_Longitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("-75.5"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -180, 180, 0, 1 );
+	SC_Longitude = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxT("-62.5"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, -180, 180, -62.500000, 1 );
 	SC_Longitude->SetDigits( 4 );
 	fgSizer10->Add( SC_Longitude, 0, wxALL|wxEXPAND, 5 );
 
@@ -792,7 +792,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	fgSizer10->Add( m_staticText38, 0, wxALL, 5 );
 
-	SC_COG = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 45, 360, 0, 1 );
+	SC_COG = new wxSpinCtrlDouble( sbSizer15->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 45, 360, 225.000000, 1 );
 	SC_COG->SetDigits( 1 );
 	fgSizer10->Add( SC_COG, 0, wxALL, 5 );
 
@@ -800,7 +800,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText39->Wrap( -1 );
 	fgSizer10->Add( m_staticText39, 0, wxALL, 5 );
 
-	SC_Heading = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxT("44"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 360, 0 );
+	SC_Heading = new wxSpinCtrl( sbSizer15->GetStaticBox(), wxID_ANY, wxT("223"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 360, 225 );
 	fgSizer10->Add( SC_Heading, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText40 = new wxStaticText( sbSizer15->GetStaticBox(), wxID_ANY, _("Time Stamp"), wxDefaultPosition, wxDefaultSize, 0 );

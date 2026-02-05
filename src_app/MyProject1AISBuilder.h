@@ -40,6 +40,8 @@ class MyProject1AISBuilder : public AISBuilder
 
 
 
+		wxWindow* MyParent{};
+
 	ais1 m_ais1;
 	ais5 m_ais5;
 

@@ -249,7 +249,7 @@
                       <property name="gripper">0</property>
                       <property name="hidden">0</property>
                       <property name="id">wxID_ANY</property>
-                      <property name="label">Show CoT Builder</property>
+                      <property name="label">Show AIS Builder</property>
                       <property name="margins"></property>
                       <property name="markup">0</property>
                       <property name="max_size"></property>
@@ -259,7 +259,7 @@
                       <property name="minimize_button">0</property>
                       <property name="minimum_size"></property>
                       <property name="moveable">1</property>
-                      <property name="name">BN_Builder</property>
+                      <property name="name">BN_ShowAISBuilder</property>
                       <property name="pane_border">1</property>
                       <property name="pane_position"></property>
                       <property name="pane_size"></property>
@@ -282,7 +282,7 @@
                       <property name="window_extra_style"></property>
                       <property name="window_name"></property>
                       <property name="window_style"></property>
-                      <event name="OnButtonClick">BN_BuilderOnButtonClick</event>
+                      <event name="OnButtonClick">BN_ShowAISBuilderOnButtonClick</event>
                     </object>
                   </object>
                   <object class="sizeritem" expanded="false">
@@ -324,7 +324,7 @@
                       <property name="gripper">0</property>
                       <property name="hidden">0</property>
                       <property name="id">wxID_ANY</property>
-                      <property name="label">Show AIS Builder</property>
+                      <property name="label">Show CoT Builder</property>
                       <property name="margins"></property>
                       <property name="markup">0</property>
                       <property name="max_size"></property>
@@ -334,7 +334,7 @@
                       <property name="minimize_button">0</property>
                       <property name="minimum_size"></property>
                       <property name="moveable">1</property>
-                      <property name="name">BN_ShowAISBuilder</property>
+                      <property name="name">BN_Builder</property>
                       <property name="pane_border">1</property>
                       <property name="pane_position"></property>
                       <property name="pane_size"></property>
@@ -357,7 +357,7 @@
                       <property name="window_extra_style"></property>
                       <property name="window_name"></property>
                       <property name="window_style"></property>
-                      <event name="OnButtonClick">BN_ShowAISBuilderOnButtonClick</event>
+                      <event name="OnButtonClick">BN_BuilderOnButtonClick</event>
                     </object>
                   </object>
                   <object class="sizeritem" expanded="false">
@@ -6468,7 +6468,7 @@
         </object>
       </object>
     </object>
-    <object class="Frame" expanded="false">
+    <object class="Frame" expanded="true">
       <property name="aui_managed">0</property>
       <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
       <property name="bg"></property>
@@ -6497,7 +6497,7 @@
       <property name="window_name"></property>
       <property name="window_style">wxTAB_TRAVERSAL</property>
       <property name="xrc_skip_sizer">1</property>
-      <object class="wxBoxSizer" expanded="false">
+      <object class="wxBoxSizer" expanded="true">
         <property name="minimum_size"></property>
         <property name="name">bSizer16</property>
         <property name="orient">wxVERTICAL</property>
@@ -7153,7 +7153,7 @@
                         <property name="caption"></property>
                         <property name="caption_visible">1</property>
                         <property name="center_pane">0</property>
-                        <property name="choices">&quot;AIS_NV_STATUS_UNDER_WAY_USING_ENGINE&quot; &quot;AIS_NV_STATUS_AT_ANCHOR&quot; &quot;AIS_NV_STATUS_NOT_UNDER_COMMAND&quot; &quot;AIS_NV_STATUS_RESTRICTED_MANEUVERABILITY&quot; &quot;AIS_NV_STATUS_CONSTRAINED_BY_DRAUGHT&quot; &quot;AIS_NV_STATUS_MOORED&quot; &quot;AIS_NV_STATUS_AGROUND&quot; &quot;AIS_NV_STATUS_ENGAGED_IN_FISHING&quot; &quot;AIS_NV_STATUS_UNDER_WAY_SAILING&quot; &quot;AIS_NV_STATUS_RESERVED1&quot; &quot;AIS_NV_STATUS_RESERVED2&quot; &quot;AIS_NV_STATUS_TOWING_ASTERN&quot; &quot;AIS_NV_STATUS_PUSHING_AHEAD_OR_TOWING_ALONGSIDE&quot; &quot;AIS_NV_STATUS_RESERVED3&quot; &quot;AIS_NV_STATUS_SART&quot; &quot;AIS_NV_STATUS_UNDEFINED&quot;</property>
+                        <property name="choices">&quot;UNDER_WAY_USING_ENGINE&quot; &quot;AT_ANCHOR&quot; &quot;NOT_UNDER_COMMAND&quot; &quot;RESTRICTED_MANEUVERABILITY&quot; &quot;CONSTRAINED_BY_DRAUGHT&quot; &quot;MOORED&quot; &quot;AGROUND&quot; &quot;ENGAGED_IN_FISHING&quot; &quot;UNDER_WAY_SAILING&quot; &quot;RESERVED1&quot; &quot;RESERVED2&quot; &quot;TOWING_ASTERN&quot; &quot;PUSHING_AHEAD_OR_TOWING_ALONGSIDE&quot; &quot;RESERVED3&quot; &quot;SART&quot; &quot;UNDEFINED&quot;</property>
                         <property name="close_button">1</property>
                         <property name="context_help"></property>
                         <property name="context_menu">1</property>
@@ -7752,7 +7752,7 @@
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
                         <property name="inc">1</property>
-                        <property name="initial">0</property>
+                        <property name="initial">44.600000</property>
                         <property name="max">90</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
@@ -7776,7 +7776,7 @@
                         <property name="subclass">; ; forward_declare</property>
                         <property name="toolbar_pane">0</property>
                         <property name="tooltip"></property>
-                        <property name="value">45.5</property>
+                        <property name="value">44.6</property>
                         <property name="window_extra_style"></property>
                         <property name="window_name"></property>
                         <property name="window_style"></property>
@@ -7879,7 +7879,7 @@
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
                         <property name="inc">1</property>
-                        <property name="initial">0</property>
+                        <property name="initial">-62.500000</property>
                         <property name="max">180</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
@@ -7903,7 +7903,7 @@
                         <property name="subclass">; ; forward_declare</property>
                         <property name="toolbar_pane">0</property>
                         <property name="tooltip"></property>
-                        <property name="value">-75.5</property>
+                        <property name="value">-62.5</property>
                         <property name="window_extra_style"></property>
                         <property name="window_name"></property>
                         <property name="window_style"></property>
@@ -8006,7 +8006,7 @@
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
                         <property name="inc">1</property>
-                        <property name="initial">0</property>
+                        <property name="initial">225.000000</property>
                         <property name="max">360</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
@@ -8131,7 +8131,7 @@
                         <property name="gripper">0</property>
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
-                        <property name="initial">0</property>
+                        <property name="initial">225</property>
                         <property name="max">360</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
@@ -8155,7 +8155,7 @@
                         <property name="subclass">; ; forward_declare</property>
                         <property name="toolbar_pane">0</property>
                         <property name="tooltip"></property>
-                        <property name="value">44</property>
+                        <property name="value">223</property>
                         <property name="window_extra_style"></property>
                         <property name="window_name"></property>
                         <property name="window_style"></property>

@@ -112,19 +112,19 @@ void wxAISCOT_MainFrame::BN_ClearOnButtonClick(wxCommandEvent& event)
 
 void wxAISCOT_MainFrame::BN_ShowStatsOnButtonClick(wxCommandEvent& event) 
 {
-	wxLogMessage(std::format("AIS1: {}", MsgCounts[1]));
-	wxLogMessage(std::format("AIS2: {}", MsgCounts[2]));
-	wxLogMessage(std::format("AIS3: {}", MsgCounts[3]));
-	wxLogMessage(std::format("AIS5: {}", MsgCounts[5]));
-	wxLogMessage(std::format("AIS6: {}", MsgCounts[6]));
-	wxLogMessage(std::format("AIS18: {}", MsgCounts[18]));
-	wxLogMessage(std::format("AIS24: {}", MsgCounts[24]));
+	wxLogMessage(std::format("AIS1: {}", MsgCounts[1]).c_str());
+	wxLogMessage(std::format("AIS2: {}", MsgCounts[2]).c_str());
+	wxLogMessage(std::format("AIS3: {}", MsgCounts[3]).c_str());
+	wxLogMessage(std::format("AIS5: {}", MsgCounts[5]).c_str());
+	wxLogMessage(std::format("AIS6: {}", MsgCounts[6]).c_str());
+	wxLogMessage(std::format("AIS18: {}", MsgCounts[18]).c_str());
+	wxLogMessage(std::format("AIS24: {}", MsgCounts[24]).c_str());
 }
 
 
 void wxAISCOT_MainFrame::m_timer1OnTimer(wxTimerEvent& event)
 {
-	wxLogMessage(std::format("Num Vessels: {}", VesselList.size()));
+	wxLogMessage(std::format("Num Vessels: {}", VesselList.size()).c_str());
 
 	TC_Debug->Clear();
 	for (int x = 0; x < VesselList.size(); x++)

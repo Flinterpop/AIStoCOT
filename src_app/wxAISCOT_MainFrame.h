@@ -19,6 +19,13 @@ class wxAISCOT_MainFrame : public MainFrame1
 {
 	public:
 
+		void MoveNMEA(std::string nmea)
+		{
+			TC_AISLine->SetValue(nmea);
+		}
+
+
+
 		bool debug = false;
 		wxAISCOT_MainFrame( wxWindow* parent );
 		~wxAISCOT_MainFrame();

@@ -29,7 +29,7 @@ namespace AIS2COT
 	inline void ProcessNMEAToCoT(std::string NMEA_String)
 	{
 		struct NMEA_AIS_MSG* nmeaMsg = new NMEA_AIS_MSG(NMEA_String);
-		if (g_debug) wxLogMessage(nmeaMsg->print());
+		if (g_debug) wxLogMessage(nmeaMsg->print().c_str());
 
 		if (1 != nmeaMsg->CountOfFragments)
 		{

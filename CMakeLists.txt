@@ -20,10 +20,17 @@ add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
 include(FetchContent)
 
 FetchContent_Declare(
-   wxWidgets
-   GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
-   GIT_SHALLOW ON
+  wxWidgets
+  GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+  GIT_TAG v3.2.9 # Or branch/commit
 )
+
+#FetchContent_Declare(
+#   wxWidgets
+#   GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+#   GIT_SHALLOW ON
+#)
+
 FetchContent_MakeAvailable(wxWidgets)
 
 include_directories(${CPP_INCLUDE_DIRS}) #include file folder
