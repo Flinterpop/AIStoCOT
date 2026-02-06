@@ -93,7 +93,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_grid1 = new wxGrid( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	m_grid1->CreateGrid( 100, 9 );
+	m_grid1->CreateGrid( 300, 10 );
 	m_grid1->EnableEditing( true );
 	m_grid1->EnableGridLines( true );
 	m_grid1->EnableDragGridSize( false );

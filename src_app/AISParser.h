@@ -12,6 +12,7 @@
 using namespace libais;
 
 extern const char* NAV_STATUS[];
+extern const char* NAVAID_TYPE[];
 extern int MsgCounts[27];
 
 
@@ -198,25 +199,6 @@ extern int MsgCounts[27];
 
         };
 
-        class AidToNavigation : public AISObject
-        {
-            AidToNavigation(Ais6* a) : AISObject(a->message_id, a->mmsi)
-            {
-                asi6 = a;
-            };
-
-            Ais6* asi6{};
-
-            std::string LogMe() override
-            {
-                std::stringstream retVal{};
-                retVal << "AIS 6 Ait To Nav parse: " << std::endl;
-                retVal << "MMSI " << mmsi << std::endl;
-                return retVal.str();
-            }
-
-        };
-
         class Vessel : public AISObject
         {
         public:
@@ -244,6 +226,12 @@ extern int MsgCounts[27];
                 isValidAIS24 = true;
             };
 
+            Vessel(Ais21* a) : AISObject(a->message_id, a->mmsi)
+            {
+                ais21 = a;
+                isValidAIS21 = true;
+            };
+
 
 
             Ais1_2_3* a123{};   //Class A Position Reports
@@ -252,13 +240,17 @@ extern int MsgCounts[27];
             Ais18* a18{};       //Class A Position Reports
             Ais24* ais24{};       //Class A Ship Data
 
+            Ais21* ais21{};
 
+
+            std::string CountryFromMIDCode{};
             bool isValidAIS123{ false };
             bool isValidAIS5{ false };
 
             bool isValidAIS18{ false };
             bool isValidAIS24{ false };
 
+            bool isValidAIS21{ false }; //Aid To Nav
 
             //AIS 1,2,3, 18
 
@@ -267,7 +259,7 @@ extern int MsgCounts[27];
             double lat_deg{};
             double lng_deg{};
             float cog{};  // Degrees.
-            float sog{};
+            float sog{};  //knots
             int true_heading{};
             int timestamp{};
             int special_manoeuvre{};
@@ -303,6 +295,16 @@ extern int MsgCounts[27];
             //AIS 24
             int Mothership_MMSI{};
 
+            //AIS 21
+            int NavType{};
+            int EPFD{};
+            bool OnOffInd{};
+            int AtoNRegApp{};
+            bool virtualflag{};
+            int ModeInd{};
+            std::string extendedName{};
+
+
             std::string LogMe() override
             {
                 std::stringstream retVal{};
@@ -327,6 +329,15 @@ extern int MsgCounts[27];
                     retVal << "time stamp " << timestamp << std::endl;
                 }
 
+                if (nullptr != ais21)
+                {
+
+                    retVal << "navaid Type " << NAVAID_TYPE[NavType] << std::endl;
+                    retVal << "position, lat " << position.lat_deg << std::endl;
+                    retVal << "position, lng " << position.lng_deg << std::endl;
+                    retVal << "time stamp " << timestamp << std::endl;
+                }
+
                 return retVal.str();
 
 
@@ -346,8 +357,11 @@ extern int MsgCounts[27];
         };
 
 
-
         void BuildKnownVesselList();
+
+        bool LoadMIDTable();
+        std::string FindCountryFromMIDCode(int mid);
+
         KnownVessel* FindKnownVesselByMMSI(int mmsi);
         Vessel* FindVesselByMMSI(int mmsi);
         AISObject* ParsePayloadString(std::string body);
@@ -355,6 +369,8 @@ extern int MsgCounts[27];
         AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
         AISObject* ParseASI24IdentPayload(std::string body, int fillbits);
+
+        AISObject* ParseASI21AtoNPayload(std::string body, int fillbits);
 
 
     }

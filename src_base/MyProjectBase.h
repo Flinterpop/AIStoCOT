@@ -70,7 +70,7 @@ class MainFrame1 : public wxFrame
 
 	public:
 
-		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxAIStoNMEA"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1600,1200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxAIStoNMEA"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1650,1200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~MainFrame1();
 

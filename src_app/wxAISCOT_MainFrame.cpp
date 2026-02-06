@@ -1,6 +1,10 @@
 
 
 #include <format>
+#include <filesystem>
+#include <string>
+#include <map>
+
 
 #include "wxAISCOT_MainFrame.h"
 
@@ -21,6 +25,7 @@ wxLogWindow* logWin{};
 extern int MsgCounts[27];
 
 extern std::vector<Vessel*> VesselList;
+extern std::map <int, std::string> MIDList;
 const int AGEOUT = 20;
 const int MaxVesselListSIze = 150;
 
@@ -35,6 +40,12 @@ wxAISCOT_MainFrame::wxAISCOT_MainFrame( wxWindow* parent ) : MainFrame1( parent 
 
 	initialise_winsock();
 	getNetworkAdapterInfo();
+
+	std::filesystem::path currentDir = std::filesystem::current_path();
+	wxLogMessage("Working folder: %s", currentDir.c_str());
+
+	AIS_PARSER::LoadMIDTable();
+	AIS_PARSER::BuildKnownVesselList();
 
 	std::string retVal = COTSENDER::StartCOTSender();
 	wxLogMessage(retVal.c_str());
@@ -91,6 +102,10 @@ wxAISCOT_MainFrame::wxAISCOT_MainFrame( wxWindow* parent ) : MainFrame1( parent 
 
 	m_grid1->SetColLabelValue(8, "Msg ID");
 	m_grid1->SetColSize(8, 100);
+
+
+	m_grid1->SetColLabelValue(9, "Country");
+	m_grid1->SetColSize(9, 200);
 }
 
 
@@ -107,18 +122,24 @@ void wxAISCOT_MainFrame::BN_ClearOnButtonClick(wxCommandEvent& event)
 	for (int x = 0; x < 27; x++) MsgCounts[x] = 0;
 	VesselList.clear();
 	UpdateGrid();
+	
+	//std::string c = AIS_PARSER::Country(316);
+	//wxLogMessage("c is %d then country is %s", 316, c.c_str());
+
 }
 
 
 void wxAISCOT_MainFrame::BN_ShowStatsOnButtonClick(wxCommandEvent& event) 
 {
-	wxLogMessage(std::format("AIS1: {}", MsgCounts[1]).c_str());
-	wxLogMessage(std::format("AIS2: {}", MsgCounts[2]).c_str());
-	wxLogMessage(std::format("AIS3: {}", MsgCounts[3]).c_str());
-	wxLogMessage(std::format("AIS5: {}", MsgCounts[5]).c_str());
-	wxLogMessage(std::format("AIS6: {}", MsgCounts[6]).c_str());
-	wxLogMessage(std::format("AIS18: {}", MsgCounts[18]).c_str());
-	wxLogMessage(std::format("AIS24: {}", MsgCounts[24]).c_str());
+	wxLogMessage(std::format("AIS1: {} Class A Pos Report", MsgCounts[1]).c_str());
+	wxLogMessage(std::format("AIS2: {} Class A Pos Report", MsgCounts[2]).c_str());
+	wxLogMessage(std::format("AIS3: {} Class A Pos Report", MsgCounts[3]).c_str());
+	wxLogMessage(std::format("AIS5: {} Ship static and voyage related data", MsgCounts[5]).c_str());
+	wxLogMessage(std::format("AIS9: {} Standard SAR aircraft position report", MsgCounts[9]).c_str());
+	wxLogMessage(std::format("AIS18: {} Class B Position Report", MsgCounts[18]).c_str());
+	wxLogMessage(std::format("AIS24: {} Class B/CS Static Data Report - Part A", MsgCounts[24]).c_str());
+	wxLogMessage(std::format("AIS21: {} Aids To Navigation Report", MsgCounts[21]).c_str());
+	wxLogMessage("Num Countries in MID table: %d" , (int)MIDList.size());
 }
 
 
@@ -152,21 +173,31 @@ void wxAISCOT_MainFrame::UpdateGrid()
 		TC_Debug->AppendText(v->LogMe());
 
 		m_grid1->SetCellValue(row, 0, std::format("{}", v->mmsi).c_str());
+		
 		m_grid1->SetCellValue(row, 1, std::format("{}", v->callsign).c_str());
+
+
 		m_grid1->SetCellValue(row, 2, std::format("{}", v->name).c_str());
 		m_grid1->SetCellValue(row, 3, std::format("{:7.4f}", v->lat_deg));
 
 		m_grid1->SetCellValue(row, 4, std::format("{:8.4f}", v->lng_deg));
 		m_grid1->SetCellValue(row, 5, std::format("{}", v->true_heading).c_str());
-		m_grid1->SetCellValue(row, 6, std::format("{}", NAV_STATUS[v->nav_status]).c_str());
+		
+		if (21 == v->AISMsgNumber)
+		{
+			m_grid1->SetCellValue(row, 6, std::format("{}", NAVAID_TYPE[v->NavType]).c_str());
+		}
+		else 	m_grid1->SetCellValue(row, 6, std::format("{}", NAV_STATUS[v->nav_status]).c_str());
+		
 		m_grid1->SetCellValue(row, 7, std::format("{}", v->age));
 		m_grid1->SetCellValue(row, 8, std::format("{}", v->AISMsgNumber ));
+		m_grid1->SetCellValue(row, 9, std::format("{}", v->CountryFromMIDCode));
 		++row;
 	}
 }
 
 
-void wxAISCOT_MainFrame::SendAidToNavCoTUpdate(AidToNavigation* a2n)
+void wxAISCOT_MainFrame::SendAidToNavCoTUpdate(Vessel* a2n)
 {
 
 
@@ -207,7 +238,7 @@ void wxAISCOT_MainFrame::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		while (std::getline(myfile, line))
 		{
 			AIS2COT::ProcessNMEAToCoT(line);
-			if (++counter > 100) break;
+			if (++counter > 200) break;
 		}
 		myfile.close();
 	}
