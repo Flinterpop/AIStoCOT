@@ -220,21 +220,36 @@ void wxAISCOT_MainFrame::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 	for (int i = 0; i < t; i++)
 	{
 		auto s = TC_AISLine->GetLineText(i);
-		//AISObject* ao = ParsePayloadString(payload);
 
+		//NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
 
-		NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
+		std::string payload = NMEA_AIS2COT::NMEAtoAISPayload(s.utf8_string());
+		if (payload.size()<1) return;
 
-		//alternate structure to improve modularization
-		/*
-		NMEA_AIS_MSG * NMEA_Msg = NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
-		Vessel * v = ProcessNMEA_AISPayload(NMEA_Msg->payload);
-		SendVesselCoTUpdate(v);
-		or 
-		SendAidToNavCoTUpdate(a2n);
-		*/
+		AISObject* ao = AIS_PARSER::ParsePayloadString(payload);
+		if (nullptr == ao) return;
 
+		switch (ao->AISMsgNumber)
+		{
+			case 1:
+			case 2:
+			case 3:
+			case 18:
+			case 24:  //Type 24: Class B Info
+			{
+				Vessel* v = (Vessel*)ao;
+				NMEA_AIS2COT::SendVesselCoTUpdate(v);
+				break;
+			}
+			//case 5: never send a AIS5 by itseld - it has no position info
 
+			case 21:  //Type 21: Aid-to-Navigation Report
+			{
+				Vessel* a2n = (Vessel*)ao;
+				NMEA_AIS2COT::SendAidToNavCoTUpdate(a2n);
+				break;
+			}
+		}
 	}
 	UpdateGrid();
 }
@@ -254,7 +269,7 @@ void wxAISCOT_MainFrame::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		int counter = 0;
 		while (std::getline(myfile, line))
 		{
-			NMEA_AIS2COT::ProcessNMEAToCoT(line);
+			NMEA_AIS2COT::NMEAtoAISPayload(line);
 			if (++counter > 200) break;
 		}
 		myfile.close();

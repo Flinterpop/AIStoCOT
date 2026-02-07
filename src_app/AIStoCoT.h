@@ -19,15 +19,14 @@ using namespace AIS_PARSER;
 namespace NMEA_AIS2COT
 {
 	//forward declarations
-	void ProcessNMEAToCoT(std::string NMEA_String);
-	void ProcessNMEA_AISPayload(std::string payload);
+std::string NMEAtoAISPayload(std::string NMEA_String);
+	void __ProcessNMEA_AISPayload(std::string payload);
 	void SendVesselCoTUpdate(Vessel* v);
 	void SendAidToNavCoTUpdate(Vessel* v);
 
 
-
-	struct NMEA_AIS_MSG* multipart1;
-	inline void ProcessNMEAToCoT(std::string NMEA_String)
+	struct NMEA_AIS_MSG* multipart1;  //convert to inside fucntion as static
+	inline std::string NMEAtoAISPayload(std::string NMEA_String)
 	{
 		struct NMEA_AIS_MSG* nmeaMsg = new NMEA_AIS_MSG(NMEA_String);
 		if (g_debug) wxLogMessage(nmeaMsg->print().c_str());
@@ -38,6 +37,7 @@ namespace NMEA_AIS2COT
 			{
 				multipart1 = nmeaMsg;
 				wxLogMessage("multipart Frag 1");
+				return "";
 			}
 
 			else if (2 == nmeaMsg->FragmentNumber)  //standard says that multipart messages must arrive sequentially
@@ -46,24 +46,23 @@ namespace NMEA_AIS2COT
 				if (nullptr == multipart1)
 				{
 					wxLogMessage("multipart Frag 2 but no first part. Discarding");
-					return; //if Rx a second part but don't have a first part then discard the second part
+					return ""; //if Rx a second part but don't have a first part then discard the second part
 				}
 				nmeaMsg->payload = multipart1->payload + nmeaMsg->payload; //concatenate the payloads
-				
-				ProcessNMEA_AISPayload(nmeaMsg->payload);
+				return nmeaMsg->payload;
 			}
 		}
 		else
 		{
 			multipart1 = nullptr; //standard says that multipart messages must arrive sequentially, so delete the first part if a second first part (or solo) is Rx before the awaited second part
 			wxLogMessage("Non multipart");
-			ProcessNMEA_AISPayload(nmeaMsg->payload);
+			return nmeaMsg->payload;
 		}
 	}
 
 
 
-	inline void ProcessNMEA_AISPayload(std::string payload)
+	inline void __ProcessNMEA_AISPayload(std::string payload)
 	{
 		AISObject* ao = ParsePayloadString(payload);
 		if (nullptr == ao) return;
