@@ -224,6 +224,17 @@ void wxAISCOT_MainFrame::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 
 
 		NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
+
+		//alternate structure to improve modularization
+		/*
+		NMEA_AIS_MSG * NMEA_Msg = NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
+		Vessel * v = ProcessNMEA_AISPayload(NMEA_Msg->payload);
+		SendVesselCoTUpdate(v);
+		or 
+		SendAidToNavCoTUpdate(a2n);
+		*/
+
+
 	}
 	UpdateGrid();
 }
