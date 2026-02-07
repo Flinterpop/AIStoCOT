@@ -1,29 +1,27 @@
 #pragma once
 
+#include "wx/log.h"
+
+
 #include "BG_SocketBase.h"
 
 #include "AISParser.h"
 
-#include "COTSender.h"
 #include "bg_TakMessage.h"
+#include "COTSender.h"
 
-#include "wx/log.h"
 
 extern bool g_debug;
 extern const char* NAVAID_TYPES[];
 
 using namespace AIS_PARSER;
 
-namespace AIS2COT
+namespace NMEA_AIS2COT
 {
-
 	//forward declarations
 	void ProcessNMEAToCoT(std::string NMEA_String);
-	
 	void ProcessNMEA_AISPayload(std::string payload);
-
 	void SendVesselCoTUpdate(Vessel* v);
-
 	void SendAidToNavCoTUpdate(Vessel* v);
 
 
@@ -42,16 +40,22 @@ namespace AIS2COT
 				wxLogMessage("multipart Frag 1");
 			}
 
-			else if (2 == nmeaMsg->FragmentNumber)
+			else if (2 == nmeaMsg->FragmentNumber)  //standard says that multipart messages must arrive sequentially
 			{
+				wxLogMessage("multipart Frag 2"); 
+				if (nullptr == multipart1)
+				{
+					wxLogMessage("multipart Frag 2 but no first part. Discarding");
+					return; //if Rx a second part but don't have a first part then discard the second part
+				}
 				nmeaMsg->payload = multipart1->payload + nmeaMsg->payload; //concatenate the payloads
-				wxLogMessage("multipart Frag 2");
+				
 				ProcessNMEA_AISPayload(nmeaMsg->payload);
 			}
 		}
 		else
 		{
-			multipart1 = nullptr;
+			multipart1 = nullptr; //standard says that multipart messages must arrive sequentially, so delete the first part if a second first part (or solo) is Rx before the awaited second part
 			wxLogMessage("Non multipart");
 			ProcessNMEA_AISPayload(nmeaMsg->payload);
 		}
@@ -59,53 +63,32 @@ namespace AIS2COT
 
 
 
-	//inline AISObject* ao ProcessNMEA_AISPayload(std::string payload)
-
 	inline void ProcessNMEA_AISPayload(std::string payload)
 	{
 		AISObject* ao = ParsePayloadString(payload);
-
 		if (nullptr == ao) return;
-
 		switch (ao->AISMsgNumber)
 		{
 		case 1:
-		case 2:
-		case 3:
-		{
-			Vessel* v = (Vessel*)ao;
-			SendVesselCoTUpdate(v);
-			break;
-		}
-		case 5:
-		{
-			Vessel* v = (Vessel*)ao;
-			break;
-		}
-		case 18:
-		{
-			Vessel* v = (Vessel*)ao;
-			SendVesselCoTUpdate(v);
-			break;
-		}
-		case 21:  //Type 21: Aid-to-Navigation Report
-		{
-			Vessel* a2n = (Vessel*)ao;
-			SendAidToNavCoTUpdate(a2n);
-			break;
-		}
-		case 24:  //Type 24: Class B Info
-		{
-			Vessel* v = (Vessel*)ao;
-			SendVesselCoTUpdate(v);
-			break;
-		}
-		}
+			case 2:
+			case 3:
+			case 18:
+			case 24:  //Type 24: Class B Info
+			{
+				Vessel* v = (Vessel*)ao;
+				SendVesselCoTUpdate(v);
+				break;
+			}
+			//case 5: never send a AIS5 by itseld - it has no position info
 
-		//UpdateGrid();
+			case 21:  //Type 21: Aid-to-Navigation Report
+			{
+				Vessel* a2n = (Vessel*)ao;
+				SendAidToNavCoTUpdate(a2n);
+				break;
+			}
+		}
 	}
-
-
 
 
 	inline void SendVesselCoTUpdate(Vessel* v)
@@ -169,8 +152,19 @@ namespace AIS2COT
 			else CurCoTMsg.callsign = std::format("MSSI-{}", v->mmsi);
 		}
 
-
-		CurCoTMsg.msg_type = std::string("a-f-S-X-M");
+		
+		KnownVessel *kv = AIS_PARSER::FindKnownVesselByMMSI(v->mmsi);
+		if (nullptr != kv)
+		{
+			CurCoTMsg.msg_type = kv->symbol;
+			CurCoTMsg.callsign = kv->callsign;
+		}
+		else
+		{
+			char hostility = GetHostilityFrom(v->mmsi);
+			CurCoTMsg.msg_type = std::format("a-{}-S-X-M",hostility);
+		}
+		
 
 		CurCoTMsg.includeDetail = true;
 		std::stringstream remarks;
@@ -192,11 +186,9 @@ namespace AIS2COT
 
 	inline void SendAidToNavCoTUpdate(Vessel * v)
 	{
-		//Class A								Class B
-		if ((false == v->isValidAIS123) && (false == v->isValidAIS18) && (false == v->isValidAIS21)) return;
+		if (false == v->isValidAIS21) return;
 
-
-		if ((0 == v->lat_deg) || (0 == v->lng_deg)) return;  //Do noy send COT with invalid positions
+		if ((0 == v->lat_deg) || (0 == v->lng_deg)) return;  //Do not send COT with invalid positions
 
 		bg_TakMessage CurCoTMsg;
 		CurCoTMsg.tm_validTimeInSeconds = 86400; //one day

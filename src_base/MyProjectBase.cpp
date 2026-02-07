@@ -93,7 +93,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_grid1 = new wxGrid( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	m_grid1->CreateGrid( 300, 10 );
+	m_grid1->CreateGrid( 300, 11 );
 	m_grid1->EnableEditing( true );
 	m_grid1->EnableGridLines( true );
 	m_grid1->EnableDragGridSize( false );
@@ -687,7 +687,7 @@ AISBuilder::AISBuilder( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText31->Wrap( -1 );
 	fgSizer13->Add( m_staticText31, 0, wxALL, 5 );
 
-	SC_MMSI = new wxSpinCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxT("265547250"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 999999999, 316130000 );
+	SC_MMSI = new wxSpinCtrl( sbSizer18->GetStaticBox(), wxID_ANY, wxT("316130000"), wxDefaultPosition, wxDefaultSize, wxALIGN_RIGHT|wxSP_ARROW_KEYS, 0, 999999999, 316130000 );
 	fgSizer13->Add( SC_MMSI, 0, wxALL|wxEXPAND, 5 );
 
 

@@ -14,8 +14,9 @@ int MsgCounts[27]{};
 
 
 std::vector<AIS_PARSER::Vessel*> VesselList;
-
 std::vector<AIS_PARSER::KnownVessel*> KnownVesselList;
+std::map <int, std::string> MIDList;  //Marine Identifier D..
+
 
 const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
     "AIS_NV_STATUS_AT_ANCHOR",
@@ -71,71 +72,44 @@ const char* NAVAID_TYPE[] = { "Default, Type of Aid to Navigation not specified"
 };
 
 
+const char* FIX_TYPES[] = { 
+    "Undefined",
+    "GPS",
+    "GLONASS",
+    "combined GPS/GLONASS",
+    "Loran-C",
+    "Chayka",
+    "integrated navigation system",
+    "surveyed",
+    "Galileo",
+    "Not Used",
+    "Not Used",
+    "Not Used",
+    "Not Used",
+    "Not Used",
+    "Not Used",
+    "internal GNSS",
+};
 
-std::map <int, std::string> MIDList;
 
-bool AIS_PARSER::LoadMIDTable()
-{
-    std::string fname = "MaritimeIdentificationDigits.csv";
-
-    bool b = std::filesystem::exists(fname);
-    if (false == b)
-    {
-        //wxLogMessage("Not found: %s", fname.c_str());
-        return true;
-    }
-    
-    //Need to check for file existence..
-    csv::CSVReader reader(fname.c_str());
-
-    try
-    {
-        for (csv::CSVRow& row : reader)
-        {
-            int mid = row["Digit"].get<int>();
-            std::string al = row["Allocated"].get<std::string>();
-            MIDList.insert({ mid,al });
-        }
-
-    }
-    catch (std::exception e)
-    {
-        //printf("Exception while loading MID List %s:%s\r\n", fname.c_str(), e.what());
-        return true;
-    }
-
-    return false;
-
-}
-
-std::string AIS_PARSER::FindCountryFromMIDCode(int mid)
-{
-    auto it = MIDList.find(mid);
-    if (it != MIDList.end())
-    {
-        return it->second;
-    }
-    return "@";
-}
 
 
 
 
 void AIS_PARSER::BuildKnownVesselList()
 {
-    AIS_PARSER::KnownVessel* kv = new AIS_PARSER::KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "Canada", 134, 17, 0, 0);
+    AIS_PARSER::KnownVessel* kv = new AIS_PARSER::KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "Canada", 134, 17, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "Canada", 134, 17, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0);
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "Canada", 183, 34, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "a-f-S-S", "Canada", 183, 34, 0, 0);
     KnownVesselList.push_back(kv);
 }
-
 AIS_PARSER::KnownVessel* AIS_PARSER::FindKnownVesselByMMSI(int mmsi)
 {
     for (auto kv : KnownVesselList)
@@ -144,6 +118,67 @@ AIS_PARSER::KnownVessel* AIS_PARSER::FindKnownVesselByMMSI(int mmsi)
     }
     return nullptr;
 }
+
+bool AIS_PARSER::LoadMIDTable()
+{
+    std::string fname = "MaritimeIdentificationDigits.csv";
+
+    //Need to check for file existence..
+    bool b = std::filesystem::exists(fname);
+    if (false == b)
+    {
+        //wxLogMessage("Not found: %s", fname.c_str());
+        return true;
+    }
+
+
+    csv::CSVReader reader(fname.c_str());
+    try
+    {
+        for (csv::CSVRow& row : reader)
+        {
+            int mid = row["Digit"].get<int>();
+            std::string al = row["Allocated"].get<std::string>();
+            MIDList.insert({ mid,al });
+        }
+    }
+    catch (std::exception e)
+    {
+        //printf("Exception while loading MID List %s:%s\r\n", fname.c_str(), e.what());
+        return true;
+    }
+    return false;
+}
+
+
+std::string AIS_PARSER::FindCountryFromMIDCode(int mmsi)
+{
+    int mid = mmsi / 1000000;
+    auto it = MIDList.find(mid);
+    if (it != MIDList.end())
+    {
+        return it->second;
+    }
+    return "@";  //use this to indicate no country found
+}
+
+char AIS_PARSER::GetHostilityFrom(int mmsi)
+{
+    int mid = mmsi / 1000000;
+    auto it = MIDList.find(mid);
+    if (it != MIDList.end())
+    {
+        if (it->second == "Canada") return 'f';
+        if (0 == it->second.compare(0, 7, "Russian")) return 'h';
+        if (0 == it->second.compare(0, 5, "China")) return 'h';
+        if (0 == it->second.compare(0, 7, "Liberia")) return 'h';
+        if (0 == it->second.compare(0, 5, "Malta")) return 'h';
+
+        return 'n';
+    }
+    return 'u';  //not hostile so its neutral
+}
+
 
 
 AIS_PARSER::Vessel* AIS_PARSER::FindVesselByMMSI(int mmsi)
@@ -157,16 +192,19 @@ AIS_PARSER::Vessel* AIS_PARSER::FindVesselByMMSI(int mmsi)
 
 
 
-
-AIS_PARSER::AISObject * AIS_PARSER::ParsePayloadString(std::string body)
+AIS_PARSER::AISObject * AIS_PARSER::ParsePayloadString(std::string AISPayload)
 {
-    switch (body[0])
+    switch (AISPayload[0])
     {
     case '1':  // FALLTHROUGH
     case '2':  // FALLTHROUGH
     case '3':  // 1-3: Class A position report.
     {
-        return AIS_PARSER::ParseAIS123_PosReportPayload(body, 0);
+        AIS_PARSER::AISObject* a = AIS_PARSER::ParseAIS123_PosReportPayload(AISPayload, 0);
+        wxLogMessage("ParsePayloadString  AISMsgNum: %d", a->AISMsgNumber);
+        return a;
+
+        //return AIS_PARSER::ParseAIS123_PosReportPayload(AISPayload, 0);
         break;
     }
 
@@ -174,39 +212,39 @@ AIS_PARSER::AISObject * AIS_PARSER::ParsePayloadString(std::string body)
     case '4':  // FALLTHROUGH - 4 - Basestation report
     case ';':  // 11 - UTC date response
     {
-        //return MakeUnique<libais::Ais4_11>(body.c_str(), fill_bits);
+        //return MakeUnique<libais::Ais4_11>(AISPayload.c_str(), fill_bits);
         break;
     }
 
     case '5':  // 5 - Ship and Cargo
     {
-        return AIS_PARSER::ParseASI5IdentPayload(body, 2);
+        return AIS_PARSER::ParseASI5IdentPayload(AISPayload, 2);
         break;
     }
 
     case '6':  // 6 - Addressed binary message
     {
-        //return CreateAisMsg6(body, fill_bits);
+        //return CreateAisMsg6(AISPayload, fill_bits);
         break;
     }
 
     case '7':  // FALLTHROUGH - 7 - ACK for addressed binary message
     case '=':  // 13 - ASRM Ack  (safety message)
     {
-        //   return MakeUnique<libais::Ais7_13>(body.c_str(), fill_bits);
+        //   return MakeUnique<libais::Ais7_13>(AISPayload.c_str(), fill_bits);
         break;
     }
 
     case '8':  // 8 - Binary broadcast message (BBM)
     {
-        //return CreateAisMsg8(body, fill_bits);
+        //return CreateAisMsg8(AISPayload, fill_bits);
         break;
     }
 
 
     case '9':  // 9 - SAR Position
     {
-        //return MakeUnique<libais::Ais9>(body.c_str(), fill_bits);
+        //return MakeUnique<libais::Ais9>(AISPayload.c_str(), fill_bits);
         break;
     }
 
@@ -231,7 +269,7 @@ case '>':  // 14 - Safety Related Broadcast Message (SRBM)
 
     case 'B':  // 18 - Position, Class B
     {
-        return AIS_PARSER::ParseAIS18_PosReportPayload(body, 0);
+        return AIS_PARSER::ParseAIS18_PosReportPayload(AISPayload, 0);
         //return MakeUnique<libais::Ais18>(body.c_str(), fill_bits);
         break;
     }
@@ -243,11 +281,11 @@ case '>':  // 14 - Safety Related Broadcast Message (SRBM)
         break;
     }
     case 'E':  // 21 - Aids to navigation report
-        return AIS_PARSER::ParseASI21AtoNPayload(body, 0);   
+        return AIS_PARSER::ParseASI21AtoNPayload(AISPayload, 0);
 
 
     case 'H':  // 24 - Static data report
-        return AIS_PARSER::ParseASI24IdentPayload(body, 0);  
+        return AIS_PARSER::ParseASI24IdentPayload(AISPayload, 0);
         break;
 
     /*
@@ -261,11 +299,9 @@ case '>':  // 14 - Safety Related Broadcast Message (SRBM)
 }
 
 
-
-
-AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string body, int fillbits)
+AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string AISPayload, int fillbits)
 {
-    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -273,7 +309,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string body, int 
     }
     else
     {
-        Ais5 *a5 = new Ais5(body.c_str(), fillbits);
+        Ais5 *a5 = new Ais5(AISPayload.c_str(), fillbits);
 
         AIS_PARSER::Vessel* v = AIS_PARSER::FindVesselByMMSI(a5->mmsi);
         if (nullptr == v)
@@ -284,6 +320,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string body, int 
             v->name = a5->name;
             v->type_and_cargo = a5->type_and_cargo;
             v->destination = a5->destination;
+            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
             VesselList.push_back(v);
         }
         else //just update the thing
@@ -301,9 +338,9 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string body, int 
 }
 
 
-AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string body, int fillbits)
+AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string AISPayload, int fillbits)
 {
-    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -311,7 +348,7 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string body, int 
     }
     else
     {
-        Ais24* a24 = new Ais24(body.c_str(), fillbits);
+        Ais24* a24 = new Ais24(AISPayload.c_str(), fillbits);
 
         AIS_PARSER::Vessel* v = AIS_PARSER::FindVesselByMMSI(a24->mmsi);
         if (nullptr == v)
@@ -322,6 +359,7 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string body, int 
             v->name = a24->name;
             v->type_and_cargo = a24->type_and_cargo;
             //v->destination = a24->destination;
+            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
             VesselList.push_back(v);
         }
         else //just update the thing
@@ -339,9 +377,9 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string body, int 
 }
 
 
-AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string body, int fillbits)
+AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string AISPayload, int fillbits)
 {
-       std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, fillbits);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -349,11 +387,11 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string bod
     }
     else
     {
-        Ais1_2_3 *a123 =  new Ais1_2_3(body.c_str(), 0);
+        Ais1_2_3 *a123 =  new Ais1_2_3(AISPayload.c_str(), 0);
 
         /*
         std::stringstream retVal{};
-        //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
+        //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(AISPayload.c_str(), 0));
         retVal << "ParsePosReportPayload:"  << std::endl;
         retVal << "user ID " << a123->mmsi << std::endl;
         retVal << "nav_status " << NAV_STATUS[a123->nav_status] << std::endl;
@@ -375,9 +413,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string bod
             v->lat_deg = a123->position.lat_deg;
             v->lng_deg = a123->position.lng_deg;
             v->timestamp = a123->timestamp;
-            int pre = v->mmsi / 1000000;
-
-            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(pre);
+            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
 
 
             VesselList.push_back(v);
@@ -385,7 +421,6 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string bod
         else //just update the thing
         {
             v->a123 = a123;
-
             v->nav_status = a123->nav_status;
             v->true_heading = a123->true_heading;
             v->lat_deg = a123->position.lat_deg;
@@ -393,6 +428,9 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string bod
             v->timestamp = a123->timestamp;
             v->age = 0;
         }
+
+        wxLogMessage("new a123  AISMsgNum: %d", v->AISMsgNumber);
+
         return (AIS_PARSER::AISObject *)v;
     }
     return nullptr;
@@ -400,11 +438,11 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS123_PosReportPayload(std::string bod
 }
 
 
-AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string body, int fillbits)
+AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string AISPayload, int fillbits)
 {
     std::stringstream retVal{};
 
-    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, fillbits);
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, fillbits);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -412,7 +450,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string body
     }
     else
     {
-        Ais18* a18 = new Ais18(body.c_str(), 0);
+        Ais18* a18 = new Ais18(AISPayload.c_str(), 0);
 
         //std::unique_ptr<Ais1_2_3> a123 = std::unique_ptr<Ais1_2_3>(new Ais1_2_3(body.c_str(), 0));
         retVal << "ParsePosReportPayload:" << std::endl;
@@ -436,7 +474,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string body
             v->lng_deg = a18->position.lng_deg;
             v->timestamp = a18->timestamp;
 
-
+            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
             VesselList.push_back(v);
         }
         else //just update the thing
@@ -457,9 +495,9 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string body
 }
 
 
-AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string body, int fillbits)
+AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string AISPayload, int fillbits)
 {
-    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(body, 0);
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
     {
         std::cout << "Null ptr" << std::endl;
@@ -467,7 +505,7 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string body, int f
     }
     else
     {
-        Ais21* a21 = new Ais21(body.c_str(), fillbits);
+        Ais21* a21 = new Ais21(AISPayload.c_str(), fillbits);
 
         AIS_PARSER::Vessel* v = AIS_PARSER::FindVesselByMMSI(a21->mmsi);
 
@@ -476,6 +514,7 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string body, int f
             v = new AIS_PARSER::Vessel(a21);
             v->mmsi = a21->mmsi;
             v->name = a21->name;
+            v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
             VesselList.push_back(v);
         }
         else //just update the thing

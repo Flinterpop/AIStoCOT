@@ -8,11 +8,13 @@
 #include "ais.h"
 #include "decode_body.h"
 
+#include "wx/log.h"
 
 using namespace libais;
 
 extern const char* NAV_STATUS[];
 extern const char* NAVAID_TYPE[];
+extern const char* FIX_TYPES[];
 extern int MsgCounts[27];
 
 
@@ -151,10 +153,11 @@ extern int MsgCounts[27];
             std::string name{};
             std::string callsign{};
             int A{}, B{}, C{}, D{};  //dimensions
-            int type{};
+            int TypeOfShip{};  //from AIS Message 5
             std::string flag{};
+            std::string symbol{};
 
-            KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _type, std::string _flag, int a, int b, int c, int d)
+            KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _TypeOfShip, std::string _symbol, std::string _flag, int a, int b, int c, int d)
             {
                 MMSI = mmsi;
                 IMO = imo;
@@ -164,8 +167,9 @@ extern int MsgCounts[27];
                 B = b;
                 C = c;
                 D = d;  //dimensions
-                type = _type;
+                TypeOfShip = _TypeOfShip;
                 flag = _flag;  //Country of registration
+                symbol = _symbol;
             };
         };
 
@@ -178,7 +182,6 @@ extern int MsgCounts[27];
             int age = 0;
             bool markForDelete = false;
             int AISMsgNumber = 0; //1 thru 27
-
 
         public:
             AISObject(int _AISMsgNum, int _mmsi)
@@ -195,8 +198,6 @@ extern int MsgCounts[27];
                 retVal << "Message ID " << AISMsgNumber << std::endl;
                 return retVal.str();
             };
-
-
         };
 
         class Vessel : public AISObject
@@ -253,7 +254,6 @@ extern int MsgCounts[27];
             bool isValidAIS21{ false }; //Aid To Nav
 
             //AIS 1,2,3, 18
-
             int position_accuracy{};
             AisPoint position{};
             double lat_deg{};
@@ -295,7 +295,7 @@ extern int MsgCounts[27];
             //AIS 24
             int Mothership_MMSI{};
 
-            //AIS 21
+            //AIS 21  (Aid to Nav)
             int NavType{};
             int EPFD{};
             bool OnOffInd{};
@@ -311,14 +311,6 @@ extern int MsgCounts[27];
                 retVal << "AIS_1_2_3 parse: " << std::endl;
                 retVal << "MMSI " << mmsi << std::endl;
 
-                if (nullptr != ais5)
-                {
-                    retVal << "callsign " << ais5->callsign << std::endl;
-                    retVal << "name " << ais5->name << std::endl;
-                    retVal << "type_and_cargo " << ais5->type_and_cargo << std::endl;
-                    retVal << "destination " << ais5->destination << std::endl;
-                }
-
                 if (nullptr != a123)
                 {
 
@@ -327,6 +319,15 @@ extern int MsgCounts[27];
                     retVal << "position, lat " << position.lat_deg << std::endl;
                     retVal << "position, lng " << position.lng_deg << std::endl;
                     retVal << "time stamp " << timestamp << std::endl;
+                }
+
+                if (nullptr != ais5)
+                {
+                    retVal << "callsign " << ais5->callsign << std::endl;
+                    retVal << "name " << ais5->name << std::endl;
+                    retVal << "type_and_cargo " << ais5->type_and_cargo << std::endl;
+                    retVal << "destination " << ais5->destination << std::endl;
+                    retVal << "fix type " << FIX_TYPES[ais5->fix_type] << std::endl;
                 }
 
                 if (nullptr != ais21)
@@ -344,33 +345,19 @@ extern int MsgCounts[27];
             }
         };
 
-
-
-        class VesselClassA : public Vessel
-        {
-
-        };
-
-        class VesselClassB : public Vessel
-        {
-
-        };
-
-
         void BuildKnownVesselList();
-
         bool LoadMIDTable();
-        std::string FindCountryFromMIDCode(int mid);
 
+        std::string FindCountryFromMIDCode(int mid);
+        char GetHostilityFrom(int mmsi);
         KnownVessel* FindKnownVesselByMMSI(int mmsi);
         Vessel* FindVesselByMMSI(int mmsi);
+
         AISObject* ParsePayloadString(std::string body);
         AISObject* ParseAIS123_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
         AISObject* ParseASI24IdentPayload(std::string body, int fillbits);
-
         AISObject* ParseASI21AtoNPayload(std::string body, int fillbits);
-
 
     }

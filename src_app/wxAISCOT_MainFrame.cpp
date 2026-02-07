@@ -25,7 +25,9 @@ wxLogWindow* logWin{};
 extern int MsgCounts[27];
 
 extern std::vector<Vessel*> VesselList;
+extern std::vector<AIS_PARSER::KnownVessel*> KnownVesselList;
 extern std::map <int, std::string> MIDList;
+
 const int AGEOUT = 20;
 const int MaxVesselListSIze = 150;
 
@@ -103,9 +105,11 @@ wxAISCOT_MainFrame::wxAISCOT_MainFrame( wxWindow* parent ) : MainFrame1( parent 
 	m_grid1->SetColLabelValue(8, "Msg ID");
 	m_grid1->SetColSize(8, 100);
 
-
 	m_grid1->SetColLabelValue(9, "Country");
 	m_grid1->SetColSize(9, 200);
+
+	m_grid1->SetColLabelValue(10, "Type");
+	m_grid1->SetColSize(10, 100);
 }
 
 
@@ -122,10 +126,6 @@ void wxAISCOT_MainFrame::BN_ClearOnButtonClick(wxCommandEvent& event)
 	for (int x = 0; x < 27; x++) MsgCounts[x] = 0;
 	VesselList.clear();
 	UpdateGrid();
-	
-	//std::string c = AIS_PARSER::Country(316);
-	//wxLogMessage("c is %d then country is %s", 316, c.c_str());
-
 }
 
 
@@ -139,7 +139,9 @@ void wxAISCOT_MainFrame::BN_ShowStatsOnButtonClick(wxCommandEvent& event)
 	wxLogMessage(std::format("AIS18: {} Class B Position Report", MsgCounts[18]).c_str());
 	wxLogMessage(std::format("AIS24: {} Class B/CS Static Data Report - Part A", MsgCounts[24]).c_str());
 	wxLogMessage(std::format("AIS21: {} Aids To Navigation Report", MsgCounts[21]).c_str());
+	
 	wxLogMessage("Num Countries in MID table: %d" , (int)MIDList.size());
+	wxLogMessage("Known Vessel List has %d entries", (int)KnownVesselList.size());
 }
 
 
@@ -192,6 +194,7 @@ void wxAISCOT_MainFrame::UpdateGrid()
 		m_grid1->SetCellValue(row, 7, std::format("{}", v->age));
 		m_grid1->SetCellValue(row, 8, std::format("{}", v->AISMsgNumber ));
 		m_grid1->SetCellValue(row, 9, std::format("{}", v->CountryFromMIDCode));
+		m_grid1->SetCellValue(row, 10, std::format("{}", v->type_and_cargo));
 		++row;
 	}
 }
@@ -217,7 +220,10 @@ void wxAISCOT_MainFrame::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 	for (int i = 0; i < t; i++)
 	{
 		auto s = TC_AISLine->GetLineText(i);
-		AIS2COT::ProcessNMEAToCoT(s.utf8_string());
+		//AISObject* ao = ParsePayloadString(payload);
+
+
+		NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
 	}
 	UpdateGrid();
 }
@@ -237,7 +243,7 @@ void wxAISCOT_MainFrame::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		int counter = 0;
 		while (std::getline(myfile, line))
 		{
-			AIS2COT::ProcessNMEAToCoT(line);
+			NMEA_AIS2COT::ProcessNMEAToCoT(line);
 			if (++counter > 200) break;
 		}
 		myfile.close();
