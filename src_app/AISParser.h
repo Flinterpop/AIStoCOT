@@ -17,8 +17,6 @@ extern const char* NAVAID_TYPE[];
 extern const char* FIX_TYPES[];
 extern int MsgCounts[27];
 
-
-
 /* NMEA sentence max length, including \r\n (chars) */
 #define NMEA_MAX_LENGTH		82
 
@@ -28,8 +26,6 @@ extern int MsgCounts[27];
 
 /* NMEA sentence prefix length (num chars), Ex: GPGLL */
 #define NMEA_PREFIX_LENGTH	5
-
-
 
 
     inline bool isStringADouble(const std::string& s) {
@@ -78,8 +74,7 @@ extern int MsgCounts[27];
             std::string payload{};      //Field 6   string of binary data 
             int fillBits{};             //Field 7 before *
             int checksum{};             //Field 7 after *
-
-
+            
             NMEA_AIS_MSG(std::string NMEA_Sentence)
             {
                 //wxLogMessage("Parsing %s", NMEA_Sentence);
@@ -138,12 +133,10 @@ extern int MsgCounts[27];
                 retVal << std::format("RadioChannel: {}\r\n", RadioChannel);
                 retVal << std::format("Payload: {}\r\n", payload);
                 retVal << std::format("fill bits: {}\r\n", fillBits);
-
                 retVal << std::format("Checksum: {}\r\n", checksum);
 
                 return retVal.str();
             }
-
         };
 
         struct KnownVessel
@@ -156,8 +149,9 @@ extern int MsgCounts[27];
             int TypeOfShip{};  //from AIS Message 5
             std::string flag{};
             std::string symbol{};
+            std::string ShipNumber{};  //example: FFH-339
 
-            KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _TypeOfShip, std::string _symbol, std::string _flag, int a, int b, int c, int d)
+            KnownVessel(int mmsi, int imo, std::string _name, std::string cs, int _TypeOfShip, std::string _symbol, std::string _flag, int a, int b, int c, int d,std::string shipNumber)
             {
                 MMSI = mmsi;
                 IMO = imo;
@@ -170,6 +164,7 @@ extern int MsgCounts[27];
                 TypeOfShip = _TypeOfShip;
                 flag = _flag;  //Country of registration
                 symbol = _symbol;
+                ShipNumber = shipNumber;
             };
         };
 
@@ -345,6 +340,7 @@ extern int MsgCounts[27];
             }
         };
 
+        bool LoadKnownVesselList();
         void BuildKnownVesselList();
         bool LoadMIDTable();
 
@@ -353,11 +349,10 @@ extern int MsgCounts[27];
         KnownVessel* FindKnownVesselByMMSI(int mmsi);
         Vessel* FindVesselByMMSI(int mmsi);
 
-        AISObject* ParsePayloadString(std::string body);
+        AISObject* getAISObjectFromAISPayloadString(std::string body);
         AISObject* ParseAIS123_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
         AISObject* ParseASI24IdentPayload(std::string body, int fillbits);
         AISObject* ParseASI21AtoNPayload(std::string body, int fillbits);
-
     }

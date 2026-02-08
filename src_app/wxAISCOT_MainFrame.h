@@ -24,8 +24,6 @@ class wxAISCOT_MainFrame : public MainFrame1
 			TC_AISLine->SetValue(nmea);
 		}
 
-
-
 		bool debug = false;
 		wxAISCOT_MainFrame( wxWindow* parent );
 		~wxAISCOT_MainFrame();
@@ -55,16 +53,12 @@ class wxAISCOT_MainFrame : public MainFrame1
      
 		void m_filePicker1OnFileChanged(wxFileDirPickerEvent& event) override;
 		void UpdateGrid();
-		//void ProcessNMEAPayload(std::string p);
-		//void SendVesselCoTUpdate(Vessel* v);
 
+		void ProcessNMEALine(std::string nmea);
 		void SendAidToNavCoTUpdate(AIS_PARSER::Vessel* v);
 
 		void BN_ClearOnButtonClick(wxCommandEvent& event) override;
 		void BN_ShowStatsOnButtonClick(wxCommandEvent& event) override;
-
-		
-		//void ProcessNMEAToCoT(std::string line);
 
 };
 

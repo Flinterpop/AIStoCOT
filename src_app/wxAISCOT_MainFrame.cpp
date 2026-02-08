@@ -47,7 +47,8 @@ wxAISCOT_MainFrame::wxAISCOT_MainFrame( wxWindow* parent ) : MainFrame1( parent 
 	wxLogMessage("Working folder: %s", currentDir.c_str());
 
 	AIS_PARSER::LoadMIDTable();
-	AIS_PARSER::BuildKnownVesselList();
+	//AIS_PARSER::BuildKnownVesselList();
+	AIS_PARSER::LoadKnownVesselList();
 
 	std::string retVal = COTSENDER::StartCOTSender();
 	wxLogMessage(retVal.c_str());
@@ -200,13 +201,38 @@ void wxAISCOT_MainFrame::UpdateGrid()
 }
 
 
-void wxAISCOT_MainFrame::SendAidToNavCoTUpdate(Vessel* a2n)
+
+void wxAISCOT_MainFrame::ProcessNMEALine(std::string nmea)
 {
+	if (nmea.size() < 20) return;
+	std::string payload = NMEA_AIS2COT::getAISPayloadFromNMEA(nmea);
+	if (payload.size() < 1) return;
 
+	AISObject* ao = AIS_PARSER::getAISObjectFromAISPayloadString(payload);
+	if (nullptr == ao) return;
 
+	switch (ao->AISMsgNumber)
+	{
+		case 1:
+		case 2:
+		case 3:
+		case 18:
+		case 24:  //Type 24: Class B Info
+		{
+			Vessel* v = (Vessel*)ao;
+			NMEA_AIS2COT::SendVesselCoTUpdate(v);
+			break;
+		}
+		//case 5: never send a AIS5 by itseld - it has no position info
+
+		case 21:  //Type 21: Aid-to-Navigation Report
+		{
+			Vessel* a2n = (Vessel*)ao;
+			NMEA_AIS2COT::SendAidToNavCoTUpdate(a2n);
+			break;
+		}
+	}
 }
-
-
 
 
 
@@ -216,40 +242,10 @@ void wxAISCOT_MainFrame::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 	wxLogMessage("-------------------------------");
 	wxLogMessage("Parsing Text Control Contents");
 
-	auto t = TC_AISLine->GetNumberOfLines();
-	for (int i = 0; i < t; i++)
+	for (int i = 0; i < TC_AISLine->GetNumberOfLines(); i++)
 	{
-		auto s = TC_AISLine->GetLineText(i);
-
-		//NMEA_AIS2COT::ProcessNMEAToCoT(s.utf8_string());
-
-		std::string payload = NMEA_AIS2COT::NMEAtoAISPayload(s.utf8_string());
-		if (payload.size()<1) return;
-
-		AISObject* ao = AIS_PARSER::ParsePayloadString(payload);
-		if (nullptr == ao) return;
-
-		switch (ao->AISMsgNumber)
-		{
-			case 1:
-			case 2:
-			case 3:
-			case 18:
-			case 24:  //Type 24: Class B Info
-			{
-				Vessel* v = (Vessel*)ao;
-				NMEA_AIS2COT::SendVesselCoTUpdate(v);
-				break;
-			}
-			//case 5: never send a AIS5 by itseld - it has no position info
-
-			case 21:  //Type 21: Aid-to-Navigation Report
-			{
-				Vessel* a2n = (Vessel*)ao;
-				NMEA_AIS2COT::SendAidToNavCoTUpdate(a2n);
-				break;
-			}
-		}
+		wxString s = TC_AISLine->GetLineText(i);
+		ProcessNMEALine(s.utf8_string());
 	}
 	UpdateGrid();
 }
@@ -258,9 +254,9 @@ void wxAISCOT_MainFrame::BN_NMEAToCoTOnButtonClick(wxCommandEvent& event)
 void wxAISCOT_MainFrame::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 {
 	wxLogMessage("-------------------------------");
-	wxLogMessage("Opening File: %s",m_filePicker1->GetTextCtrlValue());
+	wxLogMessage("Parsing File: %s",m_filePicker1->GetTextCtrlValue());
+	
 	std::string fname = m_filePicker1->GetTextCtrlValue().ToStdString();
-
 	std::ifstream myfile(fname);
 
 	if (myfile.is_open())
@@ -269,8 +265,8 @@ void wxAISCOT_MainFrame::m_filePicker1OnFileChanged(wxFileDirPickerEvent& event)
 		int counter = 0;
 		while (std::getline(myfile, line))
 		{
-			NMEA_AIS2COT::NMEAtoAISPayload(line);
-			if (++counter > 200) break;
+			ProcessNMEALine(line);
+			if (++counter > 200) break;  //max grid size
 		}
 		myfile.close();
 	}

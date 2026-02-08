@@ -11,12 +11,9 @@
 
 int MsgCounts[27]{};
 
-
-
 std::vector<AIS_PARSER::Vessel*> VesselList;
 std::vector<AIS_PARSER::KnownVessel*> KnownVesselList;
 std::map <int, std::string> MIDList;  //Marine Identifier D..
-
 
 const char* NAV_STATUS[] = { "AIS_NV_STATUS_UNDER_WAY_USING_ENGINE",
     "AIS_NV_STATUS_AT_ANCHOR",
@@ -93,27 +90,69 @@ const char* FIX_TYPES[] = {
 
 
 
-
-
-
-void AIS_PARSER::BuildKnownVesselList()
+bool AIS_PARSER::LoadKnownVesselList()
 {
-    AIS_PARSER::KnownVessel* kv = new AIS_PARSER::KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0); //FFH-339
+    std::string fname = "KnownVessels.csv";
+
+    //Need to check for file existence..
+    bool b = std::filesystem::exists(fname);
+    if (false == b)
+    {
+        //wxLogMessage("Not found: %s", fname.c_str());
+        return true;
+    }
+
+
+    csv::CSVReader reader(fname.c_str());
+    try
+    {
+        for (csv::CSVRow& row : reader)
+        {
+            int mmsi = row["MMSI"].get<int>();
+            int imo = row["IMO"].get<int>();
+            std::string name = row["Name"].get<std::string>();
+            std::string callsign = row["CallSign"].get<std::string>();
+            int type = row["Type"].get<int>();
+            std::string symbol = row["Symbol"].get<std::string>();
+            std::string flag = row["Flag"].get<std::string>();
+            int a = row["A"].get<int>();
+            int b = row["B"].get<int>();
+            int c = row["C"].get<int>();
+            int d = row["D"].get<int>();
+            std::string shipNumber = row["ShipNumber"].get<std::string>();
+
+            AIS_PARSER::KnownVessel* kv = new AIS_PARSER::KnownVessel(mmsi, imo, name, callsign, type, symbol, flag, a, b, c, d, shipNumber); //FFH-339
+            KnownVesselList.push_back(kv);
+
+        }
+    }
+    catch (std::exception e)
+    {
+        //printf("Exception while loading MID List %s:%s\r\n", fname.c_str(), e.what());
+        return true;
+    }
+    return false;
+}
+
+
+void AIS_PARSER::BuildKnownVesselList() //deprecated
+{
+    AIS_PARSER::KnownVessel* kv = new AIS_PARSER::KnownVessel(316130000, 0, "Charlettetown", "CGAJ", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0, "FFH-339");
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316138000, 0, "Halifax", "CGAP", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0, "FFH-330");
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316135000, 0, "Toronto", "CGAD", 35, "a-f-S-C-L-F-F", "Canada", 134, 17, 0, 0, "FFH-333");
     KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "a-f-S-N", "Canada", 183, 34, 0, 0);
+    kv = new AIS_PARSER::KnownVessel(316030879, 9348182, "Asterix", "CFN7327", 35, "a-f-S-N", "Canada", 183, 34, 0, 0, "FFH-339");
+    KnownVesselList.push_back(kv);
 
-    kv = new AIS_PARSER::KnownVessel(777220000, 1, "Chicoutimi", "SGVA", 35, "a-f-U-S-C-A", "Canada", 70, 8, 0, 0); //SSK_879
-
-
+    kv = new AIS_PARSER::KnownVessel(777220000, 1, "Chicoutimi", "SGVA", 35, "a-f-U-S-C-A", "Canada", 70, 8, 0, 0,"SSK_879");
     KnownVesselList.push_back(kv);
 }
+
 AIS_PARSER::KnownVessel* AIS_PARSER::FindKnownVesselByMMSI(int mmsi)
 {
     for (auto kv : KnownVesselList)
@@ -196,7 +235,7 @@ AIS_PARSER::Vessel* AIS_PARSER::FindVesselByMMSI(int mmsi)
 
 
 
-AIS_PARSER::AISObject * AIS_PARSER::ParsePayloadString(std::string AISPayload)
+AIS_PARSER::AISObject * AIS_PARSER::getAISObjectFromAISPayloadString(std::string AISPayload)
 {
     switch (AISPayload[0])
     {
@@ -512,6 +551,11 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string AISPayload,
         Ais21* a21 = new Ais21(AISPayload.c_str(), fillbits);
 
         AIS_PARSER::Vessel* v = AIS_PARSER::FindVesselByMMSI(a21->mmsi);
+
+        //Canadian AtoN MMSI are like: 99316xxxx
+        //Physical	99MID1xxx	0	GPS
+        //Synthetic	99MID1xxx	0	Surveyed
+        //Virtual	99MID6xxx	1	Surveyed
 
         if (nullptr == v)
         {
