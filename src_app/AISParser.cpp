@@ -243,14 +243,9 @@ AIS_PARSER::AISObject * AIS_PARSER::getAISObjectFromAISPayloadString(std::string
     case '2':  // FALLTHROUGH
     case '3':  // 1-3: Class A position report.
     {
-        AIS_PARSER::AISObject* a = AIS_PARSER::ParseAIS123_PosReportPayload(AISPayload, 0);
-        wxLogMessage("ParsePayloadString  AISMsgNum: %d", a->AISMsgNumber);
-        return a;
-
-        //return AIS_PARSER::ParseAIS123_PosReportPayload(AISPayload, 0);
+        return AIS_PARSER::ParseAIS123_PosReportPayload(AISPayload, 0);
         break;
     }
-
 
     case '4':  // FALLTHROUGH - 4 - Basestation report
     case ';':  // 11 - UTC date response
@@ -261,59 +256,22 @@ AIS_PARSER::AISObject * AIS_PARSER::getAISObjectFromAISPayloadString(std::string
 
     case '5':  // 5 - Ship and Cargo
     {
-        return AIS_PARSER::ParseASI5IdentPayload(AISPayload, 2);
+        return AIS_PARSER::ParseAIS5IdentPayload(AISPayload, 2);
         break;
     }
 
-    case '6':  // 6 - Addressed binary message
-    {
-        //return CreateAisMsg6(AISPayload, fill_bits);
-        break;
-    }
-
-    case '7':  // FALLTHROUGH - 7 - ACK for addressed binary message
-    case '=':  // 13 - ASRM Ack  (safety message)
-    {
-        //   return MakeUnique<libais::Ais7_13>(AISPayload.c_str(), fill_bits);
-        break;
-    }
-
-    case '8':  // 8 - Binary broadcast message (BBM)
-    {
-        //return CreateAisMsg8(AISPayload, fill_bits);
-        break;
-    }
-
-
+    
     case '9':  // 9 - SAR Position
     {
-        //return MakeUnique<libais::Ais9>(AISPayload.c_str(), fill_bits);
+        return AIS_PARSER::ParseAIS9SARAircraft(AISPayload, 2);
         break;
     }
 
 
-    case ':':  //  10 - UTC Query
-    {
-        //return MakeUnique<libais::Ais10>(body.c_str(), fill_bits);
-        break;
-    }
-    // ';' 11 - See 4
-
-/*
-case '<':  // 12 - Addressed Safety Related Messages (ASRM)
-    return MakeUnique<libais::Ais12>(body.c_str(), fill_bits);
-
-    // '=' 13 - See 7
-
-case '>':  // 14 - Safety Related Broadcast Message (SRBM)
-    return MakeUnique<libais::Ais14>(body.c_str(), fill_bits);
-
-    */
-
+    
     case 'B':  // 18 - Position, Class B
     {
         return AIS_PARSER::ParseAIS18_PosReportPayload(AISPayload, 0);
-        //return MakeUnique<libais::Ais18>(body.c_str(), fill_bits);
         break;
     }
 
@@ -324,25 +282,24 @@ case '>':  // 14 - Safety Related Broadcast Message (SRBM)
         break;
     }
     case 'E':  // 21 - Aids to navigation report
-        return AIS_PARSER::ParseASI21AtoNPayload(AISPayload, 0);
+        return AIS_PARSER::ParseAIS21AtoNPayload(AISPayload, 0);
 
 
     case 'H':  // 24 - Static data report
-        return AIS_PARSER::ParseASI24IdentPayload(AISPayload, 0);
+        return AIS_PARSER::ParseAIS24IdentPayload(AISPayload, 0);
         break;
 
     /*
-
-    case 'K':  // 27 - Long-range AIS broadcast message
+        case 'K':  // 27 - Long-range AIS broadcast message
         return MakeUnique<libais::Ais27>(body.c_str(), fill_bits);
-*/
+    */
 
     }
     return nullptr;
 }
 
 
-AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string AISPayload, int fillbits)
+AIS_PARSER::AISObject * AIS_PARSER::ParseAIS5IdentPayload(std::string AISPayload, int fillbits)
 {
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
@@ -381,7 +338,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseASI5IdentPayload(std::string AISPayload
 }
 
 
-AIS_PARSER::AISObject* AIS_PARSER::ParseASI24IdentPayload(std::string AISPayload, int fillbits)
+AIS_PARSER::AISObject* AIS_PARSER::ParseAIS24IdentPayload(std::string AISPayload, int fillbits)
 {
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
@@ -522,7 +479,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string AISP
         }
         else //just update the thing
         {
-            v->a18 = a18;
+            v->ais18 = a18;
 
             //v->nav_status = a18->nav_status;
             v->true_heading = a18->true_heading;
@@ -538,7 +495,7 @@ AIS_PARSER::AISObject * AIS_PARSER::ParseAIS18_PosReportPayload(std::string AISP
 }
 
 
-AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string AISPayload, int fillbits)
+AIS_PARSER::AISObject* AIS_PARSER::ParseAIS21AtoNPayload(std::string AISPayload, int fillbits)
 {
     std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, 0);
     if (nullptr == p)
@@ -571,6 +528,31 @@ AIS_PARSER::AISObject* AIS_PARSER::ParseASI21AtoNPayload(std::string AISPayload,
             v->name = a21->name;
             v->age = 0;
         }
+        return (AIS_PARSER::AISObject*)v;
+    }
+    return nullptr;
+}
+
+
+
+AIS_PARSER::AISObject* AIS_PARSER::ParseAIS9SARAircraft(std::string AISPayload, int fillbits)
+{
+    std::unique_ptr<libais::AisMsg>  p = CreateAisMsg(AISPayload, fillbits);
+    if (nullptr == p)
+    {
+        return nullptr;
+    }
+    else
+    {
+        Ais9* a9 = new Ais9(AISPayload.c_str(), 0);
+        AIS_PARSER::Vessel* v = new  AIS_PARSER::Vessel(a9);
+        v->true_heading = a9->cog;
+        v->cog = a9->cog;
+        v->lat_deg = a9->position.lat_deg;
+        v->lng_deg = a9->position.lng_deg;
+        v->timestamp = a9->timestamp;
+        v->CountryFromMIDCode = AIS_PARSER::FindCountryFromMIDCode(v->mmsi);
+        v->age = 0;
         return (AIS_PARSER::AISObject*)v;
     }
     return nullptr;

@@ -206,7 +206,7 @@ extern int MsgCounts[27];
             };
             Vessel(Ais18* a) : AISObject(a->message_id, a->mmsi)
             {
-                a18 = a;
+                ais18 = a;
                 isValidAIS18 = true;
             };
 
@@ -228,16 +228,23 @@ extern int MsgCounts[27];
                 isValidAIS21 = true;
             };
 
+            Vessel(Ais9* a) : AISObject(a->message_id, a->mmsi)
+            {
+                wxLogMessage("Here SAR");
+                ais9 = a;
+                isValidAIS9 = true;
+            };
 
 
             Ais1_2_3* a123{};   //Class A Position Reports
             Ais5* ais5{};       //Class A Ship Data
 
-            Ais18* a18{};       //Class A Position Reports
+            Ais18* ais18{};       //Class A Position Reports
             Ais24* ais24{};       //Class A Ship Data
 
             Ais21* ais21{};
 
+            Ais9* ais9{};
 
             std::string CountryFromMIDCode{};
             bool isValidAIS123{ false };
@@ -247,6 +254,7 @@ extern int MsgCounts[27];
             bool isValidAIS24{ false };
 
             bool isValidAIS21{ false }; //Aid To Nav
+            bool isValidAIS9{ false }; //SAR Aircraft
 
             //AIS 1,2,3, 18
             int position_accuracy{};
@@ -350,9 +358,12 @@ extern int MsgCounts[27];
         Vessel* FindVesselByMMSI(int mmsi);
 
         AISObject* getAISObjectFromAISPayloadString(std::string body);
+        AISObject* ParseAIS9SARAircraft(std::string body, int fillbits);
         AISObject* ParseAIS123_PosReportPayload(std::string body, int fillbits);
         AISObject* ParseAIS18_PosReportPayload(std::string body, int fillbits);
-        AISObject* ParseASI5IdentPayload(std::string body, int fillbits);
-        AISObject* ParseASI24IdentPayload(std::string body, int fillbits);
-        AISObject* ParseASI21AtoNPayload(std::string body, int fillbits);
+        AISObject* ParseAIS5IdentPayload(std::string body, int fillbits);
+        AISObject* ParseAIS24IdentPayload(std::string body, int fillbits);
+        AISObject* ParseAIS21AtoNPayload(std::string body, int fillbits);
+
+
     }

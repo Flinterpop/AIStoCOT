@@ -23,9 +23,9 @@ namespace NMEA_AIS2COT
 {
 	//forward declarations
 	std::string getAISPayloadFromNMEA(std::string NMEA_String);
-	void __ProcessNMEA_AISPayload(std::string payload);
 	void SendVesselCoTUpdate(Vessel* v);
 	void SendAidToNavCoTUpdate(Vessel* v);
+	void SendSARAircraftCoTUpdate(Vessel* v);
 
 
 
@@ -38,7 +38,7 @@ namespace NMEA_AIS2COT
 		if (1 == nmeaMsg->CountOfFragments)
 		{
 			multipart1 = nullptr; //standard says that multipart messages must arrive sequentially, so delete the first part if a second first part (or solo) is Rx before the awaited second part
-			wxLogMessage("Non multipart");
+			wxLogMessage("Non multipart NMEA Msg");
 			return nmeaMsg->payload;
 		}
 		else //it's a multipart message
@@ -46,12 +46,12 @@ namespace NMEA_AIS2COT
 			if (1 == nmeaMsg->FragmentNumber)
 			{
 				multipart1 = nmeaMsg;
-				wxLogMessage("multipart Frag 1");
+				wxLogMessage("multipart NMEA Msg - Frag 1");
 				return "";
 			}
 			else if (2 == nmeaMsg->FragmentNumber)  //standard says that multipart messages must arrive sequentially
 			{
-				wxLogMessage("multipart Frag 2"); 
+				wxLogMessage("multipart NMEA Msg - Frag 2"); 
 				if (nullptr == multipart1)
 				{
 					wxLogMessage("multipart Frag 2 but no first part. Discarding");
@@ -61,36 +61,7 @@ namespace NMEA_AIS2COT
 				return nmeaMsg->payload;
 			}
 			//else if (3 == nmeaMsg->FragmentNumber)  {}  
-			else { wxLogMessage("Should not get here: multipart message but Fragment Number is %d, not 1 or 2", nmeaMsg->FragmentNumber); }
-		}
-	}
-
-
-
-	inline void __ProcessNMEA_AISPayload(std::string payload)
-	{
-		AISObject* ao = getAISObjectFromAISPayloadString(payload);
-		if (nullptr == ao) return;
-		switch (ao->AISMsgNumber)
-		{
-		case 1:
-			case 2:
-			case 3:
-			case 18:
-			case 24:  //Type 24: Class B Info
-			{
-				Vessel* v = (Vessel*)ao;
-				SendVesselCoTUpdate(v);
-				break;
-			}
-			//case 5: never send a AIS5 by itseld - it has no position info
-
-			case 21:  //Type 21: Aid-to-Navigation Report
-			{
-				Vessel* a2n = (Vessel*)ao;
-				SendAidToNavCoTUpdate(a2n);
-				break;
-			}
+			else { wxLogMessage("NMEA Msg: Should not get here: multipart message but Fragment Number is %d, not 1 or 2", nmeaMsg->FragmentNumber); }
 		}
 	}
 
@@ -319,6 +290,71 @@ namespace NMEA_AIS2COT
 		std::string retVal = COTSENDER::SendCoTMsg(CurCoTMsg);
 		wxLogMessage(retVal.c_str());
 	}
+
+	inline void SendSARAircraftCoTUpdate(Vessel* v)
+	{
+		if (false == v->isValidAIS9)  return;
+
+		bg_TakMessage CurCoTMsg;
+		CurCoTMsg.IncludeTakControl = true;
+
+		CurCoTMsg.d_lat = v->lat_deg;
+		CurCoTMsg.d_lon = v->lng_deg;
+		CurCoTMsg.d_hae = 0;
+		if (0 == v->position_accuracy) //low
+		{
+			CurCoTMsg.d_ce = 100;
+			CurCoTMsg.d_le = 100;
+		}
+		else //high 
+		{
+			CurCoTMsg.d_ce = 10;
+			CurCoTMsg.d_le = 10;
+		}
+
+
+		CurCoTMsg.tm_validTimeInSeconds = 90;
+
+		CurCoTMsg.UID = std::format("MMSI-{}", v->mmsi);
+		CurCoTMsg._how = getFixType(v->fix_type);
+
+		CurCoTMsg.course = v->cog;
+
+		//AIS Speed over ground : 0.1 - knot(0.19 km / h) resolution from
+		//                   0 to 102 knots(189 km / h)
+		// COT Speed is meters / second
+		// Pre - computed constant : 0.1 / 1.944 = 0.05144
+		CurCoTMsg.speed = v->sog * 0.05144;
+
+
+		CurCoTMsg.includeContact = true;
+		if (v->callsign.size() > 0) CurCoTMsg.callsign = std::format("AIS{}", v->callsign);
+		else CurCoTMsg.callsign = std::format("MSSI-{}", v->mmsi);
+		char hostility = GetHostilityFrom(v->mmsi);  //checks country code against internal list of countries that are hostile (Russia, China for testing)
+		CurCoTMsg.msg_type = std::format("a-{}-A-M-F", hostility);
+
+		//CurCoTMsg.msg_type = "a-f-A-M-F-H"; //CSAR Fixed Wing
+		//CurCoTMsg.msg_type = "a-f-A-M-F-Q-H"; //CSAR Drone
+		//CurCoTMsg.msg_type = "a-f-A-M-H-H"; //CSAR Helo
+		//CurCoTMsg.msg_type = "a-f-A-M-F"; //SAR FixedSing
+
+
+
+		CurCoTMsg.includeDetail = true;
+		std::stringstream remarks;
+		remarks << "<remarks>";
+		remarks << "Call Sign: " << v->callsign;
+		remarks << " Country: " << v->CountryFromMIDCode;
+		remarks << " MMSI: " << std::to_string(v->mmsi);
+		remarks << "</remarks>";
+		CurCoTMsg.xmlDetail = remarks.str();
+
+		CurCoTMsg.AssembleCoTPbufEvent();
+
+		std::string retVal = COTSENDER::SendCoTMsg(CurCoTMsg);
+		wxLogMessage(retVal.c_str());
+	}
+
 
 
 }

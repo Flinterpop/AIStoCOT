@@ -217,13 +217,20 @@ void wxAISCOT_MainFrame::ProcessNMEALine(std::string nmea)
 		case 2:
 		case 3:
 		case 18:
-		case 24:  //Type 24: Class B Info
 		{
 			Vessel* v = (Vessel*)ao;
 			NMEA_AIS2COT::SendVesselCoTUpdate(v);
 			break;
 		}
 		//case 5: never send a AIS5 by itseld - it has no position info
+		//case 24:  //Type 24: Class B Info
+
+		case 9:  //Type 9: SAR Aircraft
+		{
+			Vessel* v = (Vessel*)ao;
+			NMEA_AIS2COT::SendSARAircraftCoTUpdate(v);
+			break;
+		}
 
 		case 21:  //Type 21: Aid-to-Navigation Report
 		{

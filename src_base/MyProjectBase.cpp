@@ -50,7 +50,7 @@ MainFrame1::MainFrame1( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxStaticBoxSizer* sbSizer1;
 	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("AIS NMEA Line") ), wxVERTICAL );
 
-	TC_AISLine = new wxTextCtrl( sbSizer1->GetStaticBox(), wxID_ANY, _("!AIVDM,1,1,,A,1DeO2l0jh0KT>H@I;dL1hVv00000,0*1F\n!AIVDM,2,1,0,A,5DeO2l000000<L4`000<P58hEA@E@uLp0000000S>8OA;0jjf012AhV@,0*0F\n!AIVDM,2,2,0,A,000000000000000,2*24\n!AIVDM,1,1,,A,1KU=g`0jh0KT>H@H2Lt1hR200000,0*53\n!AIVDM,2,1,0,A,5KU=g`000001=HL4000<PT<uE@TlT0000000000S>8OA;0jjf012AhV@,0*1A\n!AIVDM,2,2,0,A,000000000000000,2*24\n\n"), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
+	TC_AISLine = new wxTextCtrl( sbSizer1->GetStaticBox(), wxID_ANY, _("!AIVDM,1,1,,A,1DeO2l0jh0KT>H@I;dL1hVv00000,0*1F\n!AIVDM,2,1,0,A,5DeO2l000000<L4`000<P58hEA@E@uLp0000000S>8OA;0jjf012AhV@,0*0F\n!AIVDM,2,2,0,A,000000000000000,2*24\n!AIVDM,1,1,,A,1KU=g`0jh0KT>H@H2Lt1hR200000,0*53\n!AIVDM,2,1,0,A,5KU=g`000001=HL4000<PT<uE@TlT0000000000S>8OA;0jjf012AhV@,0*1A\n!AIVDM,2,2,0,A,000000000000000,2*24\n!AIVDO,1,1,,A,95M2oQ@41Tr4L4H@eRvQ;2h20000,0*0D\n\n"), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
 	sbSizer1->Add( TC_AISLine, 0, wxALL|wxEXPAND, 5 );
 
 	BN_NMEAToCoT = new wxButton( sbSizer1->GetStaticBox(), wxID_ANY, _("Decode AIS NMEA Sentence and Send as CoT"), wxDefaultPosition, wxDefaultSize, 0 );
