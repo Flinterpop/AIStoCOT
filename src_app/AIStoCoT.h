@@ -2,7 +2,6 @@
 
 #include "wx/log.h"
 
-
 #include "BG_SocketBase.h"
 
 #include "AISParser.h"
